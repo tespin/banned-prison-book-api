@@ -4,11 +4,9 @@ import Card from './UI/Card';
 
 const App = () => {
     return (
-        <>
         <Card>
             <Home></Home>
         </Card>
-        </>
     )
 }
 
