@@ -1,9 +1,10 @@
 import React from 'react';
+import Card from './UI/Card';
 
 const App = () => {
     return (
         <>
-        <div>Hi!</div>
+        <Card>Hello!</Card>
         </>
     )
 }
