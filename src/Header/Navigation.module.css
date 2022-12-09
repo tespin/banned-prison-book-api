@@ -1,12 +1,15 @@
 .nav {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .links {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     list-style: none;
+    padding: 0;
 }
 
 .nav li {

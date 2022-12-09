@@ -1,4 +1,5 @@
 .home {
-    width: 50rem;
+    flex-direction: column;
+    width: 33rem;
     border: none;
 }
