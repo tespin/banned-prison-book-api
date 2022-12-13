@@ -8,11 +8,14 @@ const Snippet = (props) => {
         <>
             <pre className={classes.snippet}>
                 <code>
-                    {`https://banned-books-api.onrender.com/api/books?${props.endpoint}=${props.params}`}
+                    {`https://banned-books-api.onrender.com/api/books?${props.endpoint}${props.params ? `=${props.params}` : ''}`}
                 </code>
             </pre>
         </>
     );
 };
 
+// ${`=`props.params : props.params ? ''}
+
 export default Snippet;
+
