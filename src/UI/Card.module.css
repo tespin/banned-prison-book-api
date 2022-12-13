@@ -1,5 +1,5 @@
 .card {
     display: flex;
     justify-content: center;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 }

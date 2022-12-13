@@ -1,5 +1,9 @@
 .home {
     flex-direction: column;
-    width: 33rem;
+    width: 35rem;
     border: none;
+}
+
+.about p {
+    margin: 0 0 1.25rem 0;
 }
