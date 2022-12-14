@@ -1,0 +1,14 @@
+.example {
+    margin: 0 0 1.15rem 0;   
+}
+
+.heading {
+    color: #3DB332;
+    margin: 0 0 0 0;
+}
+
+.desc {
+    /* margin-top: 0.35rem; */
+    line-height: 1.15rem;
+    margin: 0.35rem 0 0 0;
+}

@@ -1,0 +1,10 @@
+.home {
+    flex-direction: column;
+    width: 35rem;
+    border: none;
+}
+
+.about p {
+    line-height: 1.55rem;
+    margin: 0 0 1.25rem 0;
+}
