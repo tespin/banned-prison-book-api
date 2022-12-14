@@ -6,8 +6,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 3001;
 
+app.listen(port, () => console.log(`listening on port ${port}`));
+
 app.get('/api', (req, res) => {
     res.json({ message: "Hello from server!"});
 })
-
-app.listen(port, () => console.log(`listening on port ${port}`));
