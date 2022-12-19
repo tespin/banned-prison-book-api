@@ -1,10 +1,14 @@
+const Book = require('../database/Book');
+
 const getAllBooks = () => {
-    return;
-}
+    const allBooks = Book.getAllBooks();
+    return allBooks;
+};
 
 const getRandomBook = () => {
-    return;
-}
+    const randomBook = Book.getRandomBook();
+    return randomBook;
+};
 
 module.exports = {
     getAllBooks,
