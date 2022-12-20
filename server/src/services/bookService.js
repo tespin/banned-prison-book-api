@@ -1,8 +1,15 @@
 const Book = require('../database/Book');
 
-const getAllBooks = () => {
-    const allBooks = Book.getAllBooks();
-    return allBooks;
+const getAllBooks = (filterParams) => {
+    try {
+        const allBooks = Book.getAllBooks(filterParams);
+        return allBooks;
+    } catch (error) {
+        throw error;
+    }
+
+    // const allBooks = Book.getAllBooks();
+    // return allBooks;
 };
 
 const getRandomBook = () => {
