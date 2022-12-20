@@ -1,5 +1,6 @@
 const Book = require('../database/Book');
 
+// obtain filtered books from database
 const getAllBooks = (filterParams) => {
     try {
         const allBooks = Book.getAllBooks(filterParams);
@@ -12,6 +13,7 @@ const getAllBooks = (filterParams) => {
     // return allBooks;
 };
 
+// obtain random book
 const getRandomBook = () => {
     const randomBook = Book.getRandomBook();
     return randomBook;

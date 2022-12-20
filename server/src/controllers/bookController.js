@@ -1,9 +1,14 @@
 const bookService = require('../services/bookService');
 
+// request all books, passing in parameters
 const getAllBooks = (req, res) => {
-    const { author, isbn } = req.query;
+    // extract params from req.query and build params object
+    const { title, author, isbn } = req.query;
     try {
-        const allBooks = bookService.getAllBooks({ author, isbn });
+        // pass in params and get all books
+        const allBooks = bookService.getAllBooks({ title, author, isbn });
+        
+        // send json object with books
         res.send({ status: 'OK', data: allBooks });
     } catch (error) {
         res
