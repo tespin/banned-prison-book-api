@@ -24,6 +24,34 @@ const getAllBooks = (filterParams) => {
                 book.isbn.toLowerCase().includes(filterParams.isbn)
             );
         }
+
+        // filter by genre
+        if (filterParams.genre) {
+            return DB.books.filter( (book) => 
+                book.genre.toLowerCase().includes(filterParams.genre)
+            );
+        }
+
+        // filter by date
+        if (filterParams.date) {
+            return DB.books.filter( (book) => 
+                book.date.toLowerCase().includes(filterParams.date)
+            );
+        }
+
+        // filter by state
+        if (filterParams.state) {
+            return DB.books.filter( (book) => 
+                book.state.toLowerCase().includes(filterParams.state)
+            );
+        }
+
+        // filter by ban type
+        if (filterParams.banType) {
+            return DB.books.filter( (book) =>
+                book.banType.toLowerCase().includes(filterParams.banType)
+            );
+        }
         
         // if no params specified, return all books
         return books;
