@@ -2,6 +2,7 @@ const DB = require('./db.json');
 
 const getAllBooks = (filterParams) => {
     try {
+        // connect to database
         let books = DB.books;
         
         // filter by title
@@ -27,8 +28,10 @@ const getAllBooks = (filterParams) => {
 
         // filter by genre
         if (filterParams.genre) {
-            return DB.books.filter( (book) => 
-                book.genre.toLowerCase().includes(filterParams.genre)
+            return DB.books.filter((book) => 
+                book.genre
+                    .map((genre) => genre.toLowerCase())
+                    .includes(filterParams.genre)
             );
         }
 
