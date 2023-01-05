@@ -1,12 +1,12 @@
 const bookService = require('../services/bookService');
 
 // request all books, passing in parameters
-const getAllBooks = (req, res) => {
+const getAllBooks = async (req, res) => {
     // extract params from req.query and build params object
     const { title, author, isbn, genre, date, state, banType } = req.query;
     try {
         // pass in params and get all books
-        const allBooks = bookService.getAllBooks({ title, author, isbn, genre, date, state, banType });
+        const allBooks = await bookService.getAllBooks({ title, author, isbn, genre, date, state, banType });
         
         // send json object with books
         res.send({ status: 'OK', data: allBooks });

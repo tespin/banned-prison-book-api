@@ -1,9 +1,9 @@
 const Book = require('../database/Book');
 
 // obtain filtered books from database
-const getAllBooks = (filterParams) => {
+const getAllBooks = async (filterParams) => {
     try {
-        const allBooks = Book.getAllBooks(filterParams);
+        const allBooks = await Book.getAllBooks(filterParams);
         return allBooks;
     } catch (error) {
         throw error;
