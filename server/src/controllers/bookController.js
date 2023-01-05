@@ -3,10 +3,10 @@ const bookService = require('../services/bookService');
 // request all books, passing in parameters
 const getAllBooks = async (req, res) => {
     // extract params from req.query and build params object
-    const { title, author, isbn, genre, date, state, banType } = req.query;
+    const { publication, author, year, reason, state_arc } = req.query;
     try {
         // pass in params and get all books
-        const allBooks = await bookService.getAllBooks({ title, author, isbn, genre, date, state, banType });
+        const allBooks = await bookService.getAllBooks({ publication, author, year, reason, state_arc });
         
         // send json object with books
         res.send({ status: 'OK', data: allBooks });
@@ -20,8 +20,8 @@ const getAllBooks = async (req, res) => {
     // res.send({ status: 'OK', data: allBooks });
 }
 
-const getRandomBook = (req, res) => {
-    const randomBook = bookService.getRandomBook();
+const getRandomBook = async (req, res) => {
+    const randomBook = await bookService.getRandomBook();
     res.send({ status: 'OK', data: randomBook});;
 }
 

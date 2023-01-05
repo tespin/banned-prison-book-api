@@ -5,7 +5,24 @@ const getAllBooks = async (filterParams) => {
     try {
         // connect to database
         // let books = DB.books;
-        const allBooks = await bookDB.find();
+        // const allBooks = await bookDB.find();
+        const books = await bookDB.find();
+
+        // publication, author, year, reason, state_arc
+
+        // filter by title
+        if (filterParams.publication) {
+            return books.filter( (book) => 
+                book.publication.toLocaleLowerCase.includes(filterParams.publication)
+            );
+        }
+
+        // filter by author
+        if (filterParams.author) {
+            return books.filter( (book) => 
+                book.author.toLowerCase().includes(filterParams.author)
+            );
+        }
         
         // filter by title
         // if (filterParams.title) {
@@ -65,9 +82,10 @@ const getAllBooks = async (filterParams) => {
     }
 };
 
-const getRandomBook = () => {
+const getRandomBook = async () => {
     // pick random book in database
-    const randomBook = DB.books[Math.floor(Math.random() * DB.books.length)];
+    const books = await bookDB.find();
+    const randomBook = books[Math.floor(Math.random() * books.length)]
     return randomBook;
 }
 

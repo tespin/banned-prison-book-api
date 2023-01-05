@@ -14,8 +14,8 @@ const getAllBooks = async (filterParams) => {
 };
 
 // obtain random book
-const getRandomBook = () => {
-    const randomBook = Book.getRandomBook();
+const getRandomBook = async () => {
+    const randomBook =  await Book.getRandomBook();
     return randomBook;
 };
 
