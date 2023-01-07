@@ -26,4 +26,6 @@ const bookSchema = new Schema ({
     state_arc: String
 })
 
+bookSchema.index({ publication: "text", author: "text", reason: "text", state_arc: "text"});
+
 module.exports = mongoose.model('Book', bookSchema);

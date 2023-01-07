@@ -3,26 +3,87 @@ const bookDB = require('./db');
 
 const getAllBooks = async (filterParams) => {
     try {
+        let query = {};
+
+        if (filterParams.publication) {
+            const regex = new RegExp(filterParams.publication, 'i');
+            query.publication = { $regex: regex };
+        }
+
+        if (filterParams.author) {
+            const regex = new RegExp(filterParams.author, 'i');
+            query.author = { $regex: regex };
+        }
+
+        if (filterParams.year) {
+            query.year = { $eq: filterParams.year };
+        }
+
+        if (filterParams.reason) {
+            const regex = new RegExp(filterParams.reason, 'i');
+            query.reason = { $regex: regex };
+        }
+
+        const books = await bookDB.find(query);
+
+        // if (filterParams.author) {
+        //     query.author = filterParams.author;
+        // }
         // connect to database
         // let books = DB.books;
         // const allBooks = await bookDB.find();
-        const books = await bookDB.find();
+        // bookDB.createIndexes({ publication: "text", author: "text"})
+        // let books = await bookDB.find();
+        // console.log(typeof(books));
 
         // publication, author, year, reason, state_arc
 
         // filter by title
-        if (filterParams.publication) {
-            return books.filter( (book) => 
-                book.publication.toLocaleLowerCase.includes(filterParams.publication)
-            );
-        }
+        // if (filterParams.publication) {
+        //     books = await bookDB.find({ $text: { $search: filterParams.publication }});
+            // books = bookDB.find({
+            //     publication: { $elemMatch : }
+            // })
+            // books = books.filter( () => 
+            //     bookDB.find({ publication: filterParams.publication })
+            // );
+            // books = books.filter( (book) => 
+            //     book.publication.toLowerCase().includes(filterParams.publication)
+            // );
+        // }
 
         // filter by author
-        if (filterParams.author) {
-            return books.filter( (book) => 
-                book.author.toLowerCase().includes(filterParams.author)
-            );
-        }
+        // if (filterParams.author) {
+        //     books = books.filter( (book) => 
+        //         book.author.toLowerCase().includes(filterParams.author)
+        //     );
+        // }
+
+        // filter by year
+        // if (filterParams.year) {
+        //     const books = await bookDB.find({ year: filterParams.year});
+        //     return books;
+
+            // return books.find( { year: filterParams.year })
+            // return books.filter( (book) => 
+            //     book.year = filterParams.year
+            // );
+            // return books.filter( (book) => 
+            //     book.find( {year: filterParams.year })
+            // );
+            // return books.find({ year: filterParams.year });
+            // return books.filter( (book) => 
+            //     book.year
+            // );
+            // return books.find({ year: filterParams.year }).exec();
+            // return books.filter( (book) => {
+
+            // })
+        // }
+
+        // if (filterParams.state_arc) {
+
+        // }
         
         // filter by title
         // if (filterParams.title) {
@@ -76,7 +137,7 @@ const getAllBooks = async (filterParams) => {
         // }
         
         // if no params specified, return all books
-        return allBooks;
+        return books;
     } catch (error) {
         throw { status: 500, message: error };
     }
