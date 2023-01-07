@@ -26,7 +26,6 @@ const getAllBooks = async (filterParams) => {
 
         if (filterParams.state_arc) {
             const regex = new RegExp(`^${filterParams.state_arc}$`);
-            console.log(regex);
             query.state_arc = { $regex: regex };
         }
 
