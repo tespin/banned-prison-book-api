@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import MainHeader from '../Header/MainHeader';
 import Card from '../UI/Card';
 import classes from './Home.module.css';
@@ -6,19 +6,6 @@ import Usage from '../Usage/Usage';
 import Footer from '../Footer/Footer';
 
 const Home = (props) => {
-    // const [data, setData] = useState('');
-
-    // useEffect( () => {
-    //     const fetchData = async () => {
-    //         const res = await fetch('/api');
-    //         const json = await res.json();
-    //         // return json;
-    //         setData(json.message);
-    //     }
-
-    //     fetchData()
-    // })
-
     return (
         <Card className={classes.home}>
             <MainHeader />

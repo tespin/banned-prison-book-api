@@ -5,7 +5,7 @@ import Card from './UI/Card';
 const App = () => {
     return (
         <Card>
-            <Home></Home>
+                <Home></Home>
         </Card>
     )
 }
