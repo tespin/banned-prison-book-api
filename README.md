@@ -26,6 +26,7 @@ Retrieve banned books according to the reason they were banned.
 ### State
 Retrieve all banned books in a specific state.
 
-[https://banned-books-api.onrender.com/api/books?title=the%wretched%of%the%earth](https://banned-books-api.onrender.com/api/books?state=az)
+[https://banned-books-api.onrender.com/api/books?state=az](https://banned-books-api.onrender.com/api/books?state=az)
 
 ## Licensing
+This project is licensed under the [MIT License](https://github.com/tespin/banned-prison-book-api/blob/dev/LICENSE.md).
