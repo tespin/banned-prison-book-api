@@ -1,4 +1,5 @@
-A JSON API for books banned in prisons within the United States -- [https://banned-prison-books-api.onrender.com](https://banned-prison-books-api.onrender.com)
+# Banned Prison Books API
+A JSON API for books banned in prisons within the United States — [https://banned-prison-books-api.onrender.com](https://banned-prison-books-api.onrender.com)
 
 ## Usage
 
