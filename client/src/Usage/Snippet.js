@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Card from '../UI/Card';
 import classes from './Snippet.module.css';
 
 const Snippet = (props) => {
@@ -8,7 +7,7 @@ const Snippet = (props) => {
         <>
             <pre className={classes.snippet}>
                 <code>
-                    {`https://banned-books-api.onrender.com/api/books?${props.endpoint}${props.params ? `=${props.params}` : ''}`}
+                    {`https://banned-prison-books-api.onrender.com/api/v1/books?${props.endpoint}${props.params ? `=${props.params}` : ''}`}
                 </code>
             </pre>
         </>
