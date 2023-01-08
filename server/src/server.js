@@ -10,6 +10,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));
 
 app.use(express.static(path.join(__dirname, '../../client/build')));
+
 app.use('/api/v1/books', v1Router);
 
 // app.get('/api', (req, res) => {

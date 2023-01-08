@@ -3,3 +3,14 @@
     justify-content: center;
     /* border: solid black 1px; */
 }
+ 
+.main {
+    /* justify-content: flex-start; */
+    width: 100%;
+} 
+
+@media only screen and (min-width: 500px) {
+    .main {
+        width: 100px;
+    }
+}
