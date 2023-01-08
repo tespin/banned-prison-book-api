@@ -5,8 +5,8 @@ const getAllBooks = async (filterParams) => {
     try {
         let query = {};
 
-        if (filterParams.publication) {
-            const regex = new RegExp(filterParams.publication, 'i');
+        if (filterParams.title) {
+            const regex = new RegExp(filterParams.title, 'i');
             query.publication = { $regex: regex };
         }
 
