@@ -1,4 +1,4 @@
-const DB = require('./db.json');
+// const DB = require('./db.json');
 const bookDB = require('./db');
 
 const getAllBooks = async (filterParams) => {
