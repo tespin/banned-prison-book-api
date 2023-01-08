@@ -15,7 +15,3 @@ const Example = (props) => {
 }
 
 export default Example;
-
-{/* <h3>Title</h3>
-                <p>Retrieve a banned book by its title.</p>
-                <Snippet endpoint='title' params='the%wretched%of%the%earth'/> */}
