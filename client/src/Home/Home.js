@@ -11,11 +11,11 @@ const Home = (props) => {
             <MainHeader />
             <main>
                 <div className={classes.about}>
-                    <p>Banned Prison Books API is a free JSON API for banned texts in prisons within the United States. The API uses a dataset published by The Marshall Project that collects lists of banned publications in various prison systems throughout the United States. <a href="https://www.themarshallproject.org/2022/12/21/prison-banned-books-list-find-your-state">View their interactive tool to find out books banned in your state's prisons.</a></p>
+                    <p>Banned Prison Books API is a free JSON API for banned texts in prisons within the United States. The API uses a dataset published by The Marshall Project that collects lists of banned publications in various prison systems throughout the United States. <a href="https://www.themarshallproject.org/2022/12/21/prison-banned-books-list-find-your-state">Find out which books are banned in your state's prisons.</a></p>
                 </div>
                 <Usage />
-                <Footer />
             </main>
+            <Footer />
         </Card>
     );
 };
