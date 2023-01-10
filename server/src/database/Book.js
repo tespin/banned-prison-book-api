@@ -30,6 +30,10 @@ const getAllBooks = async (filterParams) => {
         }
 
         const books = await bookDB.find(query);
+
+        if (filterParams.length) {
+            books.splice(filterParams.length);
+        }
         
         // if no params specified, return all books
         return books;

@@ -6,8 +6,9 @@ const Snippet = (props) => {
     return (
         <>
             <pre className={classes.snippet}>
-                <code>
-                    {`https://banned-prison-books-api.onrender.com/api/v1/books?${props.endpoint}${props.params ? `=${props.params}` : ''}`}
+                <code className={props.reqClass}>
+                    {/* {`https://banned-books-api.onrender.com/api/books?${props.endpoint}${props.params ? `=${props.params}` : ''}`} */}
+                    {`https://banned-books-api.onrender.com/api/books${props.endpoint == 'random' ? `/${props.endpoint}` : `?${props.endpoint}` }${props.params ? `=${props.params}` : ''}`}
                 </code>
             </pre>
         </>

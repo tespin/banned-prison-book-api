@@ -8,7 +8,7 @@ const Example = (props) => {
             <div className={classes.example}>
                 <h3 className={classes.heading}>{props.heading}</h3>
                 <p className={classes.desc}>{props.desc}</p>
-                <Snippet endpoint={props.endpoint} params={props.params}></Snippet>
+                <Snippet endpoint={props.endpoint} reqClass={props.reqClass} params={props.params}></Snippet>
             </div>
         </>
     );

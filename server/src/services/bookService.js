@@ -8,9 +8,6 @@ const getAllBooks = async (filterParams) => {
     } catch (error) {
         throw error;
     }
-
-    // const allBooks = Book.getAllBooks();
-    // return allBooks;
 };
 
 // obtain random book
