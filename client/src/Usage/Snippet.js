@@ -7,8 +7,8 @@ const Snippet = (props) => {
         <>
             <pre className={classes.snippet}>
                 <code className={props.reqClass}>
-                    {`https://banned-books-api.onrender.com/api/books?${props.endpoint}${props.params ? `=${props.params}` : ''}`}
-                    {/* {`https://banned-books-api.onrender.com/api/books${props.endpoint == 'random' ? `/${props.endpoint}` : `?${props.endpoint}` }${props.params ? `=${props.params}` : ''}`} */}
+                    {/* {`https://banned-books-api.onrender.com/api/books?${props.endpoint}${props.params ? `=${props.params}` : ''}`} */}
+                    {`https://banned-books-api.onrender.com/api/books${props.endpoint == 'random' ? `/${props.endpoint}` : `?${props.endpoint}` }${props.params ? `=${props.params}` : ''}`}
                 </code>
             </pre>
         </>

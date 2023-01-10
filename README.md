@@ -3,6 +3,11 @@ A JSON API for books banned in prisons within the United States — [https://ban
 
 ## Usage
 
+### Random
+Retrieve a random banned book.
+
+[https://banned-books-api.onrender.com/api/books/random](https://banned-books-api.onrender.com/api/books/random)
+
 ### Publication
 Retrieve a banned book by its title.
 
@@ -27,6 +32,11 @@ Retrieve banned books according to the reason they were banned.
 Retrieve all banned books in a specific state.
 
 [https://banned-books-api.onrender.com/api/books?state=az](https://banned-books-api.onrender.com/api/books?state=az)
+
+### Length
+Retrieve a specified number of banned books. Can be combined with other queries.
+
+[https://banned-books-api.onrender.com/api/books?length=5](https://banned-books-api.onrender.com/api/books?length=5)
 
 ## Licensing
 This project is licensed under the [MIT License](https://github.com/tespin/banned-prison-book-api/blob/dev/LICENSE.md).
