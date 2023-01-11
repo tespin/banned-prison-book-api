@@ -17,11 +17,11 @@ const App = () => {
     // })
     const [data, setData] = useState({});
 
-    // const exampleHandler = async () => {
-    //     const res = await fetch('/random');
-    //     const json = await res.json();
-    //     setData(json);
-    // }
+    const exampleHandler = async () => {
+        const res = await fetch('/random');
+        const json = await res.json();
+        setData(json);
+    }
 
     useEffect( () => {
         const exampleHandler = async () => {
