@@ -8,7 +8,9 @@ const Example = (props) => {
             <div className={classes.example}>
                 <h3 className={classes.heading}>{props.heading}</h3>
                 <p className={classes.desc}>{props.desc}</p>
-                <Snippet endpoint={props.endpoint} reqClass={props.reqClass} params={props.params}></Snippet>
+                <Snippet snippetClass={props.snippetClass} reqClass={props.reqClass}>
+                    {`https://banned-books-api.onrender.com/api/books${props.endpoint == 'random' ? `/${props.endpoint}` : `?${props.endpoint}` }${props.params ? `=${props.params}` : ''}`}
+                </Snippet>
             </div>
         </>
     );

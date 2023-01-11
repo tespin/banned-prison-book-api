@@ -1,14 +1,14 @@
+.content {
+    color: #000;
+    font-family: 'Anonymous Pro', Courier, sans-serif;
+}
+
 .snippet {
     background: transparent;
     margin: 0.85rem 0 0 0;
     padding: 1.25rem 1.5rem;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     border: 1px solid #A9B3A8;
-}
-
-.snippet code {
-    color: #000;
-    font-family: 'Anonymous Pro', Courier, sans-serif;
 }
 
 /* .snippet code.request {
