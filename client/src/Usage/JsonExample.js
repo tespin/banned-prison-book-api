@@ -7,7 +7,8 @@ const JsonExample = (props) => {
     return (
         <>
             <div className={classes.jsonExample}>
-                {props.data.map( data => <p>data.publication</p>)}
+                <p>{props.data.publication}</p>
+                {/* {props.data.map( data => <p>data.publication</p>)} */}
                 {/* <p>{props.data.data || "Loading ..."}</p> */}
                 {/* <p className={classes.desc}>Example JSON response:</p>
                 <Snippet snippetClass={props.snippetClass} reqClass={props.reqClass}>
