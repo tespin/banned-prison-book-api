@@ -8,8 +8,8 @@
 }
 
 .loader {
-    width: 48px;
-    height: 48px;
+    width: 1.15rem;
+    height: 1.15rem;
     border: 3px solid #000;
     border-bottom-color: transparent;
     border-radius: 50%;
@@ -29,14 +29,14 @@
 
 .loadButton {
     margin: 1.05rem 0 0 0;
-    /* background-color: #218218;
-    border: 1px solid #218218;
-    color: #FFF; */
-
+    padding: 1rem;
+    font-size: 1.15rem;
     border: 1px solid black;
     color: #000;
-    /* background-color: white; */
     cursor: pointer;
-    font-size: 1.15rem;
-    padding: 1rem;
+}
+
+.loadButton:disabled {
+    opacity: 20%;
+    cursor: default;
 }

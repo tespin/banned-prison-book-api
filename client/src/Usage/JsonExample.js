@@ -37,8 +37,6 @@ const JsonExample = (props) => {
     return (
         <>
             <div className={classes.jsonExample}>
-                {/* {props.data.map( data => <p>data.publication</p>)} */}
-                {/* <p>{props.data.data || "Loading ..."}</p> */}
                 <p className={classes.desc}>Example JSON response:</p>
                 { !props.response
                 ? <div className={classes.loader}></div>
@@ -62,7 +60,10 @@ data: {
                 </Snippet>
             }
                 <Card>
-                    <Button className={classes.loadButton} onClick={props.onLoadExample}>Get a random banned book.</Button>
+                    {props.response 
+                        ? <Button className={classes.loadButton} onClick={props.onLoadExample} disabled={false}>Get a random banned book.</Button>
+                        : <Button className={classes.loadButton} onClick={props.onLoadExample} disabled={true}>Get a random banned book.</Button>
+                    }
                 </Card>
             </div>
         </>
