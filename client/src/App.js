@@ -15,11 +15,12 @@ const App = () => {
 
     //     fetchData()
     // })
-    const [data, setData] = useState({});
+    const [data, setData] = useState();
 
     const exampleHandler = async () => {
         const res = await fetch('/api/v1/books/random');
         const json = await res.json();
+        console.log(json);
         setData(json);
     }
 
