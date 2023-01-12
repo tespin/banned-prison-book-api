@@ -7,7 +7,6 @@ const getAllBooks = async (req, res) => {
     try {
         // pass in params and get all books
         const allBooks = await bookService.getAllBooks({ publication, author, year, reason, state_arc, length });
-        
         // send json object with books
         res.send({ status: 'OK', data: allBooks });
     } catch (error) {
