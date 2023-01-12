@@ -24,6 +24,10 @@ const App = () => {
         setData(json);
     }
 
+    useEffect( () => {
+        exampleHandler();
+    }, []);
+
     // useEffect( () => {
     //     const exampleHandler = async () => {
     //         const res = await fetch('/api/v1/books/random');
