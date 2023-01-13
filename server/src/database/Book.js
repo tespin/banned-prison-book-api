@@ -12,7 +12,7 @@ const getAllBooks = async (filterParams) => {
             books = JSON.parse(cached);
         } else {
             books = await bookDB.find();
-            await bookCache.setex('books', 5, JSON.stringify(books));
+            await bookCache.setex('books', 86400, JSON.stringify(books));
         }
 
         if (filterParams.publication) {
