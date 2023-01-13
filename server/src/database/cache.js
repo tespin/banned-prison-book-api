@@ -1,19 +1,19 @@
-// const redis = require('redis');
+const redis = require('redis');
 
-// const client = redis.createClient({
-//     url: process.env.REDIS_URL
-// });
+const client = redis.createClient({
+    url: process.env.REDIS_URL
+});
 
-// const connectCache = async () => {
-//     client.on('error', (err) => console.log('Redis Cache Error', err));
+const connectCache = async () => {
+    client.on('error', (err) => console.log('Redis Cache Error', err));
 
-//     try {
-//         await client.connect();
-//     } catch (error) {
-//         throw error;
-//     }
-// }
+    try {
+        await client.connect();
+    } catch (error) {
+        throw error;
+    }
+}
 
-// connectCache();
+connectCache();
 
-// module.exports = client;
+module.exports = client;
