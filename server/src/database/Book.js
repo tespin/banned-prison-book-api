@@ -1,19 +1,18 @@
 // const DB = require('./db.json');
 const bookDB = require('./db');
-const bookCache = require('./cache');
+// const bookCache = require('./cache');
 
 const getAllBooks = async (filterParams) => {
     try {
-        let books;
+        let books = await bookDB.find();
         
-        const cached = await bookCache.get('books');
-        console.log(typeof(cached));
-        if (cached) {
-            books = JSON.parse(cached);
-        } else {
-            books = await bookDB.find();
-            await bookCache.setex('books', 5, JSON.stringify(books));
-        }
+        // const cached = await bookCache.get('books');
+        // if (cached) {
+        //     books = JSON.parse(cached);
+        // } else {
+        //     books = await bookDB.find();
+        //     await bookCache.setex('books', 5, JSON.stringify(books));
+        // }
 
         if (filterParams.publication) {
             const regex = new RegExp(filterParams.publication, 'i');
@@ -87,15 +86,15 @@ const getRandomBook = async () => {
     // pick random book in database
     // const books = await bookDB.find();
 
-    let books;
+    let books = await bookDB.find();
         
-    const cached = await bookCache.get('books');
-    if (cached) {
-        books = JSON.parse(cached);
-    } else {
-        books = await bookDB.find();
-        await bookCache.setex('books', 5, JSON.stringify(books));
-    }
+    // const cached = await bookCache.get('books');
+    // if (cached) {
+    //     books = JSON.parse(cached);
+    // } else {
+    //     books = await bookDB.find();
+    //     await bookCache.setex('books', 5, JSON.stringify(books));
+    // }
 
     const randomBook = books[Math.floor(Math.random() * books.length)]
     return randomBook;
