@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React from 'react';
 import MainHeader from '../Header/MainHeader';
 import Card from '../UI/Card';
 import classes from './Home.module.css';

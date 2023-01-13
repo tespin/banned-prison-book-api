@@ -16,11 +16,6 @@ const Usage = (props) => {
                 <Example heading='Reason' desc='Retrieve banned books according to the reason they were banned.' endpoint='reason' snippetClass={classes.request}  reqClass={classes.get} params='security'/>
                 <Example heading='State' desc='Retrieve all banned books in a specific state.' endpoint='state_arc' snippetClass={classes.request} reqClass={classes.get} params='wi'/>
                 <Example heading='Length' desc='Retrieve a specified number of banned books. Can be combined with other queries.' endpoint='length' snippetClass={classes.request} reqClass={classes.get} params='5'/>
-                {/* <Example heading='ISBN' desc='Retrieve a banned book by its ISBN.' endpoint='isbn' params='080214323'/>
-                <Example heading='Genre' desc='Retrieve all banned books in a specific genre.' endpoint='genre' params='lgbtq'/>
-                <Example heading='Random' desc='Retrieve a random banned book.' endpoint='random' params=''/>
-                <Example heading='Multiple Results' desc='Retrieve a random banned book.' endpoint='random' params='results=10'/>
-                <Example heading='All' desc='Retrieve all banned books, in random order.' endpoint='all' params=''/> */}
             </div>
         </>
     );

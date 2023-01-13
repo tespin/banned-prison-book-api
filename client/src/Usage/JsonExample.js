@@ -1,39 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import classes from './JsonExample.module.css';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Snippet from './Snippet';
 
 const JsonExample = (props) => {    
-    // const [response, setResponse] = useState();
-
-    // const responseHandler = () => {
-    //     if (props.data) {
-    //         setResponse(props.data);
-    //     }
-    // }
-
-    // responseHandler();
-    
-    /*
-
-    if (there is a props response) 
-        if (props response status is OK)
-            render status and response
-        else
-            render status
-    else
-        render loading
-
-    ( if no data has been fetched
-        ? render loading
-        : if status of fetched data is ok
-        ? render status and response
-        : render response
-    )
-
-    */
-
     return (
         <>
             <div className={classes.jsonExample}>
