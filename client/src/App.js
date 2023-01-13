@@ -16,25 +16,6 @@ const App = () => {
         exampleHandler();
     }, []);
 
-    // useEffect( () => {
-    //     const exampleHandler = async () => {
-    //         const res = await fetch('/api/v1/books/random');
-    //         const json = await res.json();
-    //         setData(json);
-    //     }
-
-    //     exampleHandler();
-    // });
-
-    // const exampleHandler = () => {
-    //     setData({
-    //         'status': 'OK from click',
-    //         'data': {
-    //             'example': 'loaded'
-    //         }
-    //     });
-    // };
-
     return (
         <Card>
                 <Home onLoadExample={exampleHandler} data={data}></Home>
