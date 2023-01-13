@@ -1,6 +1,6 @@
 // const DB = require('./db.json');
 const bookDB = require('./db');
-// const bookCache = require('./cache');
+const bookCache = require('./cache');
 
 const getAllBooks = async (filterParams) => {
     try {
