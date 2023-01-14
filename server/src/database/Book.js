@@ -33,13 +33,50 @@ const getAllBooks = async (filterParams) => {
         }
 
         if (filterParams.state_arc) {
-            const regex = new RegExp(`^${filterParams.state_arc}$`);
+            const stateToAbbrev = {
+                'arizona': 'az',
+                'california': 'ca',
+                'connecticut': 'ct',
+                'florida': 'fl',
+                'georgia': 'ga',
+                'iowa': 'ia',
+                'illinois': 'il',
+                'kansas': 'ks',
+                'michigan': 'mi',
+                'montana': 'mt',
+                'north carolina': 'nc',
+                'new jersey': 'nj',
+                'oregon': 'or',
+                'rhode island': 'ri',
+                'south carolina': 'sc',
+                'texas': 'tx',
+                'virginia': 'va',
+                'wisconsin' : 'wi'
+            }
+
+            if (filterParams.state_arc.length > 2) {
+                const val = stateToAbbrev[filterParams.state_arc.toLowerCase()];
+                regex = new RegExp(`^${val}$`, 'i');
+            } else {
+                regex = new RegExp(`^${filterParams.state_arc}$`, 'i');
+            }
+
             books = books.filter( (book) => book.state_arc.match(regex));
         }
 
         if (filterParams.length) {
             books.splice(filterParams.length);
         }
+
+        // if (filterParams.sort) {
+        //     // let field = filterParams.sort;
+        //     // let sortObj = { field : filterParams.order }
+        //     // books.sort(sortObj);
+        //     // console.log(filterParams.sort);
+        //     books.sort({ 
+        //         [filterParams.sort] : filterParams.order
+        //     });
+        // }
 
         // if no params specified, return all books
         return books;

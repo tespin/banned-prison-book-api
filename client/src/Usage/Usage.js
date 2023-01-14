@@ -14,8 +14,8 @@ const Usage = (props) => {
                 <Example heading='Author' desc='Retrieve banned books by a specified author.' endpoint='author' snippetClass={classes.request} reqClass={classes.get} params='george%20jackson'/>
                 <Example heading='Year' desc='Retrieve books banned in a specific year.' endpoint='year' snippetClass={classes.request} reqClass={classes.get} params='2013'/>
                 <Example heading='Reason' desc='Retrieve banned books according to the reason they were banned.' endpoint='reason' snippetClass={classes.request}  reqClass={classes.get} params='security'/>
-                <Example heading='State' desc='Retrieve all banned books in a specific state.' endpoint='state_arc' snippetClass={classes.request} reqClass={classes.get} params='wi'/>
-                <Example heading='Length' desc='Retrieve a specified number of banned books. Can be combined with other queries.' endpoint='length' snippetClass={classes.request} reqClass={classes.get} params='5'/>
+                <Example heading='State' desc='Retrieve all banned books in a specific state, searching with the two-letter abbreviation or full state name.' endpoint='state_arc' snippetClass={classes.request} reqClass={classes.get} params='wi'/>
+                <Example heading='Length' desc='Retrieve a specified number of banned books.' endpoint='length' snippetClass={classes.request} reqClass={classes.get} params='5'/>
             </div>
         </>
     );
