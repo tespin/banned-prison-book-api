@@ -1,6 +1,41 @@
 const bookDB = require('./db');
 const bookCache = require('./cache');
 
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *      Book:
+ *          type: object
+ *          properties:
+ *              _id:
+ *                  type: string
+ *                  example: 63b71000fea592e110f7f237
+ *              publication:
+ *                  type: string
+ *                  example: A Practical Guide to Dragons
+ *              author:
+ *                  type: string
+ *                  example: Archmage Lowadar
+ *              date:
+ *                  type: string
+ *                  example: 2012-02-10T08:00:00.000Z
+ *              year:
+ *                  type: integer
+ *                  example: 2012
+ *              month:
+ *                  type: integer
+ *                  example: 2
+ *              day:
+ *                  type: integer
+ *                  example: 10
+ *              reason:
+ *                  type: string
+ *                  example: Role Playing game
+ *              state_arc:
+ *                  type: string
+ *                  example: mt
+ */
 const getAllBooks = async (filterParams) => {
     try {
         let books;
