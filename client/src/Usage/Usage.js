@@ -16,6 +16,8 @@ const Usage = (props) => {
                 <Example heading='Reason' desc='Retrieve banned books according to the reason they were banned.' endpoint='reason' snippetClass={classes.request}  reqClass={classes.get} params='security'/>
                 <Example heading='State' desc='Retrieve all banned books in a specific state, searching with the two-letter abbreviation or full state name.' endpoint='state_arc' snippetClass={classes.request} reqClass={classes.get} params='wi'/>
                 <Example heading='Length' desc='Retrieve a specified number of banned books.' endpoint='length' snippetClass={classes.request} reqClass={classes.get} params='5'/>
+                <Example heading='Sort' desc='Retrieve results sorted by publication, author, year, reason, or state_arc.' endpoint='sort' snippetClass={classes.request} reqClass={classes.get} params='author'/>
+                <Example heading='Order' desc='Retrieve results sorted in a specific direction. Allowed values are asc, desc, ascending, descending, 1, and -1.' endpoint='order' snippetClass={classes.request} reqClass={classes.get} params='desc'/>
             </div>
         </>
     );

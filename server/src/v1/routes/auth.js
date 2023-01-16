@@ -35,6 +35,18 @@ const router = express.Router();
  *                type: string
  *            description: The state in which the book was banned
  *          - in: query
+ *            name: sort
+ *            schema:
+ *                type: string
+ *            description: The parameter to sort, either publication, author, year, reason, or state_arc
+ *          - in: query
+ *            name: order
+ *            schema:
+ *                oneOf:
+ *                  - type: string
+ *                  - type: integer
+ *            description: The direction of the sort. Allowed values are 'asc', 'desc', 'ascending', 'descending', 1, and -1
+ *          - in: query
  *            name: length
  *            schema:
  *                type: integer

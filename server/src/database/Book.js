@@ -99,19 +99,49 @@ const getAllBooks = async (filterParams) => {
             books = books.filter( (book) => book.state_arc.match(regex));
         }
 
+        if (filterParams.sort) {
+            if (filterParams.order) {
+                if (filterParams.order === 'ascending' 
+                    || filterParams.order === 'asc'
+                    || filterParams.order == 1) {
+                        books.sort( (a, b) => {
+                            if (a[filterParams.sort] > b[filterParams.sort]) {
+                                return 1;
+                            }
+                            if (a[filterParams.sort] < b[filterParams.sort]) {
+                                return -1;
+                            }
+                            return 0;
+                        })
+                } else if (filterParams.order === 'descending' 
+                    || filterParams.order === 'desc'
+                    || filterParams.order == -1) {
+                        books.sort( (a, b) => {
+                            if (a[filterParams.sort] > b[filterParams.sort]) {
+                                return -1;
+                            }
+                            if (a[filterParams.sort] < b[filterParams.sort]) {
+                                return 1;
+                            }
+                            return 0;
+                        })
+                }
+            } else {
+                books.sort( (a, b) => {
+                    if (a[filterParams.sort] > b[filterParams.sort]) {
+                        return 1;
+                    }
+                    if (a[filterParams.sort] < b[filterParams.sort]) {
+                        return -1;
+                    }
+                    return 0;
+                })
+            }
+        }
+
         if (filterParams.length) {
             books.splice(filterParams.length);
         }
-
-        // if (filterParams.sort) {
-        //     // let field = filterParams.sort;
-        //     // let sortObj = { field : filterParams.order }
-        //     // books.sort(sortObj);
-        //     // console.log(filterParams.sort);
-        //     books.sort({ 
-        //         [filterParams.sort] : filterParams.order
-        //     });
-        // }
 
         // if no params specified, return all books
         return books;
