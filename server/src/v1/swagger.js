@@ -20,9 +20,6 @@ const swaggerDocs = (app, port) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(swaggerSpec);
     });
-    console.log(
-        `Version 1 Docs available at https://localhost:${port}/api/v1/docs`
-    );
 };
 
 module.exports = { swaggerDocs };
