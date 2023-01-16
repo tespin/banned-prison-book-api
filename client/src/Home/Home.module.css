@@ -1,6 +1,6 @@
 .home {
     flex-direction: column;
-    width: 320px;
+    width: 296px;
     border: none;
 }
 
@@ -21,6 +21,6 @@
 
 @media only screen and (min-width: 500px) {
     .home {
-        width: calc(320px + 10.25vw);
+        width: calc(296px + 10.25vw);
     }
 }
