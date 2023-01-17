@@ -43,8 +43,8 @@ const router = express.Router();
  *            name: order
  *            schema:
  *                oneOf:
- *                  - type: string
- *                  - type: integer
+ *                    - type: string
+ *                    - type: integer
  *            description: The direction of the sort. Allowed values are 'asc', 'desc', 'ascending', 'descending', 1, and -1
  *          - in: query
  *            name: length
