@@ -8,6 +8,11 @@ Retrieve a random banned book.
 
 [https://banned-books-api.onrender.com/api/v1/books/random](https://banned-books-api.onrender.com/api/v1/books/random)
 
+### All
+Retrieve all books in the database (48375 entries).
+
+[https://banned-books-api.onrender.com/api/v1/books/](https://banned-books-api.onrender.com/api/v1/books/)
+
 ### Publication
 Retrieve a banned book by its title.
 
