@@ -13,6 +13,7 @@ const Home = (props) => {
                 <div className={classes.about}>
                     <p>Banned Prison Books API is a free JSON API for banned texts in prisons within the United States. The API uses a dataset published by The Marshall Project that collects lists of banned publications in various prison systems throughout the United States. <a href="https://www.themarshallproject.org/2022/12/21/prison-banned-books-list-find-your-state">Find out which books are banned in your state's prisons.</a></p>
                     <p>Read the <a href="./api/v1/docs">documentation</a>.</p>
+                    <p>Content warning: please note that due to the nature of the data, use of the API can return texts that reference violence, pornography, explicit language, and other sensitive content.</p>
                 </div>
                 <Usage onLoadExample={props.onLoadExample} data={props.data}  />
             </main>
