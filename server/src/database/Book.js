@@ -1,5 +1,6 @@
 const bookDB = require('./db');
 const bookCache = require('./cache');
+const { stateToAbbrev } = require('./utils');
 
 /**
  * @openapi
@@ -68,27 +69,6 @@ const getAllBooks = async (filterParams) => {
         }
 
         if (filterParams.state_arc) {
-            const stateToAbbrev = {
-                'arizona': 'az',
-                'california': 'ca',
-                'connecticut': 'ct',
-                'florida': 'fl',
-                'georgia': 'ga',
-                'iowa': 'ia',
-                'illinois': 'il',
-                'kansas': 'ks',
-                'michigan': 'mi',
-                'montana': 'mt',
-                'north carolina': 'nc',
-                'new jersey': 'nj',
-                'oregon': 'or',
-                'rhode island': 'ri',
-                'south carolina': 'sc',
-                'texas': 'tx',
-                'virginia': 'va',
-                'wisconsin' : 'wi'
-            }
-
             if (filterParams.state_arc.length > 2) {
                 const val = stateToAbbrev[filterParams.state_arc.toLowerCase()];
                 regex = new RegExp(`^${val}$`, 'i');
