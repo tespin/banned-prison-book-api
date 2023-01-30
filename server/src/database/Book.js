@@ -80,7 +80,6 @@ const getAllBooks = async (filterParams) => {
         }
 
         if (filterParams.sort) {
-            const sortType = typeof(books[0][filterParams.sort]);
             if (filterParams.order) {
                 if (filterParams.order === 'ascending' 
                     || filterParams.order === 'asc'
@@ -106,7 +105,7 @@ const getAllBooks = async (filterParams) => {
                         books.sort( (a, b) => {
                             if (Number.isNaN(a[filterParams.sort])) {
                                 return ( 
-                                    a[filterParams.sort].localeCompare(b[filterParams.sort])
+                                    b[filterParams.sort].localeCompare(a[filterParams.sort])
                                 );
                             } else {
                                 if (a[filterParams.sort] > b[filterParams.sort]) {
