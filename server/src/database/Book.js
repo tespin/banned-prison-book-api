@@ -80,41 +80,28 @@ const getAllBooks = async (filterParams) => {
         }
 
         if (filterParams.sort) {
+            const upOrder = ['ascending', 'asc', '1'];
+            const downOrder = ['descending', 'desc', '-1'];
+
             if (filterParams.order) {
-                if (filterParams.order === 'ascending' 
-                    || filterParams.order === 'asc'
-                    || filterParams.order == 1) {
+                if (upOrder.includes(filterParams.order)) {
                         books.sort( (a, b) => {
                             if (Number.isNaN(a[filterParams.sort])) {
                                 return ( 
                                     a[filterParams.sort].localeCompare(b[filterParams.sort])
                                 );
                             } else {
-                                if (a[filterParams.sort] > b[filterParams.sort]) {
-                                    return 1;
-                                }
-                                if (a[filterParams.sort] < b[filterParams.sort]) {
-                                    return -1;
-                                }
-                                return 0;
+                                return (a[filterParams.sort] < b[filterParams.sort] ? -1 : (a[filterParams.sort] > b[filterParams.sort] ? 1 : 0))
                             }
                         });
-                } else if (filterParams.order === 'descending' 
-                    || filterParams.order === 'desc'
-                    || filterParams.order == -1) {
+                } else if (downOrder.includes(filterParams.order)) {
                         books.sort( (a, b) => {
                             if (Number.isNaN(a[filterParams.sort])) {
                                 return ( 
                                     b[filterParams.sort].localeCompare(a[filterParams.sort])
                                 );
                             } else {
-                                if (a[filterParams.sort] > b[filterParams.sort]) {
-                                    return -1;
-                                }
-                                if (a[filterParams.sort] < b[filterParams.sort]) {
-                                    return 1;
-                                }
-                                return 0;
+                                return (b[filterParams.sort] < a[filterParams.sort] ? -1 : (b[filterParams.sort] > a[filterParams.sort] ? 1 : 0))
                             }
                         });
                 }
@@ -125,13 +112,7 @@ const getAllBooks = async (filterParams) => {
                             a[filterParams.sort].localeCompare(b[filterParams.sort])
                         );
                     } else {
-                        if (a[filterParams.sort] > b[filterParams.sort]) {
-                            return 1;
-                        }
-                        if (a[filterParams.sort] < b[filterParams.sort]) {
-                            return -1;
-                        }
-                        return 0;
+                        return (a[filterParams.sort] < b[filterParams.sort] ? -1 : (a[filterParams.sort] > b[filterParams.sort] ? 1 : 0))
                     }
                 });
             }
