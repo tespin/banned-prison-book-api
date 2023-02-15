@@ -1,6 +1,6 @@
 const bookDB = require('./db');
 const bookCache = require('./cache');
-const { stateToAbbrev, sortWith } = require('./utils');
+const { stateToAbbrev } = require('./utils');
 
 /**
  * @openapi
@@ -80,8 +80,8 @@ const getAllBooks = async (filterParams) => {
         }
 
         if (filterParams.sort) {
-            const upOrder = ['ascending', 'asc', 1];
-            const downOrder = ['descending', 'desc', -1];
+            const upOrder = ['ascending', 'asc', '1'];
+            const downOrder = ['descending', 'desc', '-1'];
 
             if (filterParams.order) {
                 if (upOrder.includes(filterParams.order)) {
@@ -91,13 +91,7 @@ const getAllBooks = async (filterParams) => {
                                     a[filterParams.sort].localeCompare(b[filterParams.sort])
                                 );
                             } else {
-                                if (a[filterParams.sort] > b[filterParams.sort]) {
-                                    return 1;
-                                }
-                                if (a[filterParams.sort] < b[filterParams.sort]) {
-                                    return -1;
-                                }
-                                return 0;
+                                return (a[filterParams.sort] < b[filterParams.sort] ? -1 : (a[filterParams.sort] > b[filterParams.sort] ? 1 : 0))
                             }
                         });
                 } else if (downOrder.includes(filterParams.order)) {
@@ -107,13 +101,7 @@ const getAllBooks = async (filterParams) => {
                                     b[filterParams.sort].localeCompare(a[filterParams.sort])
                                 );
                             } else {
-                                if (a[filterParams.sort] > b[filterParams.sort]) {
-                                    return -1;
-                                }
-                                if (a[filterParams.sort] < b[filterParams.sort]) {
-                                    return 1;
-                                }
-                                return 0;
+                                return (b[filterParams.sort] < a[filterParams.sort] ? -1 : (b[filterParams.sort] > a[filterParams.sort] ? 1 : 0))
                             }
                         });
                 }
@@ -124,13 +112,7 @@ const getAllBooks = async (filterParams) => {
                             a[filterParams.sort].localeCompare(b[filterParams.sort])
                         );
                     } else {
-                        if (a[filterParams.sort] > b[filterParams.sort]) {
-                            return 1;
-                        }
-                        if (a[filterParams.sort] < b[filterParams.sort]) {
-                            return -1;
-                        }
-                        return 0;
+                        return (a[filterParams.sort] < b[filterParams.sort] ? -1 : (a[filterParams.sort] > b[filterParams.sort] ? 1 : 0))
                     }
                 });
             }
