@@ -1,6 +1,6 @@
 const bookDB = require('./db');
 const bookCache = require('./cache');
-const { stateToAbbrev } = require('./utils');
+const { stateToAbbrev, sortWith } = require('./utils');
 
 /**
  * @openapi
@@ -80,10 +80,11 @@ const getAllBooks = async (filterParams) => {
         }
 
         if (filterParams.sort) {
+            const upOrder = ['ascending', 'asc', 1];
+            const downOrder = ['descending', 'desc', -1];
+
             if (filterParams.order) {
-                if (filterParams.order === 'ascending' 
-                    || filterParams.order === 'asc'
-                    || filterParams.order == 1) {
+                if (upOrder.includes(filterParams.order)) {
                         books.sort( (a, b) => {
                             if (Number.isNaN(a[filterParams.sort])) {
                                 return ( 
@@ -99,9 +100,7 @@ const getAllBooks = async (filterParams) => {
                                 return 0;
                             }
                         });
-                } else if (filterParams.order === 'descending' 
-                    || filterParams.order === 'desc'
-                    || filterParams.order == -1) {
+                } else if (downOrder.includes(filterParams.order)) {
                         books.sort( (a, b) => {
                             if (Number.isNaN(a[filterParams.sort])) {
                                 return ( 
