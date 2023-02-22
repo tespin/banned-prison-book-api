@@ -96,11 +96,14 @@ const getAllBooks = async (filterParams) => {
         // sort the results, with an optional order parameter
         if (filterParams.sort) {
             if (filterParams.order) {
+                // construct arrays holding accepted parameters for the order
                 const upOrder = ['ascending', 'asc', '1'];
                 const downOrder = ['descending', 'desc', '-1'];
 
+                // check if the order is ascending or descending
                 if (upOrder.includes(filterParams.order)) {
                         books.sort( (a, b) => {
+                            // when sorting string fields, use localeCompare
                             if (Number.isNaN(a[filterParams.sort])) {
                                 return ( 
                                     a[filterParams.sort].localeCompare(b[filterParams.sort])
