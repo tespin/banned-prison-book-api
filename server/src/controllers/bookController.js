@@ -10,17 +10,27 @@ const getAllBooks = async (req, res) => {
         const allBooks = await bookService.getAllBooks({ publication, author, year, reason, state_arc, length, sort, order });
         
         // send json object with books
-        res.send({ status: 'OK', data: allBooks });
+        res
+            .status(200)
+            .send({ data: allBooks });
     } catch (error) {
         res
             .status(error?.status || 500)
-            .send({ status: 'FAILED', data: { error: error?.message || error } });
+            .send({ data: { error: error?.message || error } });
     }
 }
 
 const getRandomBook = async (req, res) => {
-    const randomBook = await bookService.getRandomBook();
-    res.send({ status: 'OK', data: randomBook});;
+    try {
+        const randomBook = await bookService.getRandomBook();
+        res
+            .status(200)
+            .send({ data: randomBook});
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ data: { error: error?.message || error } });
+    }
 }
 
 module.exports = {
