@@ -99,9 +99,6 @@ router.get('/', bookController.getAllBooks);
  *                      schema:
  *                          type: object
  *                          properties:
- *                              status:
- *                                  type: string
- *                                  example: OK
  *                              data:
  *                                  type: array
  *                                  items:
@@ -113,9 +110,6 @@ router.get('/', bookController.getAllBooks);
  *                      schema:
  *                          type: object
  *                          properties:
- *                              status:
- *                                  type: string
- *                                  example: FAILED
  *                              data:
  *                                  type: object
  *                                  properties:
