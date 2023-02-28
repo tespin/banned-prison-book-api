@@ -9,7 +9,8 @@ const App = () => {
         setData();
         const res = await fetch('/api/v1/books/random');
         const json = await res.json();
-        setData(json);
+        setData({status: res.status, data: json});
+        // setData({status: 500, data: {data: {error: "error message"}}});
     }
 
     useEffect( () => {
@@ -18,7 +19,7 @@ const App = () => {
 
     return (
         <Card>
-                <Home onLoadExample={exampleHandler} data={data}></Home>
+                <Home onLoadExample={exampleHandler} response={data}></Home>
         </Card>
     )
 }
