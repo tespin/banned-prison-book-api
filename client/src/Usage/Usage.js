@@ -9,7 +9,7 @@ const Usage = (props) => {
             <div className={classes.usage}>
                 <h2>Usage</h2>
                 <Example heading='Random' desc='Retrieve a random banned book.' endpoint='random' snippetClass={classes.request} reqClass={classes.get} params=''/>
-                <JsonExample onLoadExample={props.onLoadExample} response={props.data} snippetClass={classes.response}></JsonExample>
+                <JsonExample onLoadExample={props.onLoadExample} response={props.response} snippetClass={classes.response}></JsonExample>
                 <Example heading='All' desc='Retrieve all books in the database (48375 entries).' endpoint='' snippetClass={classes.request} reqClass={classes.get} params=''/>
                 <Example heading='Publication' desc='Retrieve a banned book by its title.' endpoint='publication' snippetClass={classes.request} reqClass={classes.get} params='blood%20in%20my%20eye'/>
                 <Example heading='Author' desc='Retrieve banned books by a specified author.' endpoint='author' snippetClass={classes.request} reqClass={classes.get} params='george%20jackson'/>

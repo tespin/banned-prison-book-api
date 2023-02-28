@@ -12,8 +12,12 @@ const getAllBooks = async (filterParams) => {
 
 // obtain random book
 const getRandomBook = async () => {
-    const randomBook =  await Book.getRandomBook();
-    return randomBook;
+    try {
+        const randomBook =  await Book.getRandomBook();        
+        return randomBook;
+    } catch (error) {
+        throw error;
+    }
 };
 
 module.exports = {

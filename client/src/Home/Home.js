@@ -15,7 +15,7 @@ const Home = (props) => {
                     <p>Read the <a href="./api/v1/docs">documentation</a>.</p>
                     <p>Content warning: please note that due to the nature of the data, use of the API can return texts that reference violence, pornography, explicit language, and other sensitive content.</p>
                 </div>
-                <Usage onLoadExample={props.onLoadExample} data={props.data}  />
+                <Usage onLoadExample={props.onLoadExample} response={props.response}  />
             </main>
             <Footer />
         </Card>

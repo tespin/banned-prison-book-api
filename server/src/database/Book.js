@@ -151,16 +151,20 @@ const getAllBooks = async (filterParams) => {
 const getRandomBook = async () => {
     let books;
         
-    const cached = await bookCache.get('books');
-    if (cached) {
-        books = JSON.parse(cached);
-    } else {
-        books = await bookDB.find();
-        await bookCache.setex('books', 86400, JSON.stringify(books));
+    try {
+        const cached = await bookCache.get('books');
+        if (cached) {
+            books = JSON.parse(cached);
+        } else {
+            books = await bookDB.find();
+            await bookCache.setex('books', 86400, JSON.stringify(books));
+        }
+    
+        const randomBook = books[Math.floor(Math.random() * books.length)]
+        return randomBook;
+    } catch (error) {
+        throw { status: 500, message: error };
     }
-
-    const randomBook = books[Math.floor(Math.random() * books.length)]
-    return randomBook;
 }
 
 module.exports = { 
