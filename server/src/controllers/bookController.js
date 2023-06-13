@@ -13,7 +13,7 @@ const getAllBooks = async (req, res) => {
         res
             .status(200)
             .send({ data: allBooks });
-    } catch (error) {
+    } catch (error) { // use optional chaining to send error.status if error exists, else 500
         res
             .status(error?.status || 500)
             .send({ data: { error: error?.message || error } });
