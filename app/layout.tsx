@@ -1,5 +1,6 @@
 import Flex from '@/components/Flex';
 import Header from '@/components/Header';
+import SearchBar from '@/components/SearchBar';
 import './globals.css'
 
 export default function RootLayout({
@@ -10,9 +11,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Flex className='flex-col'>
+        <Flex className='xs:flex-col w-full xs:items-center'>
           <Header />
-          {children}
+          <Flex className='xs:flex-col xs:max-w-sm text-2xl text-center'>
+            {children}
+            <SearchBar/>
+          </Flex>
         </Flex>
       </body>
     </html>

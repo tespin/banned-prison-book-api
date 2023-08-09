@@ -5,7 +5,7 @@ type FlexProps = {
 
 const Flex = ({ children, className }: FlexProps) => {
   return (
-    <div className={`flex ${className}`}>
+    <div className={`flex ${className ? className : ''}`}>
       {children}
     </div>
   )
