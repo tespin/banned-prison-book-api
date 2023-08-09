@@ -11,6 +11,10 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"]
+    },
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",

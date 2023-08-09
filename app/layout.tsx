@@ -1,3 +1,5 @@
+import Flex from '@/components/Flex';
+import Header from '@/components/Header';
 import './globals.css'
 
 export default function RootLayout({
@@ -7,7 +9,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Flex className='flex-col'>
+          <Header />
+          {children}
+        </Flex>
+      </body>
     </html>
   )
 }
