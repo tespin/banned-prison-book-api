@@ -57,8 +57,8 @@ const SearchBar = () => {
 
   return (
     <Flex className='xs:justify-between mt-16 text-base'>
-      <Flex>
-        <label className='text-left shrink-0' htmlFor='search'>I'm looking for books in ...</label>
+      <Flex className='items-center'>
+        <label className='text-left  shrink-0' htmlFor='search'>I'm looking for books in ...</label>
         <Flex className='flex-col flex-auto min-w-0 px-2'>
           <input className='px-2 py-1 border rounded-md' value={state.query} onChange={handleQuery} type='text' placeholder='State' id='search' />
           <SearchResults className='mt-2 border rounded-md text-left px-2 py-1' results={state.results} />
