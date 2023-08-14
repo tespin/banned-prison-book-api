@@ -5,14 +5,33 @@ type SearchProps = {
 
 const SearchResults = ({ className, results }: SearchProps) => {
   return (
-    <ul className={`${className}`}>
+    <>
       {results.length
-        ? results.map((item) => {
-          return (<li>{item.name}</li>)
-        })
-        : <li>No results found</li>
+        ? <ul className={`${className}`}>
+          {results.map((item) => {
+            return (<li>{item.name}</li>)
+          })}
+        </ul>
+        : null
       }
-    </ul>
+    </>
+    // {
+    //   results.length &&
+    //     (<ul className={`${className}`}>
+    //       {results.map((item) => {
+    //           return (<li>{item.name}</li>)
+    //         })
+    //       }
+    //       </ul>)
+    // }
+    // <ul className={`${className}`}>
+    //   {results.length
+    //     ? results.map((item) => {
+    //       return (<li>{item.name}</li>)
+    //     })
+    //     : <li>No results found</li>
+    //   }
+    // </ul>
   )
 }
 
