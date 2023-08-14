@@ -56,10 +56,14 @@ const SearchBar = () => {
   }, [state.query])
 
   return (
-    <Flex className='xs:justify-between xs:items-center mt-16 text-base'>
-      <label className='basis-2/3' htmlFor='search'>I'm looking for books in ...</label>
-      <input className='px-2 py-1 border min-w-0' value={state.query} onChange={handleQuery} type='text' placeholder='State' id='search' />
-      <SearchResults results={state.results} />
+    <Flex className='xs:justify-between mt-16 text-base'>
+      <Flex>
+        <label className='text-left shrink-0' htmlFor='search'>I'm looking for books in ...</label>
+        <Flex className='flex-col flex-auto min-w-0 px-2'>
+          <input className='px-2 py-1 border rounded-t-md' value={state.query} onChange={handleQuery} type='text' placeholder='State' id='search' />
+          <SearchResults className='border border-t-0 rounded-b-md text-left px-2 py-1' results={state.results} />
+        </Flex>
+      </Flex>
     </Flex>
   )
 }

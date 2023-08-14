@@ -1,13 +1,11 @@
-import { getFiltered } from '@/utils/utils';
-import states from '@/utils/states.json';
-
 type SearchProps = {
+  className: string;
   results: { name: string, abbreviation: string }[]
 }
 
-const SearchResults = ({ results }: SearchProps) => {
+const SearchResults = ({ className, results }: SearchProps) => {
   return (
-    <ul>
+    <ul className={`${className}`}>
       {results.length
         ? results.map((item) => {
           return (<li>{item.name}</li>)
