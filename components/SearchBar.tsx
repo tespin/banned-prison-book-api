@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import Flex from '@/components/Flex';
 import SearchResults from './SearchResults';
 import states from '@/utils/states.json';
@@ -27,7 +27,6 @@ const reducer = (state: State, action: Action) => {
     case 'set-results': {
       const { results } = action.payload;
       const newResults = [...state.results, ...results];
-      console.log(newResults);
       return { ...state, results: newResults}
     }
     default:
@@ -36,8 +35,6 @@ const reducer = (state: State, action: Action) => {
 };
 
 const SearchBar = () => {
-  const [input, setInput] = useState('');
-  // const [results, dispatch] = useReducer(reducer, {results: []});
   const [state, dispatch] = useReducer(reducer, initState);
 
   const handleQuery = ((e) => {
@@ -57,14 +54,6 @@ const SearchBar = () => {
 
     getResults();
   }, [state.query])
-
-  // const inputHandler = (e) => {
-  //   setInput(e.target.value);
-  // }
-
-  // useEffect(() => {
-
-  // }, [input])
 
   return (
     <Flex className='xs:justify-between xs:items-center mt-16 text-base'>
