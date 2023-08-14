@@ -13,7 +13,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/utils/*": ["utils/*"]
     },
     "esModuleInterop": true,
     "module": "esnext",
