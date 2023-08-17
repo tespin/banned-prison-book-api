@@ -14,6 +14,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
+      "@/assets/*": ["assets/*"],
       "@/utils/*": ["utils/*"]
     },
     "esModuleInterop": true,
