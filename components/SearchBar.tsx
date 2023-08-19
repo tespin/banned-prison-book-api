@@ -23,14 +23,7 @@ type Action =
   | { type: 'set-suggestions'; payload: { suggestions: { name: string, abbreviation: string }[] } }
   | {
     type: 'set-results'; payload: {
-      results: {
-        author: string | null
-        date: string | null
-        id: string
-        publication: string | null
-        reason: string | null
-        state_arc: string | null
-      }[] | null, showResults: boolean }
+      results: Tables<'books'>[], showResults: boolean }
     }
 
 const initState: State = {
@@ -54,11 +47,16 @@ const reducer = (state: State, action: Action) => {
     }
     case 'set-results': {
       const { results, showResults } = action.payload;
-      if (results) {
-        const newResults = [...results]
-        return { ...state, results: newResults, showResults: showResults}
-      };
-      return { ...state, results: [], showResults: false}
+      return { ...state, results: results, showResults: showResults}
+      // if (results) {
+      //   // const newResults = [...results]
+      //   const newResults = results.map((item) => {
+      //     const updated = { ...item, showMore: false };
+      //     return updated;
+      //   })
+
+      // };
+      // return { ...state, results: [], showResults: false}
     }
     default:
       return initState;
@@ -82,10 +80,25 @@ const SearchBar = () => {
     e.preventDefault();
     const abbrev = stateToAbbrev[state.query.toLowerCase()];
     const { data } = await supabase.from('books').select().eq('state_arc', abbrev);
-    dispatch({ type: 'set-results', payload: { results: data, showResults: true } });
-    console.log(data);
+    if (data) {
+      const newData = data.map((item) => {
+        const newItem = { ...item, showMore: false };
+        return newItem;
+      })
+
+      dispatch({ type: 'set-results', payload: { results: newData, showResults: true } });
+    }
   })
-  
+
+  const handleShowMore = ((e, index) => {
+    let results = [...state.results];
+    let result = results[index];
+    result.showMore = !result.showMore;
+
+    results[index] = result;
+    dispatch({ type: 'set-results', payload: { results: results, showResults: true } });
+  })
+ 
   useEffect(() => {
     const getResults = () => {
       if (state.query.length < 1) {
@@ -118,7 +131,7 @@ const SearchBar = () => {
           </form>
         </Flex>
         {state.showResults && 
-          <SearchResults className='mt-2' results={state.results} />
+          <SearchResults className='mt-2' results={state.results} handleShowMore={handleShowMore} />
         }
       </Flex>
     </Flex>

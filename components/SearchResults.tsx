@@ -1,21 +1,23 @@
+import Flex from './Flex';
+import { useState } from 'react';
 import { Tables } from '../types/database.types';
+import { CaretDownIcon } from '@radix-ui/react-icons';
+import SearchItem from './SearchItem';
 
 type ResultsProps = {
   className: string;
   results: Tables<'books'>[];
+  handleShowMore: (event: React.MouseEvent, index: number) => void
 }
 
-const SearchResults = ({ className, results }: ResultsProps) => {
+const SearchResults = ({ className, results, handleShowMore }: ResultsProps) => {
+
   return (
     <>
       {results.length > 0
         ? <ul className={`${className}`}>
-          {results.map((item) => {
-            return (<li className='mb-4 hover:bg-neutral-300 focus:bg-neutral-300 text-left cursor-default'>
-              <h2>{item.publication}</h2>
-              <p>{item.author}</p>
-              <p>{item.date}</p>
-            </li>)
+          {results.map((item, index) => {
+            return <SearchItem item={item} handleShowMore={handleShowMore} index={index} />
           })}
         </ul>
         : null

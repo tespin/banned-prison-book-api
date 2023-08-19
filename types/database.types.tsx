@@ -17,6 +17,7 @@ export interface Database {
           publication: string | null
           reason: string | null
           state_arc: string | null
+          showMore: boolean
         }
         Insert: {
           author?: string | null
