@@ -6,7 +6,7 @@ This project is currently being migrated to Next.js.
 
 ## To Do
 
-- accessible search bar
-- navigate results with keyboard
-- search results styling
-- paginate results
+- feat: accessible search bar
+- feat: paginate results
+- fix: search results styling
+- error: when enter is pressed with no query -> state.suggestions[state.activeIndex] is undefined
