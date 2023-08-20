@@ -17,7 +17,7 @@ const SearchResults = ({ className, results, handleShowMore }: ResultsProps) => 
       {results.length > 0
         ? <ul className={`${className}`}>
           {results.map((item, index) => {
-            return <SearchItem item={item} handleShowMore={handleShowMore} index={index} />
+            return <SearchItem item={item} index={index} handleShowMore={handleShowMore} />
           })}
         </ul>
         : null

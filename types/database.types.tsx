@@ -18,6 +18,7 @@ export interface Database {
           reason: string | null
           state_arc: string | null
           showMore: boolean
+          isSelected: boolean
         }
         Insert: {
           author?: string | null

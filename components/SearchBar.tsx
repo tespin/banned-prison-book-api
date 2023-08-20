@@ -15,23 +15,23 @@ type State = {
   suggestions: { name: string, abbreviation: string }[],
   results: Tables<'books'>[], 
   showSuggestions: boolean,
-  showResults: boolean
+  showResults: boolean,
+  activeIndex: number
 }
 
 type Action =
   | { type: 'set-query'; payload: {query: string, showSuggestions: boolean, suggestions?: { name: string, abbreviation: string }[]} }
   | { type: 'set-suggestions'; payload: { suggestions: { name: string, abbreviation: string }[] } }
-  | {
-    type: 'set-results'; payload: {
-      results: Tables<'books'>[], showResults: boolean }
-    }
+  | { type: 'set-results'; payload: { results: Tables<'books'>[], showResults: boolean } }
+  | { type: 'set-active-index'; payload: { newIndex: number } }
 
 const initState: State = {
   query: '',
   suggestions: [],
   results: [],
   showSuggestions: false,
-  showResults: false
+  showResults: false,
+  activeIndex: -1
 }
 
 const reducer = (state: State, action: Action) => {
@@ -48,15 +48,12 @@ const reducer = (state: State, action: Action) => {
     case 'set-results': {
       const { results, showResults } = action.payload;
       return { ...state, results: results, showResults: showResults}
-      // if (results) {
-      //   // const newResults = [...results]
-      //   const newResults = results.map((item) => {
-      //     const updated = { ...item, showMore: false };
-      //     return updated;
-      //   })
+    }
+    case 'set-active-index': {
+      const { newIndex } = action.payload;
+      console.log(newIndex);
+      return {...state, activeIndex: newIndex}
 
-      // };
-      // return { ...state, results: [], showResults: false}
     }
     default:
       return initState;
@@ -76,13 +73,43 @@ const SearchBar = () => {
     }
   })
 
+  const handleKeyDown = ((e) => {
+    let newIndex;
+    
+    switch (e.key) {
+      case 'ArrowUp':
+        // console.log('up');
+        if (state.activeIndex <= 0) {
+          newIndex = state.suggestions.length - 1;
+        } else {
+          newIndex = state.activeIndex - 1;
+        }
+        dispatch({ type: 'set-active-index', payload: { newIndex: newIndex } });
+        break;
+      case 'ArrowDown':
+        // console.log('down');
+        if (state.activeIndex === -1 || state.activeIndex >= state.suggestions.length - 1) {
+          newIndex = 0;
+        } else {
+          newIndex = state.activeIndex + 1;
+        }
+        dispatch({ type: 'set-active-index', payload: { newIndex: newIndex } });
+        break;
+      case 'Enter':
+        const activeSuggestion = state.suggestions[state.activeIndex].name;
+        dispatch({ type: 'set-query', payload: { query: activeSuggestion, showSuggestions: false } });
+      default:
+        return;
+    }
+  })
+
   const handleSubmit = (async (e) => {
     e.preventDefault();
     const abbrev = stateToAbbrev[state.query.toLowerCase()];
     const { data } = await supabase.from('books').select().eq('state_arc', abbrev);
     if (data) {
       const newData = data.map((item) => {
-        const newItem = { ...item, showMore: false };
+        const newItem = { ...item, showMore: false, isSelected: false };
         return newItem;
       })
 
@@ -120,12 +147,12 @@ const SearchBar = () => {
           <form className='relative flex items-center' autoComplete='off' onSubmit={handleSubmit}>
             <label className='text-left shrink-0' htmlFor='search'>I'm looking for books in ...</label>
             <Flex className='relative ml-2 border-b-2'>
-              <input className='px-2 py-1 w-full' value={state.query} onChange={handleQuery} type='text' placeholder='State' id='search' />
+              <input className='px-2 py-1 w-full' value={state.query} onChange={handleQuery} onKeyDown={handleKeyDown} type='text' placeholder='State' id='search' />
               <button className='' type='submit'>
                 <svg width="18" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
               </button>
               {state.showSuggestions &&
-                <AutocompleteResults className='mt-2 py-2 border absolute top-8 rounded-md text-left w-full bg-white' onClick={handleClick} suggestions={state.suggestions} />
+                <AutocompleteResults className='mt-2 py-2 border absolute top-8 rounded-md text-left w-full bg-white' onClick={handleClick} suggestions={state.suggestions} activeIndex={state.activeIndex} />
               }
             </Flex>
           </form>
