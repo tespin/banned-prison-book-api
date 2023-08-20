@@ -16,7 +16,9 @@ type State = {
   results: Tables<'books'>[], 
   showSuggestions: boolean,
   showResults: boolean,
-  activeIndex: number
+  activeIndex: number,
+  currentPage: number,
+  isLoading: boolean
 }
 
 type Action =
@@ -24,6 +26,8 @@ type Action =
   | { type: 'set-suggestions'; payload: { suggestions: { name: string, abbreviation: string }[] } }
   | { type: 'set-results'; payload: { results: Tables<'books'>[], showResults: boolean } }
   | { type: 'set-active-index'; payload: { newIndex: number } }
+  | { type: 'set-is-loading'; payload: { newIsLoading: boolean } }
+  | { type: 'set-current-page'; payload: { newCurrentPage: number } }
 
 const initState: State = {
   query: '',
@@ -31,7 +35,9 @@ const initState: State = {
   results: [],
   showSuggestions: false,
   showResults: false,
-  activeIndex: -1
+  activeIndex: -1,
+  currentPage: 1,
+  isLoading: false
 }
 
 const reducer = (state: State, action: Action) => {
@@ -51,9 +57,15 @@ const reducer = (state: State, action: Action) => {
     }
     case 'set-active-index': {
       const { newIndex } = action.payload;
-      console.log(newIndex);
       return {...state, activeIndex: newIndex}
-
+    }
+    case 'set-is-loading': {
+      const { newIsLoading } = action.payload;
+      return {...state, isLoading: newIsLoading}
+    }
+    case 'set-current-page': {
+      const { newCurrentPage } = action.payload;
+      return {...state, currentPage: newCurrentPage}
     }
     default:
       return initState;
@@ -78,7 +90,6 @@ const SearchBar = () => {
     
     switch (e.key) {
       case 'ArrowUp':
-        // console.log('up');
         if (state.activeIndex <= 0) {
           newIndex = state.suggestions.length - 1;
         } else {
@@ -87,7 +98,6 @@ const SearchBar = () => {
         dispatch({ type: 'set-active-index', payload: { newIndex: newIndex } });
         break;
       case 'ArrowDown':
-        // console.log('down');
         if (state.activeIndex === -1 || state.activeIndex >= state.suggestions.length - 1) {
           newIndex = 0;
         } else {
@@ -111,6 +121,39 @@ const SearchBar = () => {
 
     const abbrev = stateToAbbrev[state.query.toLowerCase()];
     const { data } = await supabase.from('books').select().eq('state_arc', abbrev).range(from, to);
+    // dispatch({ type: 'set-is-loading', payload: { newIsLoading: true } });
+
+    if (data) {
+      const newData = data.map((item) => {
+        const newItem = { ...item, showMore: false, isSelected: false };
+        return newItem;
+      })
+
+      dispatch({ type: 'set-results', payload: { results: newData, showResults: true } });
+    }
+    // dispatch({ type: 'set-is-loading', payload: { newIsLoading: false } });
+  })
+
+  const handleShowReason = ((e, index) => {
+    let results = [...state.results];
+    let result = results[index];
+    result.showMore = !result.showMore;
+
+    results[index] = result;
+    dispatch({ type: 'set-results', payload: { results: results, showResults: true } });
+  })
+
+  const handleLoadMore = ( async () => {
+    console.log('load more pressed');
+    const newPage = state.currentPage + 1;
+    dispatch({ type: 'set-current-page', payload: { newCurrentPage: newPage } });;
+
+    const numPerPage = 10;
+    const {from, to} = getRange(state.currentPage, numPerPage);
+
+    const abbrev = stateToAbbrev[state.query.toLowerCase()];
+    const { data } = await supabase.from('books').select().eq('state_arc', abbrev).range(0, to);
+    // dispatch({ type: 'set-is-loading', payload: { newIsLoading: true } });
 
     if (data) {
       const newData = data.map((item) => {
@@ -121,18 +164,9 @@ const SearchBar = () => {
       dispatch({ type: 'set-results', payload: { results: newData, showResults: true } });
     }
   })
-
-  const handleShowMore = ((e, index) => {
-    let results = [...state.results];
-    let result = results[index];
-    result.showMore = !result.showMore;
-
-    results[index] = result;
-    dispatch({ type: 'set-results', payload: { results: results, showResults: true } });
-  })
  
   useEffect(() => {
-    const getSuggestions = () => {
+    const getSuggestions = () => { 
       if (state.query.length < 1) {
         dispatch({ type: 'set-suggestions', payload: { suggestions: [] } })
       } else {
@@ -164,8 +198,11 @@ const SearchBar = () => {
           </form>
         </Flex>
         {state.showResults && 
-          <SearchResults className='mt-2' results={state.results} handleShowMore={handleShowMore} />
+          <SearchResults className='mt-2' results={state.results} handleShowReason={handleShowReason} />
         }
+        <Flex>
+          <button className='border px-2 py-1' onClick={handleLoadMore}>{state.isLoading ? 'Loading ...' : 'Load more'}</button>
+        </Flex>
       </Flex>
     </Flex>
   )

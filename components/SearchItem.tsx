@@ -13,14 +13,14 @@ type SearchItemProps = {
     showMore: boolean | null
   },
   index: number,
-  handleShowMore: (event: React.MouseEvent, index: number) => void
+  handleShowReason: (event: React.MouseEvent, index: number) => void
 }
 
-const SearchItem = ({ item, index, handleShowMore }: SearchItemProps) => {
+const SearchItem = ({ item, index, handleShowReason }: SearchItemProps) => {
   // const [showMore, setShowMore] = useState(false);
 
   return (
-    <li className={`mb-4 hover:bg-neutral-300 focus:bg-neutral-300 border-b-2 pb-4 text-left cursor-default`
+    <li className={`mb-4 focus:bg-neutral-300 border-b-2 pb-4 text-left cursor-default`
 }>
               <Flex className='justify-between'>
                 <p className='flex-initial'>{item.date?.split('-')[0] || 'No date'}</p>
@@ -28,7 +28,7 @@ const SearchItem = ({ item, index, handleShowMore }: SearchItemProps) => {
                   <h2>{item.publication}</h2>
                   <p className='text-sm text-neutral-500'>{item.author || 'No author'}</p>
                 </Flex>
-                <button className='px-2 py-1' onClick={(e) => handleShowMore(e, index)}>
+                <button className='px-2 py-1' onClick={(e) => handleShowReason(e, index)}>
                   <CaretDownIcon/>
                 </button>
               </Flex>

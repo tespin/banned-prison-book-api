@@ -7,17 +7,17 @@ import SearchItem from './SearchItem';
 type ResultsProps = {
   className: string;
   results: Tables<'books'>[];
-  handleShowMore: (event: React.MouseEvent, index: number) => void
+  handleShowReason: (event: React.MouseEvent, index: number) => void
 }
 
-const SearchResults = ({ className, results, handleShowMore }: ResultsProps) => {
+const SearchResults = ({ className, results, handleShowReason }: ResultsProps) => {
 
   return (
     <>
       {results.length > 0
         ? <ul className={`${className}`}>
           {results.map((item, index) => {
-            return <SearchItem item={item} index={index} handleShowMore={handleShowMore} />
+            return <SearchItem item={item} index={index} handleShowReason={handleShowReason} />
           })}
         </ul>
         : null
