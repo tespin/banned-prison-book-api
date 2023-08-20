@@ -7,7 +7,7 @@ import SearchResults from './SearchResults';
 // import books from '@/assets/banned-books.json';
 import states from '@/utils/states.json';
 import supabase from '@/utils/supabase';
-import { stateToAbbrev } from '@/utils/utils';
+import { getRange, stateToAbbrev } from '@/utils/utils';
 import { Tables } from '../types/database.types';
 
 type State = {
@@ -105,8 +105,13 @@ const SearchBar = () => {
 
   const handleSubmit = (async (e) => {
     e.preventDefault();
+    const page = 1;
+    const numPerPage = 10;
+    const {from, to} = getRange(page, numPerPage);
+
     const abbrev = stateToAbbrev[state.query.toLowerCase()];
-    const { data } = await supabase.from('books').select().eq('state_arc', abbrev);
+    const { data } = await supabase.from('books').select().eq('state_arc', abbrev).range(from, to);
+
     if (data) {
       const newData = data.map((item) => {
         const newItem = { ...item, showMore: false, isSelected: false };
@@ -127,17 +132,18 @@ const SearchBar = () => {
   })
  
   useEffect(() => {
-    const getResults = () => {
+    const getSuggestions = () => {
       if (state.query.length < 1) {
         dispatch({ type: 'set-suggestions', payload: { suggestions: [] } })
       } else {
         const filtered = states.filter((item) => item.name.toLowerCase().includes(state.query.toLowerCase()));
+
         dispatch({ type: 'set-suggestions', payload: { suggestions: filtered}})
       }
 
     }
 
-    getResults();
+    getSuggestions();
   }, [state.query])
 
   return (

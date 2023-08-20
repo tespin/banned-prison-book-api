@@ -24,4 +24,11 @@ const getFiltered = (data, input) => {
   else return data.filter((item) => item.name.toLowerCase().includes(input.toLowerCase()));
 }
 
-export { getFiltered, stateToAbbrev };
+const getRange = (page, numPerPage) => {
+  const from = numPerPage * page - numPerPage;
+  const to = from + numPerPage;
+  const range = {from, to}
+  return range;
+}
+
+export { getFiltered, getRange, stateToAbbrev };
