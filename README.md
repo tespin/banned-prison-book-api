@@ -9,4 +9,6 @@ This project is currently being migrated to Next.js.
 - feat: accessible search bar
 - feat: paginate results
 - fix: search results styling
+- fix: show load more only when results have been fetched
+- fix: hide button when all results fetched
 - error: when enter is pressed with no query -> state.suggestions[state.activeIndex] is undefined
