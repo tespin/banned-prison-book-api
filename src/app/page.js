@@ -1,6 +1,6 @@
-import Image from "next/image";
+import React from 'react';
 
-export default function Home() {
+function Home() {
   return (
     <main>
       <h1 className='mt-16'>Banned Prison Books is a tool for identifying books that have been banned in state prison systems.</h1>
@@ -8,3 +8,4 @@ export default function Home() {
     </main>
   );
 }
+export default Home;
