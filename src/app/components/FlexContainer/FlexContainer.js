@@ -7,3 +7,5 @@ function FlexContainer({ children, className }) {
     </div>
   )
 }
+
+export default FlexContainer;
