@@ -2,13 +2,17 @@
 import React from "react";
 import { useState } from "react";
 import FlexContainer from "../FlexContainer";
+import Books from "../../assets/books.json";
 
 function SearchBar({ className }) {
   const [query, setQuery] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(query);
+    const results = Books.filter((item) =>
+      item.publication.toLowerCase().includes(query.toLowerCase())
+    );
+    console.log(results);
   }
 
   return (
