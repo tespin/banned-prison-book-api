@@ -1,13 +1,32 @@
+"use client";
 import React from "react";
+import { useState } from "react";
 import FlexContainer from "../FlexContainer";
 
 function SearchBar({ className }) {
+  const [query, setQuery] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(query);
+  }
+
   return (
-    <form className={`${className}`}>
+    <form className={`${className}`} onSubmit={handleSubmit}>
       <FlexContainer className="items-center">
-        <label className="shrink-0">I'm looking for books in </label>
+        <label htmlFor="search-input" className="shrink-0">
+          I'm looking for books in{" "}
+        </label>
         <FlexContainer className="ml-2 border-b-2 border-black">
-          <input className="px-2 py-1 w-full" />
+          <input
+            id="search-input"
+            type="text"
+            value={query}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
+            className="px-2 py-1 w-full"
+          />
           <button type="submit">
             <svg
               width="18"
