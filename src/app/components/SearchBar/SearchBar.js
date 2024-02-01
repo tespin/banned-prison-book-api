@@ -2,6 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import FlexContainer from "../FlexContainer";
+import AutocompleteResults from "../AutocompleteResults";
 import Books from "../../assets/books.json";
 
 function SearchBar({ className }) {
@@ -21,7 +22,7 @@ function SearchBar({ className }) {
         <label htmlFor="search-input" className="shrink-0">
           I'm looking for books in{" "}
         </label>
-        <FlexContainer className="ml-2 border-b-2 border-black">
+        <FlexContainer className="ml-2 border-b-2 border-black relative">
           <input
             id="search-input"
             type="text"
@@ -47,6 +48,7 @@ function SearchBar({ className }) {
               ></path>
             </svg>
           </button>
+          <AutocompleteResults />
         </FlexContainer>
       </FlexContainer>
     </form>
