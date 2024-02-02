@@ -1,15 +1,12 @@
 import React from "react";
 
-import States from "../../utils/states.json";
-
-function AutocompleteResults() {
+function AutocompleteResults({ suggestions }) {
   return (
-    <div className="absolute top-full p-0">
-      <div>Alabama</div>
-      <div>California</div>
-      <div>New Jersey</div>
-      <div>Rhdoe Island</div>
-    </div>
+    <ul className="absolute top-full p-0">
+      {suggestions.map((item) => {
+        return <li>{item.name}</li>;
+      })}
+    </ul>
   );
 }
 

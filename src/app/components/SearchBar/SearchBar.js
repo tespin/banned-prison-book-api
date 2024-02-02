@@ -1,23 +1,35 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FlexContainer from "../FlexContainer";
 import AutocompleteResults from "../AutocompleteResults";
 import Books from "../../assets/books.json";
+import States from "../../utils/states.json";
 
 function SearchBar({ className }) {
   const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    setSuggestions(States);
+  }, []);
+
+  useEffect(() => {
+    const nextSuggestions = States.filter((item) => {
+      return item.name.toLowerCase().startsWith(query.toLowerCase());
+    });
+    setSuggestions(nextSuggestions);
+  }, [query]);
 
   function handleSubmit(e) {
     e.preventDefault();
     const results = Books.filter((item) =>
       item.publication.toLowerCase().includes(query.toLowerCase())
     );
-    console.log(results);
   }
 
   return (
-    <form className={`${className}`} onSubmit={handleSubmit}>
+    <form className={`${className}`} onSubmit={handleSubmit} autoComplete="off">
       <FlexContainer className="items-center">
         <label htmlFor="search-input" className="shrink-0">
           I'm looking for books in{" "}
@@ -27,9 +39,13 @@ function SearchBar({ className }) {
             id="search-input"
             type="text"
             value={query}
-            onChange={(event) => {
-              setQuery(event.target.value);
+            onChange={(e) => {
+              // handleChange(e);
+              setQuery(e.target.value);
             }}
+            // onChange={(event) => {
+            //   handleChange;
+            // }}
             className="px-2 py-1 w-full"
           />
           <button type="submit">
@@ -48,7 +64,7 @@ function SearchBar({ className }) {
               ></path>
             </svg>
           </button>
-          <AutocompleteResults />
+          <AutocompleteResults suggestions={suggestions} />
         </FlexContainer>
       </FlexContainer>
     </form>
