@@ -1,25 +1,22 @@
 "use client";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import FlexContainer from "../FlexContainer";
-import AutocompleteResults from "../AutocompleteResults";
+import { StateDataContext } from "../StateDataProvider";
 import Books from "../../assets/books.json";
-import States from "../../utils/states.json";
 
-function SearchBar({ className }) {
+function SearchBar({ className, children }) {
+  const { filterData } = useContext(StateDataContext);
   const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    setSuggestions(States);
-  }, []);
-
-  useEffect(() => {
-    const nextSuggestions = States.filter((item) => {
-      return item.name.toLowerCase().startsWith(query.toLowerCase());
-    });
-    setSuggestions(nextSuggestions);
+    filterData(query);
   }, [query]);
+
+  function handleChange(e) {
+    setQuery(e.target.value);
+    filterData(query);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,12 +37,8 @@ function SearchBar({ className }) {
             type="text"
             value={query}
             onChange={(e) => {
-              // handleChange(e);
-              setQuery(e.target.value);
+              handleChange(e);
             }}
-            // onChange={(event) => {
-            //   handleChange;
-            // }}
             className="px-2 py-1 w-full"
           />
           <button type="submit">
@@ -64,7 +57,7 @@ function SearchBar({ className }) {
               ></path>
             </svg>
           </button>
-          <AutocompleteResults suggestions={suggestions} />
+          {children}
         </FlexContainer>
       </FlexContainer>
     </form>

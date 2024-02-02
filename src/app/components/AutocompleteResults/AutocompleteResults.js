@@ -1,10 +1,15 @@
+"use client";
 import React from "react";
+import { useContext } from "react";
+import { StateDataContext } from "../StateDataProvider";
 
-function AutocompleteResults({ suggestions }) {
+function AutocompleteResults() {
+  const { filteredData } = useContext(StateDataContext);
+
   return (
     <ul className="absolute top-full p-0">
-      {suggestions.map((item) => {
-        return <li>{item.name}</li>;
+      {filteredData.map((item) => {
+        return <li key={item.id}>{item.name}</li>;
       })}
     </ul>
   );

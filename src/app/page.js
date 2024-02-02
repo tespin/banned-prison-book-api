@@ -1,6 +1,6 @@
 import React from "react";
 import FlexContainer from "./components/FlexContainer";
-import SearchBar from "./components/SearchBar";
+import Search from "./components/Search";
 
 function Home() {
   return (
@@ -15,7 +15,7 @@ function Home() {
             Search for books below. Or, explore the API.
           </p>
         </div>
-        <SearchBar className="mt-10" />
+        <Search />
       </FlexContainer>
     </main>
   );
