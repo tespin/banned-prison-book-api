@@ -9,6 +9,7 @@ import States from "../../utils/states.json";
 function StateDataProvider({ children }) {
   const [stateData, setStateData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const newStates = States.map((item) => ({
@@ -29,7 +30,9 @@ function StateDataProvider({ children }) {
   }
 
   return (
-    <StateDataContext.Provider value={{ stateData, filteredData, filterData }}>
+    <StateDataContext.Provider
+      value={{ stateData, filteredData, filterData, setQuery, query }}
+    >
       {children}
     </StateDataContext.Provider>
   );
