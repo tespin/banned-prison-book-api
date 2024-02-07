@@ -3,11 +3,11 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import FlexContainer from "../FlexContainer";
 import { StateDataContext } from "../StateDataProvider";
+import { ActiveItemContext } from "../ActiveItemProvider";
 import Books from "../../assets/books.json";
 
 function SearchBar({ className, children }) {
-  const { filterData } = useContext(StateDataContext);
-  const [query, setQuery] = useState("");
+  const { query, setQuery, filterData } = useContext(StateDataContext);
 
   useEffect(() => {
     filterData(query);
@@ -15,7 +15,6 @@ function SearchBar({ className, children }) {
 
   function handleChange(e) {
     setQuery(e.target.value);
-    filterData(query);
   }
 
   function handleSubmit(e) {
@@ -26,7 +25,11 @@ function SearchBar({ className, children }) {
   }
 
   return (
-    <form className={`${className}`} onSubmit={handleSubmit} autoComplete="off">
+    <form
+      className={`${className} mt-10`}
+      onSubmit={handleSubmit}
+      autoComplete="off"
+    >
       <FlexContainer className="items-center">
         <label htmlFor="search-input" className="shrink-0">
           I'm looking for books in{" "}
@@ -39,7 +42,7 @@ function SearchBar({ className, children }) {
             onChange={(e) => {
               handleChange(e);
             }}
-            className="px-2 py-1 w-full"
+            className="px-2 py-1 w-full outline-none"
           />
           <button type="submit">
             <svg
