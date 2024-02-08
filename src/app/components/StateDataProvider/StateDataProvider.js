@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 
 export const StateDataContext = createContext();
 
@@ -10,6 +10,8 @@ function StateDataProvider({ children }) {
   const [stateData, setStateData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState("");
+  const [inputActive, setInputActive] = useState(false);
+  const inputRef = useRef();
 
   useEffect(() => {
     const newStates = States.map((item) => ({
@@ -31,7 +33,16 @@ function StateDataProvider({ children }) {
 
   return (
     <StateDataContext.Provider
-      value={{ stateData, filteredData, filterData, setQuery, query }}
+      value={{
+        stateData,
+        filterData,
+        filteredData,
+        query,
+        setQuery,
+        inputActive,
+        setInputActive,
+        inputRef,
+      }}
     >
       {children}
     </StateDataContext.Provider>

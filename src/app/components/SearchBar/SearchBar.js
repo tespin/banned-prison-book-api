@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import FlexContainer from "../FlexContainer";
 import { StateDataContext } from "../StateDataProvider";
 import { ActiveItemContext } from "../ActiveItemProvider";
 import Books from "../../assets/books.json";
 
 function SearchBar({ className, children }) {
-  const { query, setQuery, filterData } = useContext(StateDataContext);
+  const { query, setQuery, filterData, inputActive, setInputActive, inputRef } =
+    useContext(StateDataContext);
 
   useEffect(() => {
     filterData(query);
@@ -34,17 +35,24 @@ function SearchBar({ className, children }) {
         <label htmlFor="search-input" className="shrink-0">
           I'm looking for books in{" "}
         </label>
-        <FlexContainer className="ml-2 border-b-2 border-black relative">
+        <FlexContainer className={`ml-2 border rounded relative`}>
           <input
+            ref={inputRef}
             id="search-input"
             type="text"
             value={query}
             onChange={(e) => {
               handleChange(e);
             }}
-            className="px-2 py-1 w-full outline-none"
+            onFocus={() => {
+              setInputActive(true);
+            }}
+            onBlur={() => {
+              setInputActive(false);
+            }}
+            className="w-full px-2 py-1"
           />
-          <button type="submit">
+          <button className="pr-2" type="submit">
             <svg
               width="18"
               height="18"
@@ -60,7 +68,7 @@ function SearchBar({ className, children }) {
               ></path>
             </svg>
           </button>
-          {children}
+          {inputActive && children}
         </FlexContainer>
       </FlexContainer>
     </form>

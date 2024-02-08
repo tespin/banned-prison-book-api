@@ -6,8 +6,9 @@ export const ActiveItemContext = createContext();
 function ActiveItemProvider({ children }) {
   const { setQuery } = useContext(StateDataContext);
 
-  function handleClick(e) {
+  function handleClick(e, inputRef) {
     setQuery(e.target.innerHTML);
+    inputRef.current.focus();
   }
 
   return (
