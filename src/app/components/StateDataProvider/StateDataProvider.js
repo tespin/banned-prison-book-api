@@ -11,7 +11,6 @@ function StateDataProvider({ children }) {
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState("");
   const [inputActive, setInputActive] = useState(false);
-  const inputRef = useRef();
 
   useEffect(() => {
     const newStates = States.map((item) => ({
@@ -41,7 +40,6 @@ function StateDataProvider({ children }) {
         setQuery,
         inputActive,
         setInputActive,
-        inputRef,
       }}
     >
       {children}

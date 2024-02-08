@@ -5,7 +5,7 @@ import { StateDataContext } from "../StateDataProvider";
 import { ActiveItemContext } from "../ActiveItemProvider";
 
 function AutocompleteResults() {
-  const { filteredData, containerRef } = useContext(StateDataContext);
+  const { filteredData } = useContext(StateDataContext);
   const { handleClick } = useContext(ActiveItemContext);
 
   return (
@@ -15,7 +15,7 @@ function AutocompleteResults() {
           <li
             key={item.id}
             className="pl-2 py-1 hover:bg-neutral-300"
-            onClick={(e) => handleClick(e, containerRef)}
+            onClick={(e) => handleClick(e)}
           >
             {item.name}
           </li>

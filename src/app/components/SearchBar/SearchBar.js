@@ -47,8 +47,9 @@ function SearchBar({ className, children }) {
             onFocus={() => {
               setInputActive(true);
             }}
-            onBlur={() => {
-              setInputActive(false);
+            onBlur={(e) => {
+              // console.log(document.activeElement.tagName === "BODY");
+              // setInputActive(false);
             }}
             className="w-full px-2 py-1"
           />
@@ -68,7 +69,7 @@ function SearchBar({ className, children }) {
               ></path>
             </svg>
           </button>
-          {inputActive && children}
+          {children}
         </FlexContainer>
       </FlexContainer>
     </form>
