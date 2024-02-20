@@ -1,6 +1,8 @@
 import React from "react";
 import FlexContainer from "./components/FlexContainer";
+import SearchBar from "./components/SearchBar";
 import Search from "./components/Search";
+import StateDataProvider from "./components/StateDataProvider";
 
 function Home() {
   return (
@@ -15,7 +17,9 @@ function Home() {
             Search for books below. Or, explore the API.
           </p>
         </div>
-        <Search />
+        <StateDataProvider>
+          <Search label={`I'm looking for books in `}></Search>
+        </StateDataProvider>
       </FlexContainer>
     </main>
   );

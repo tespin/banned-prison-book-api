@@ -1,20 +1,12 @@
-import React from "react";
-
+"use client";
+import React, { useContext } from "react";
 import SearchBar from "../SearchBar";
-import AutocompleteResults from "../AutocompleteResults";
-import StateDataProvider from "../StateDataProvider";
-import ActiveItemProvider from "../ActiveItemProvider";
+import { StateDataContext } from "../StateDataProvider";
 
-function Search() {
-  return (
-    <StateDataProvider>
-      <ActiveItemProvider>
-        <SearchBar>
-          <AutocompleteResults />
-        </SearchBar>
-      </ActiveItemProvider>
-    </StateDataProvider>
-  );
+function Search({ label }) {
+  const { stateData } = useContext(StateDataContext);
+
+  return <SearchBar label={label} data={stateData} />;
 }
 
 export default Search;
