@@ -8,12 +8,11 @@ function SearchInputProvider({ children, data }) {
   const [filtered, setFilteredData] = useState([]);
 
   useEffect(() => {
-    console.log(data);
-    setCurrentData(data);
-  }, []);
+    setFilteredData(data);
+  }, [data]);
 
   function filterData(query) {
-    const filteredData = stateData.filter((item) => {
+    const filteredData = data.filter((item) => {
       return item.name.toLowerCase().startsWith(query.toLowerCase());
     });
 

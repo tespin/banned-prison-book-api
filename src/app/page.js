@@ -18,7 +18,7 @@ function Home() {
           </p>
         </div>
         <StateDataProvider>
-          <Search label={`I'm looking for books in `}></Search>
+          <Search label={`I'm looking for books in `} />
         </StateDataProvider>
       </FlexContainer>
     </main>

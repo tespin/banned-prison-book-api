@@ -1,18 +1,41 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../FlexContainer";
 
 import { SearchInputContext } from "../SearchInputProvider";
 
 function InputForm({ label }) {
-  const { currentData } = useContext(SearchInputContext);
+  const { filtered, filterData } = useContext(SearchInputContext);
   const [value, setValue] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  const inputRef = useRef();
+  const listRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  });
+
+  function handleDisplayDropdown() {
+    setIsActive(!isActive);
+  }
 
   function handleChange(e) {
     setValue(e.target.value);
+    filterData(e.target.value);
   }
 
-  function handleClick(e) {
+  function handleListClick(e) {
     setValue(e.target.innerHTML);
+  }
+
+  function handleOutsideClick(e) {
+    if (e.target !== listRef.current && e.target !== inputRef.current) {
+      // console.log("list not ref clicked");
+      setIsActive(false);
+    }
   }
 
   return (
@@ -26,10 +49,12 @@ function InputForm({ label }) {
             id="search-input"
             type="text"
             value={value}
+            onClick={handleDisplayDropdown}
             onChange={(e) => {
               handleChange(e);
             }}
             className="relative"
+            ref={inputRef}
           />
           <button className="pr-2" type="submit">
             <svg
@@ -47,19 +72,22 @@ function InputForm({ label }) {
               ></path>
             </svg>
           </button>
-          <ul className="absolute top-full w-full max-h-40 overflow-y-auto z-10">
-            {currentData.map((item) => {
-              return (
-                <li
-                  key={item.id}
-                  className="pl-2 py-1 hover:bg-neutral-300"
-                  onClick={(e) => handleClick(e)}
-                >
-                  {item.name}
-                </li>
-              );
-            })}
-          </ul>
+          {isActive && (
+            <ul className="absolute top-full w-full max-h-40 overflow-y-auto z-10">
+              {filtered.map((item) => {
+                return (
+                  <li
+                    key={item.id}
+                    className="pl-2 py-1 hover:bg-neutral-300"
+                    onClick={(e) => handleListClick(e)}
+                    ref={listRef}
+                  >
+                    {item.name}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </FlexContainer>
       </FlexContainer>
     </form>

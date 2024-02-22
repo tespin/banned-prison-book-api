@@ -19,7 +19,6 @@ function StateDataProvider({ children }) {
     }));
 
     setStateData(newStates);
-    setFilteredData(newStates);
   }, []);
 
   function filterData(query) {
