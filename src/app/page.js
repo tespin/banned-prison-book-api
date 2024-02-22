@@ -1,6 +1,5 @@
 import React from "react";
 import FlexContainer from "./components/FlexContainer";
-import SearchBar from "./components/SearchBar";
 import Search from "./components/Search";
 import StateDataProvider from "./components/StateDataProvider";
 
