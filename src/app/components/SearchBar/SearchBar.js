@@ -2,11 +2,14 @@
 import React, { useState } from "react";
 import InputForm from "../InputForm";
 import SearchInputProvider from "../SearchInputProvider";
+import ActiveItemProvider from "../ActiveItemProvider";
 
-function SearchBar({ label, data }) {
+function SearchBar({ label, options }) {
   return (
-    <SearchInputProvider data={data}>
-      <InputForm label={label} />
+    <SearchInputProvider data={options}>
+      <ActiveItemProvider>
+        <InputForm label={label} />
+      </ActiveItemProvider>
     </SearchInputProvider>
   );
 }

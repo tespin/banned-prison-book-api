@@ -2,12 +2,17 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../FlexContainer";
 
 import { SearchInputContext } from "../SearchInputProvider";
+import { ActiveItemContext } from "../ActiveItemProvider";
 
 function InputForm({ label }) {
-  const { filtered, filterData } = useContext(SearchInputContext);
-  const [value, setValue] = useState("");
+  const { filtered, filterData, value, setValue } =
+    useContext(SearchInputContext);
+  const { handleKeyDown, activeIndex, setActiveIndex } =
+    useContext(ActiveItemContext);
+  // const [value, setValue] = useState("");
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef();
+  const listItemRef = useRef();
   const listRef = useRef();
 
   useEffect(() => {
@@ -29,11 +34,13 @@ function InputForm({ label }) {
 
   function handleListClick(e) {
     setValue(e.target.innerHTML);
+    setIsActive(false);
   }
 
   function handleOutsideClick(e) {
-    if (e.target !== listRef.current && e.target !== inputRef.current) {
+    if (e.target !== inputRef.current) {
       // console.log("list not ref clicked");
+      console.log("list not clicked");
       setIsActive(false);
     }
   }
@@ -53,8 +60,13 @@ function InputForm({ label }) {
             onChange={(e) => {
               handleChange(e);
             }}
+            onKeyDown={(e) => {
+              // console.log(activeItemIndex); undefined
+              handleKeyDown(e);
+            }}
             className="relative"
             ref={inputRef}
+            autoComplete="off"
           />
           <button className="pr-2" type="submit">
             <svg
@@ -74,13 +86,19 @@ function InputForm({ label }) {
           </button>
           {isActive && (
             <ul className="absolute top-full w-full max-h-40 overflow-y-auto z-10">
-              {filtered.map((item) => {
+              {filtered.map((item, index) => {
+                let isSelected = index === activeIndex;
+
                 return (
                   <li
                     key={item.id}
-                    className="pl-2 py-1 hover:bg-neutral-300"
+                    className={`pl-2 py-1 ${
+                      isSelected ? "bg-neutral-300" : ""
+                    } `}
+                    onMouseEnter={() => {
+                      setActiveIndex(index);
+                    }}
                     onClick={(e) => handleListClick(e)}
-                    ref={listRef}
                   >
                     {item.name}
                   </li>

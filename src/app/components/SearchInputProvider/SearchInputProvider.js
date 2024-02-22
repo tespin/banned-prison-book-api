@@ -6,6 +6,7 @@ export const SearchInputContext = createContext();
 function SearchInputProvider({ children, data }) {
   const [currentData, setCurrentData] = useState([]);
   const [filtered, setFilteredData] = useState([]);
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     setFilteredData(data);
@@ -25,6 +26,8 @@ function SearchInputProvider({ children, data }) {
         filterData,
         filtered,
         currentData,
+        value,
+        setValue,
       }}
     >
       {children}

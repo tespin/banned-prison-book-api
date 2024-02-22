@@ -6,7 +6,7 @@ import { StateDataContext } from "../StateDataProvider";
 function Search({ label }) {
   const { stateData } = useContext(StateDataContext);
 
-  return <SearchBar label={label} data={stateData} />;
+  return <SearchBar label={label} options={stateData} />;
 }
 
 export default Search;
