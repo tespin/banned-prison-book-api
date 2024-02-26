@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import InputForm from "../InputForm";
 import SearchInputProvider from "../SearchInputProvider";
 import ActiveItemProvider from "../ActiveItemProvider";

@@ -33,10 +33,7 @@ function ActiveItemProvider({ children }) {
       default:
         return;
     }
-    console.log(newIndex);
-
     setActiveIndex(newIndex);
-    // switch(e.key)
   }
 
   return (

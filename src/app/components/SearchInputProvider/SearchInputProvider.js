@@ -4,7 +4,6 @@ import React, { useState, useEffect, createContext } from "react";
 export const SearchInputContext = createContext();
 
 function SearchInputProvider({ children, data }) {
-  const [currentData, setCurrentData] = useState([]);
   const [filtered, setFilteredData] = useState([]);
   const [value, setValue] = useState("");
 
@@ -25,7 +24,6 @@ function SearchInputProvider({ children, data }) {
       value={{
         filterData,
         filtered,
-        currentData,
         value,
         setValue,
       }}

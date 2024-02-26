@@ -8,9 +8,6 @@ import States from "../../utils/states.json";
 
 function StateDataProvider({ children }) {
   const [stateData, setStateData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [query, setQuery] = useState("");
-  const [inputActive, setInputActive] = useState(false);
 
   useEffect(() => {
     const newStates = States.map((item) => ({
@@ -21,24 +18,10 @@ function StateDataProvider({ children }) {
     setStateData(newStates);
   }, []);
 
-  function filterData(query) {
-    const filtered = stateData.filter((item) => {
-      return item.name.toLowerCase().startsWith(query.toLowerCase());
-    });
-
-    setFilteredData(filtered);
-  }
-
   return (
     <StateDataContext.Provider
       value={{
         stateData,
-        filterData,
-        filteredData,
-        query,
-        setQuery,
-        inputActive,
-        setInputActive,
       }}
     >
       {children}

@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../FlexContainer";
-
 import { SearchInputContext } from "../SearchInputProvider";
 import { ActiveItemContext } from "../ActiveItemProvider";
 
@@ -9,11 +8,8 @@ function InputForm({ label }) {
     useContext(SearchInputContext);
   const { handleKeyDown, activeIndex, setActiveIndex } =
     useContext(ActiveItemContext);
-  // const [value, setValue] = useState("");
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef();
-  const listItemRef = useRef();
-  const listRef = useRef();
 
   useEffect(() => {
     document.addEventListener("click", handleOutsideClick);
@@ -39,8 +35,6 @@ function InputForm({ label }) {
 
   function handleOutsideClick(e) {
     if (e.target !== inputRef.current) {
-      // console.log("list not ref clicked");
-      console.log("list not clicked");
       setIsActive(false);
     }
   }
@@ -61,7 +55,6 @@ function InputForm({ label }) {
               handleChange(e);
             }}
             onKeyDown={(e) => {
-              // console.log(activeItemIndex); undefined
               handleKeyDown(e);
             }}
             className="relative"

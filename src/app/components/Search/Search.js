@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import SearchBar from "../SearchBar";
 import { StateDataContext } from "../StateDataProvider";
 
