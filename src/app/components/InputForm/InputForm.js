@@ -6,7 +6,7 @@ import { ActiveItemContext } from "../ActiveItemProvider";
 function InputForm({ label }) {
   const { filtered, filterData, value, setValue } =
     useContext(SearchInputContext);
-  const { handleKeyDown, activeIndex, setActiveIndex } =
+  const { handleKeyDown, activeIndex, setActiveIndex, selectedRef } =
     useContext(ActiveItemContext);
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef();
@@ -84,6 +84,7 @@ function InputForm({ label }) {
 
                 return (
                   <li
+                    ref={isSelected ? selectedRef : null}
                     key={item.id}
                     className={`pl-2 py-1 ${
                       isSelected ? "bg-neutral-300" : ""

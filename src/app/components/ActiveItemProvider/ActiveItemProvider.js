@@ -1,4 +1,10 @@
-import React, { useState, createContext, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  useRef,
+} from "react";
 import { SearchInputContext } from "../SearchInputProvider";
 
 export const ActiveItemContext = createContext();
@@ -6,6 +12,18 @@ export const ActiveItemContext = createContext();
 function ActiveItemProvider({ children }) {
   const { filtered, setValue } = useContext(SearchInputContext);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const selectedRef = useRef();
+
+  useEffect(() => {
+    if (!selectedRef.current) {
+      return;
+    }
+
+    selectedRef.current.scrollIntoView({
+      behavior: "instant",
+      block: "nearest",
+    });
+  }, [activeIndex]);
 
   function handleKeyDown(e) {
     let newIndex;
@@ -38,7 +56,7 @@ function ActiveItemProvider({ children }) {
 
   return (
     <ActiveItemContext.Provider
-      value={{ activeIndex, setActiveIndex, handleKeyDown }}
+      value={{ activeIndex, setActiveIndex, handleKeyDown, selectedRef }}
     >
       {children}
     </ActiveItemContext.Provider>
