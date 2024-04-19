@@ -27,7 +27,7 @@ async function Home() {
         <StateDataProvider>
           <Search label={`I'm looking for books in ...`} />
         </StateDataProvider>
-        <ResultsContainer results={data} />
+        <ResultsContainer className="mt-60" results={data} />
       </FlexContainer>
     </main>
   );

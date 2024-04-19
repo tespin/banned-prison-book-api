@@ -41,8 +41,8 @@ function InputForm({ label }) {
 
   return (
     <form>
-      <FlexContainer className="relative border border-black focus-within:ring pointer-events-none hover:border-gray-400">
-        <FlexContainer className="w-full justify-between pointer-events-auto">
+      <FlexContainer className="relative focus-within:ring focus-within:ring-neutral-300 rounded-md pointer-events-none">
+        <FlexContainer className="border border-neutral-300 w-full hover:border-neutral-400 focus-within:border-black hover:focus-within:border-black rounded-md justify-between pointer-events-auto">
           <input
             id="search-input"
             type="search"
@@ -54,7 +54,7 @@ function InputForm({ label }) {
             onKeyDown={(e) => {
               handleKeyDown(e);
             }}
-            className="relative px-2 py-1 focus:outline-none w-full"
+            className="relative rounded-md focus:outline-none w-full px-2 py-2 "
             ref={inputRef}
             placeholder={label}
             autoComplete="off"
@@ -76,7 +76,7 @@ function InputForm({ label }) {
             </svg>
           </button>
           {isActive && (
-            <ul className="absolute top-full w-full max-h-40 overflow-y-auto z-10">
+            <ul className="absolute mt-2 top-full left-0 w-full max-h-40 shadow-md rounded-md overflow-y-auto ">
               {filtered.map((item, index) => {
                 let isSelected = index === activeIndex;
 
@@ -84,7 +84,7 @@ function InputForm({ label }) {
                   <li
                     ref={isSelected ? selectedRef : null}
                     key={item.id}
-                    className={`pl-2 py-1 ${
+                    className={`px-2 py-2 ${
                       isSelected ? "bg-neutral-300" : ""
                     } `}
                     onMouseEnter={() => {
