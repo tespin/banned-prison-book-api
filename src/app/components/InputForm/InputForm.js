@@ -41,14 +41,11 @@ function InputForm({ label }) {
 
   return (
     <form>
-      <FlexContainer>
-        <label htmlFor="search-input" className="shrink-0">
-          {label}
-        </label>
-        <FlexContainer className="relative">
+      <FlexContainer className="relative border border-black focus-within:ring pointer-events-none hover:border-gray-400">
+        <FlexContainer className="w-full justify-between pointer-events-auto">
           <input
             id="search-input"
-            type="text"
+            type="search"
             value={value}
             onClick={handleDisplayDropdown}
             onChange={(e) => {
@@ -57,8 +54,9 @@ function InputForm({ label }) {
             onKeyDown={(e) => {
               handleKeyDown(e);
             }}
-            className="relative"
+            className="relative px-2 py-1 focus:outline-none w-full"
             ref={inputRef}
+            placeholder={label}
             autoComplete="off"
           />
           <button className="pr-2" type="submit">

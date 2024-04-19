@@ -12,12 +12,12 @@ function Home() {
             Banned Prison Books is a tool for finding books that have been
             banned in state prison systems.
           </h1>
-          <p className="opacity-50 mt-4">
+          <p className="opacity-50 my-10">
             Search for books below. Or, explore the API.
           </p>
         </div>
         <StateDataProvider>
-          <Search label={`I'm looking for books in `} />
+          <Search label={`I'm looking for books in ...`} />
         </StateDataProvider>
       </FlexContainer>
     </main>
