@@ -2,8 +2,16 @@ import React from "react";
 import FlexContainer from "./components/FlexContainer";
 import Search from "./components/Search";
 import StateDataProvider from "./components/StateDataProvider";
+import ResultsContainer from "./components/ResultsContainer";
+import { promises as fs } from "fs";
 
-function Home() {
+async function Home() {
+  const file = await fs.readFile(
+    process.cwd() + "/src/app/assets/books.json",
+    "utf8"
+  );
+  const data = JSON.parse(file);
+
   return (
     <main>
       <FlexContainer className="xs:flex-col xs:max-w-sm">
@@ -19,6 +27,7 @@ function Home() {
         <StateDataProvider>
           <Search label={`I'm looking for books in ...`} />
         </StateDataProvider>
+        <ResultsContainer results={data} />
       </FlexContainer>
     </main>
   );
