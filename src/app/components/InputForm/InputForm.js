@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../FlexContainer";
 import { SearchInputContext } from "../SearchInputProvider";
 import { ActiveItemContext } from "../ActiveItemProvider";
+import supabase from "@/app/utils/supabase";
+import { stateToAbbrev } from "@/app/utils/helpers";
 
 function InputForm({ label }) {
   const { filtered, filterData, value, setValue } =
@@ -18,6 +20,19 @@ function InputForm({ label }) {
       document.removeEventListener("click", handleOutsideClick);
     };
   });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submit");
+
+    const query = stateToAbbrev[value.toLowerCase()];
+    const { data } = await supabase
+      .from("books")
+      .select()
+      .eq("state_arc", query)
+      .range(1, 10);
+    console.log(data);
+  }
 
   function handleDisplayDropdown() {
     setIsActive(!isActive);
@@ -40,7 +55,11 @@ function InputForm({ label }) {
   }
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
       <FlexContainer className="relative focus-within:ring focus-within:ring-neutral-300 rounded-md pointer-events-none">
         <FlexContainer className="border border-neutral-300 w-full hover:border-neutral-400 focus-within:border-black hover:focus-within:border-black rounded-md justify-between pointer-events-auto">
           <input
