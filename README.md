@@ -6,14 +6,21 @@ This is a project for discovering books banned in your state's prison system.
 
 #### General
 
-- page styles
 - documentation
-- build API
-- get results from db
+- API
 
 #### Search Bar
 
 - aria roles
-- char highlighting in results
+- highlighting predictive text in autocomplete
 - mouseenter fires when scrolling into view
-- styling
+- search results styling
+- use mm/dd/yy format for date in search results
+- search by author and reason
+- sort by author first and last name, most / last recent
+
+#### Design
+
+- color swatches
+- home page desktop layout
+- home page mobile layout

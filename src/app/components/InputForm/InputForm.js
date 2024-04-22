@@ -95,7 +95,7 @@ function InputForm({ placeholder, handleSubmit }) {
             </svg>
           </button>
           {isActive && (
-            <ul className="absolute mt-2 top-full left-0 w-full max-h-40 shadow-md rounded-md overflow-y-auto ">
+            <ul className="absolute mt-2 top-full left-0 w-full max-h-40 shadow-md rounded-md overflow-y-auto bg-white ">
               {filtered.map((item, index) => {
                 let isSelected = index === activeIndex;
 
