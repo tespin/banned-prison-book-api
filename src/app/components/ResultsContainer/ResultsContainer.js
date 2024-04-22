@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import Card from "../Card";
+import { SearchResultsContext } from "../SearchResultsProvider";
 
-function ResultsContainer({ results, className }) {
+function ResultsContainer({ className }) {
+  const { searchResults } = useContext(SearchResultsContext);
+
   return (
     <ul className={`${className ? className : ""}`}>
-      {results.map((item) => {
+      {searchResults.map((item) => {
         // console.log(result);
         return <Card data={item} />;
       })}

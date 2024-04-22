@@ -4,11 +4,11 @@ import InputForm from "../InputForm";
 import SearchInputProvider from "../SearchInputProvider";
 import ActiveItemProvider from "../ActiveItemProvider";
 
-function SearchBar({ label, options }) {
+function SearchBar({ placeholder, options, onSearch }) {
   return (
     <SearchInputProvider data={options}>
       <ActiveItemProvider>
-        <InputForm label={label} />
+        <InputForm placeholder={placeholder} handleSubmit={onSearch} />
       </ActiveItemProvider>
     </SearchInputProvider>
   );

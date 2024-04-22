@@ -2,10 +2,8 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../FlexContainer";
 import { SearchInputContext } from "../SearchInputProvider";
 import { ActiveItemContext } from "../ActiveItemProvider";
-import supabase from "@/app/utils/supabase";
-import { stateToAbbrev } from "@/app/utils/helpers";
 
-function InputForm({ label }) {
+function InputForm({ placeholder, handleSubmit }) {
   const { filtered, filterData, value, setValue } =
     useContext(SearchInputContext);
   const { handleKeyDown, activeIndex, setActiveIndex, selectedRef } =
@@ -21,18 +19,20 @@ function InputForm({ label }) {
     };
   });
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    console.log("submit");
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   console.log("submit");
+  //   const page = 1;
+  //   const numPerPage = 10;
+  //   const { from, to } = getRange(page, numPerPage);
 
-    const query = stateToAbbrev[value.toLowerCase()];
-    const { data } = await supabase
-      .from("books")
-      .select()
-      .eq("state_arc", query)
-      .range(1, 10);
-    console.log(data);
-  }
+  //   const query = stateToAbbrev[value.toLowerCase()];
+  //   const { data } = await supabase
+  //     .from("books")
+  //     .select()
+  //     .eq("state_arc", query)
+  //     .range(from, to);
+  // }
 
   function handleDisplayDropdown() {
     setIsActive(!isActive);
@@ -57,7 +57,7 @@ function InputForm({ label }) {
   return (
     <form
       onSubmit={(e) => {
-        handleSubmit(e);
+        handleSubmit(e, value);
       }}
     >
       <FlexContainer className="relative focus-within:ring focus-within:ring-neutral-300 rounded-md pointer-events-none">
@@ -75,7 +75,7 @@ function InputForm({ label }) {
             }}
             className="relative rounded-md focus:outline-none w-full px-2 py-2 "
             ref={inputRef}
-            placeholder={label}
+            placeholder={placeholder}
             autoComplete="off"
           />
           <button className="pr-2" type="submit">

@@ -58,4 +58,10 @@ const stateToAbbrev = {
   wyoming: "wy",
 };
 
-export { stateToAbbrev };
+function getRange(page, numPerPage) {
+  const from = numPerPage * page - numPerPage;
+  const to = from + numPerPage;
+  return { from, to };
+}
+
+export { getRange, stateToAbbrev };

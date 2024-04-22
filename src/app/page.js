@@ -3,14 +3,15 @@ import FlexContainer from "./components/FlexContainer";
 import Search from "./components/Search";
 import StateDataProvider from "./components/StateDataProvider";
 import ResultsContainer from "./components/ResultsContainer";
+import SearchResultsProvider from "./components/SearchResultsProvider";
 import { promises as fs } from "fs";
 
 async function Home() {
-  const file = await fs.readFile(
-    process.cwd() + "/src/app/assets/books.json",
-    "utf8"
-  );
-  const data = JSON.parse(file);
+  // const file = await fs.readFile(
+  //   process.cwd() + "/src/app/assets/books.json",
+  //   "utf8"
+  // );
+  // const data = JSON.parse(file);
 
   return (
     <main>
@@ -24,10 +25,12 @@ async function Home() {
             Search for books below. Or, explore the API.
           </p>
         </div>
-        <StateDataProvider>
-          <Search label={`I'm looking for books in ...`} />
-        </StateDataProvider>
-        <ResultsContainer className="mt-60" results={data} />
+        <SearchResultsProvider>
+          <StateDataProvider>
+            <Search label={`I'm looking for books in ...`} />
+          </StateDataProvider>
+          <ResultsContainer className="mt-12" />
+        </SearchResultsProvider>
       </FlexContainer>
     </main>
   );
