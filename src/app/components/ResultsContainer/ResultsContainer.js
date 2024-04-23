@@ -7,7 +7,7 @@ function ResultsContainer({ className }) {
   const { searchResults } = useContext(SearchResultsContext);
 
   return (
-    <ul className={`${className ? className : ""}`}>
+    <ul className={`flex flex-col gap-y-10 ${className ? className : ""}`}>
       {searchResults.map((item) => {
         // console.log(result);
         return <Card data={item} />;
