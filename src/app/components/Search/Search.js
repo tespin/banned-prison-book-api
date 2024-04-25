@@ -4,12 +4,16 @@ import SearchBar from "../SearchBar";
 import { StateDataContext } from "../StateDataProvider";
 import { SearchResultsContext } from "../SearchResultsProvider";
 
-function Search({ label }) {
+function Search({ placeholder }) {
   const { stateData } = useContext(StateDataContext);
   const { handleSubmit } = useContext(SearchResultsContext);
 
   return (
-    <SearchBar label={label} options={stateData} onSearch={handleSubmit} />
+    <SearchBar
+      placeholder={placeholder}
+      options={stateData}
+      onSearch={handleSubmit}
+    />
   );
 }
 

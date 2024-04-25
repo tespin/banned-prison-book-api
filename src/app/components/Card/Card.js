@@ -11,7 +11,7 @@ function Card({ data }) {
           {author ? author : "No author recorded"}
         </p>
         <p className="text-gray-600 justify-end">
-          {date ? date : "No date provided"}
+          {date ? date.split("-")[0] : "No date provided"}
         </p>
       </FlexContainer>
       <h3 className="font-medium text-xl mt-4">

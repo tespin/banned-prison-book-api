@@ -9,16 +9,10 @@ function ResultsContainer({ className }) {
   return (
     <ul className={`flex flex-col gap-y-10 ${className ? className : ""}`}>
       {searchResults.map((item) => {
-        // console.log(result);
         return <Card data={item} />;
       })}
     </ul>
   );
-  // console.log(results);
-
-  // return results.map((result) => {
-  //   return <Card data={result} />;
-  // });
 }
 
 export default ResultsContainer;

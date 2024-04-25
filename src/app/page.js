@@ -4,7 +4,7 @@ import Search from "./components/Search";
 import StateDataProvider from "./components/StateDataProvider";
 import ResultsContainer from "./components/ResultsContainer";
 import SearchResultsProvider from "./components/SearchResultsProvider";
-import { promises as fs } from "fs";
+import Filter from "./components/Filter";
 
 async function Home() {
   // const file = await fs.readFile(
@@ -26,9 +26,12 @@ async function Home() {
           </p>
         </div>
         <SearchResultsProvider>
-          <StateDataProvider>
-            <Search label={`I'm looking for books in ...`} />
-          </StateDataProvider>
+          <FlexContainer className="gap-x-2">
+            <StateDataProvider>
+              <Search placeholder={`I'm looking for books in ...`} />
+            </StateDataProvider>
+            <Filter></Filter>
+          </FlexContainer>
           <ResultsContainer className="mt-10" />
         </SearchResultsProvider>
       </FlexContainer>

@@ -59,9 +59,10 @@ function InputForm({ placeholder, handleSubmit }) {
       onSubmit={(e) => {
         handleSubmit(e, value);
       }}
+      className="flex grow"
     >
-      <FlexContainer className="relative focus-within:ring focus-within:ring-neutral-300 rounded-md pointer-events-none">
-        <FlexContainer className="border border-neutral-300 w-full hover:border-neutral-400 focus-within:border-black hover:focus-within:border-black rounded-md justify-between pointer-events-auto">
+      <FlexContainer className="relative w-full focus-within:ring focus-within:ring-neutral-300 rounded-md pointer-events-none">
+        <FlexContainer className="border w-full border-neutral-300 hover:border-neutral-400 focus-within:border-black hover:focus-within:border-black rounded-md justify-between pointer-events-auto">
           <input
             id="search-input"
             type="search"
@@ -73,7 +74,7 @@ function InputForm({ placeholder, handleSubmit }) {
             onKeyDown={(e) => {
               handleKeyDown(e);
             }}
-            className="relative rounded-md focus:outline-none w-full px-2 py-2 "
+            className="relative w-full rounded-md focus:outline-none px-2 py-2 "
             ref={inputRef}
             placeholder={placeholder}
             autoComplete="off"
