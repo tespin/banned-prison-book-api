@@ -19,21 +19,6 @@ function InputForm({ placeholder, handleSubmit }) {
     };
   });
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log("submit");
-  //   const page = 1;
-  //   const numPerPage = 10;
-  //   const { from, to } = getRange(page, numPerPage);
-
-  //   const query = stateToAbbrev[value.toLowerCase()];
-  //   const { data } = await supabase
-  //     .from("books")
-  //     .select()
-  //     .eq("state_arc", query)
-  //     .range(from, to);
-  // }
-
   function handleDisplayDropdown() {
     setIsActive(!isActive);
   }

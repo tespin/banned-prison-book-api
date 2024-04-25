@@ -5,7 +5,7 @@ function Card({ data }) {
   const { publication, author, reason, date } = data;
 
   return (
-    <FlexContainer className="flex-col w-full border border-green-900 px-3 py-2">
+    <FlexContainer className="flex-col w-full border border-green-900 px-3 py-2 rounded-lg">
       <FlexContainer className="w-full justify-between">
         <p className="text-gray-600">
           {author ? author : "No author recorded"}

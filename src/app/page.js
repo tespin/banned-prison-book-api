@@ -2,7 +2,7 @@ import React from "react";
 import FlexContainer from "./components/FlexContainer";
 import Search from "./components/Search";
 import StateDataProvider from "./components/StateDataProvider";
-import ResultsContainer from "./components/ResultsContainer";
+import ResultsList from "./components/ResultsList";
 import SearchResultsProvider from "./components/SearchResultsProvider";
 import Filter from "./components/Filter";
 
@@ -32,7 +32,7 @@ async function Home() {
             </StateDataProvider>
             <Filter></Filter>
           </FlexContainer>
-          <ResultsContainer className="mt-10" />
+          <ResultsList className="mt-10" />
         </SearchResultsProvider>
       </FlexContainer>
     </main>
