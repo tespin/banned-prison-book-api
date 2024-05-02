@@ -2,9 +2,9 @@ import React from "react";
 import FlexContainer from "./components/FlexContainer";
 import Search from "./components/Search";
 import StateDataProvider from "./components/StateDataProvider";
-import ResultsList from "./components/ResultsList";
 import SearchResultsProvider from "./components/SearchResultsProvider";
 import Filter from "./components/Filter";
+import SearchResults from "./components/SearchResults";
 
 async function Home() {
   // const file = await fs.readFile(
@@ -30,9 +30,9 @@ async function Home() {
             <StateDataProvider>
               <Search placeholder={`I'm looking for books in ...`} />
             </StateDataProvider>
-            <Filter></Filter>
+            {/* <Filter></Filter> */}
           </FlexContainer>
-          <ResultsList className="mt-10" />
+          <SearchResults />
         </SearchResultsProvider>
       </FlexContainer>
     </main>
