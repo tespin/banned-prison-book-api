@@ -24,3 +24,11 @@ This is a project for discovering books banned in your state's prison system.
 - color swatches
 - home page desktop layout
 - home page mobile layout
+
+#### Pagination
+
+- be able to change num siblings
+- add prev and next arrows
+- disabled button styling
+- constrain page range
+- accessibility
