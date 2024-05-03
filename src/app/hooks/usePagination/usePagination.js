@@ -44,7 +44,7 @@ function usePagination({
       return [...leftRange, DOTS, totalPageCount];
     }
 
-    if (showLeftDots && showRightDots) {
+    if (showLeftDots && !showRightDots) {
       let rightItemCount = 3 + 2 * siblingCount;
       let rightRange = range(
         totalPageCount - rightItemCount + 1,
