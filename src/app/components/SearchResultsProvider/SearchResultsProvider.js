@@ -15,6 +15,7 @@ function SearchResultsProvider({ children }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [numPerPage, setNumPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
+  const [query, setQuery] = useState("");
 
   async function handleSubmit(e, value) {
     e.preventDefault();
@@ -28,6 +29,7 @@ function SearchResultsProvider({ children }) {
 
     setData(data);
     setTotalCount(data.length);
+    setQuery(value);
   }
 
   const currentData = useMemo(() => {
@@ -45,7 +47,9 @@ function SearchResultsProvider({ children }) {
         currentData,
         totalCount,
         numPerPage,
+        numSiblings,
         data,
+        query,
       }}
     >
       {children}
