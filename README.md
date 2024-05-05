@@ -41,5 +41,6 @@ This is a project for discovering books banned in your state's prison system.
 - mobile vs desktop; infinite scrolling?
 - hover styles
 - page numbers look cramped when 3 digits
+- if used arrow to go to 1st page or last page, focus should switch to the opposite arrow
 
 #### Errors
