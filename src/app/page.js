@@ -17,9 +17,8 @@ async function Home() {
     <main>
       <FlexContainer className="xs:flex-col xs:max-w-sm">
         <div className="text-center">
-          <h1 className="mt-16 text-4xl">
-            Banned Prison Books is a tool for finding books that have been
-            banned in state prison systems.
+          <h1 className="text-4xl">
+            Find books that have been banned in state prison systems.
           </h1>
           <p className="opacity-50 my-10">
             Search for books below. Or, explore the API.

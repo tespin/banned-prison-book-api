@@ -24,7 +24,8 @@ function SearchResults({ className }) {
       {status === "success" && hasResults ? (
         <>
           <p className="text-sm mb-4">
-            There are {totalCount} banned texts in {query}.
+            There are <span className=" font-medium">{totalCount}</span> banned
+            texts in {query}.
           </p>
           <FlexContainer className="flex-col">
             <ResultsList searchResults={currentData} />
