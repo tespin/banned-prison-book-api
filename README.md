@@ -13,6 +13,7 @@ This is a project for discovering books banned in your state's prison system.
 
 #### Search Bar
 
+- keep page nav fixed to stop of search bar
 - aria roles
 - highlighting predictive text in autocomplete
 - use mm/dd/yy format for date in search results
@@ -23,6 +24,7 @@ This is a project for discovering books banned in your state's prison system.
 - truncation of long descriptions
 - design pass on spacing between autocomplete suggestions and search results
 - keep previous search query
+- focus search button when query is selected
 
 #### Design
 
@@ -38,5 +40,6 @@ This is a project for discovering books banned in your state's prison system.
 - disable current page button
 - mobile vs desktop; infinite scrolling?
 - hover styles
+- page numbers look cramped when 3 digits
 
 #### Errors
