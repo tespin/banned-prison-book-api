@@ -5,7 +5,7 @@ import ResultsList from "../ResultsList";
 import PageNav from "../PageNav";
 import { SearchResultsContext } from "../SearchResultsProvider";
 
-function SearchResults() {
+function SearchResults({ className }) {
   const {
     totalCount,
     currentData,
@@ -14,16 +14,20 @@ function SearchResults() {
     numPerPage,
     numSiblings,
     query,
+    status,
   } = useContext(SearchResultsContext);
 
+  const hasResults = currentData.length > 0;
+
   return (
-    <FlexContainer className="flex-col my-14">
-      {currentData.length === 0 ? (
-        <p>No results were found for '{query}'.</p>
-      ) : (
+    <FlexContainer className={`flex-col ${className ? className : ""}`}>
+      {status === "success" && hasResults ? (
         <>
-          <ResultsList searchResults={currentData} />
-          {totalCount > numPerPage && (
+          <p className="text-sm mb-4">
+            There are {totalCount} banned texts in {query}.
+          </p>
+          <FlexContainer className="flex-col">
+            <ResultsList searchResults={currentData} />
             <PageNav
               className="my-4"
               onPageChange={(page) => setCurrentPage(page)}
@@ -32,8 +36,13 @@ function SearchResults() {
               siblingCount={numSiblings}
               pageSize={numPerPage}
             />
-          )}
+          </FlexContainer>
         </>
+      ) : (
+        status === "success" &&
+        !hasResults && (
+          <p className="text-sm">No results were found for '{query}'</p>
+        )
       )}
     </FlexContainer>
   );

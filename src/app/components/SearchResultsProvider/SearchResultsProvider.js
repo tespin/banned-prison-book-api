@@ -7,7 +7,7 @@ import { stateToAbbrev } from "@/app/utils/helpers";
 export const SearchResultsContext = createContext();
 const DOTS = "...";
 const numPerPage = 10;
-const numSiblings = 2;
+const numSiblings = 1;
 
 function SearchResultsProvider({ children }) {
   const [status, setStatus] = useState("idle");
@@ -28,6 +28,7 @@ function SearchResultsProvider({ children }) {
       .eq("state_arc", query);
 
     setData(data);
+    setStatus("success");
     setTotalCount(data.length);
     setQuery(value);
   }
@@ -50,6 +51,7 @@ function SearchResultsProvider({ children }) {
         numSiblings,
         data,
         query,
+        status,
       }}
     >
       {children}

@@ -32,7 +32,7 @@ async function Home() {
             </StateDataProvider>
             {/* <Filter></Filter> */}
           </FlexContainer>
-          <SearchResults />
+          <SearchResults className="mt-8" />
         </SearchResultsProvider>
       </FlexContainer>
     </main>
