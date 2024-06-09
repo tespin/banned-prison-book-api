@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Banned Prison Books
 
-## Getting Started
+Discover texts banned in your state's prison system.
 
-First, run the development server:
+### To Do
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### General
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- documentation
+- API
+- integrate actions
+- typescript
+- random collections of banned prison texts; i.e, books banned in the last year, books banned for obscenity, books
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+#### Search Bar
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- keep page nav fixed to stop of search bar
+- aria roles
+- highlighting predictive text in autocomplete
+- use mm/dd/yy format for date in search results
+- search by author and reason
+- sort by author first and last name, most / last recent
+- keys for list
+- loading styles
+- truncation of long descriptions
+- design pass on spacing between autocomplete suggestions and search results
+- keep previous search query
+- focus search button when query is selected
 
-## Learn More
+#### Design
 
-To learn more about Next.js, take a look at the following resources:
+- color swatches
+- home page desktop layout
+- home page mobile layout
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Pagination
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- disabled button styling
+- accessibility
+- keys for each link
+- disable current page button
+- mobile vs desktop; infinite scrolling?
+- hover styles
+- page numbers look cramped when 3 digits
+- if used arrow to go to 1st page or last page, focus should switch to the opposite arrow
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Errors

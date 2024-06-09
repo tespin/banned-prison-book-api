@@ -1,19 +1,19 @@
-import React from "react";
-
+"use client";
+import React, { useContext } from "react";
 import SearchBar from "../SearchBar";
-import AutocompleteResults from "../AutocompleteResults";
-import StateDataProvider from "../StateDataProvider";
-import ActiveItemProvider from "../ActiveItemProvider";
+import { StateDataContext } from "../StateDataProvider";
+import { SearchResultsContext } from "../SearchResultsProvider";
 
-function Search() {
+function Search({ placeholder }) {
+  const { stateData } = useContext(StateDataContext);
+  const { handleSubmit } = useContext(SearchResultsContext);
+
   return (
-    <StateDataProvider>
-      <ActiveItemProvider>
-        <SearchBar>
-          <AutocompleteResults />
-        </SearchBar>
-      </ActiveItemProvider>
-    </StateDataProvider>
+    <SearchBar
+      placeholder={placeholder}
+      options={stateData}
+      onSearch={handleSubmit}
+    />
   );
 }
 
