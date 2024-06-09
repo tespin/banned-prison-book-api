@@ -65,7 +65,9 @@ function InputForm({ placeholder, handleSubmit }) {
             placeholder={placeholder}
             autoComplete="off"
             role="combobox"
+            aria-expanded={isActive}
             aria-label="search text"
+            aria-controls="autocomplete"
           />
           <button className="pr-2" type="submit">
             <svg
@@ -84,7 +86,10 @@ function InputForm({ placeholder, handleSubmit }) {
             </svg>
           </button>
           {isActive && (
-            <ul className="absolute mt-2 top-full left-0 w-full max-h-40 shadow-md rounded-md overflow-y-auto bg-white ">
+            <ul
+              className="absolute mt-2 top-full left-0 w-full max-h-40 shadow-md rounded-md overflow-y-auto bg-white"
+              id="autocomplete"
+            >
               {filtered.map((item, index) => {
                 let isSelected = index === activeIndex;
 
