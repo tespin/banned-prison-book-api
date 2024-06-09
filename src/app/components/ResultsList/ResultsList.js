@@ -6,7 +6,7 @@ function ResultsList({ className, searchResults }) {
   return (
     <ul className={`flex flex-col gap-y-4 ${className ? className : ""}`}>
       {searchResults.map((item) => {
-        return <Card data={item} />;
+        return <Card data={item} key={item.id} />;
       })}
     </ul>
   );

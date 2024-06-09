@@ -42,7 +42,9 @@ function SearchResults({ className }) {
       ) : (
         status === "success" &&
         !hasResults && (
-          <p className="text-sm">No results were found for '{query}'</p>
+          <p className="text-sm">
+            No results were found for &apos;{query}&apos;
+          </p>
         )
       )}
     </FlexContainer>
