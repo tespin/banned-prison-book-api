@@ -37,7 +37,7 @@ function SearchResultsProvider({ children }) {
     const firstPageIndex = (currentPage - 1) * numPerPage;
     const lastPageIndex = firstPageIndex + numPerPage;
     return data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, data]);
+  }, [numPerPage, currentPage, data]);
 
   return (
     <SearchResultsContext.Provider

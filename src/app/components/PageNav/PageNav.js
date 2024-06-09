@@ -59,9 +59,9 @@ function PageNav({
             </svg>
           </button>
         </li>
-        {pageRange?.map((pageNumber) => {
+        {pageRange?.map((pageNumber, idx) => {
           if (pageNumber === DOTS) {
-            return <li>&#8230;</li>;
+            return <li key={idx}>&#8230;</li>;
           }
           return (
             <li
@@ -69,6 +69,7 @@ function PageNav({
                 pageNumber === currentPage ? "bg-black text-white" : ""
               }`}
               onClick={() => onPageChange(pageNumber)}
+              key={idx}
             >
               <Link href="/#/">{pageNumber}</Link>
             </li>
