@@ -1,6 +1,6 @@
 ## Banned Prison Books
 
-This is a project for discovering books banned in your state's prison system.
+Discover texts banned in your state's prison system.
 
 ### To Do
 
@@ -10,6 +10,7 @@ This is a project for discovering books banned in your state's prison system.
 - API
 - integrate actions
 - typescript
+- random collections of banned prison texts; i.e, books banned in the last year, books banned for obscenity, books
 
 #### Search Bar
 
