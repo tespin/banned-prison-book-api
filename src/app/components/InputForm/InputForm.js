@@ -45,6 +45,7 @@ function InputForm({ placeholder, handleSubmit }) {
         handleSubmit(e, value);
       }}
       className="flex grow"
+      role="search"
     >
       <FlexContainer className="relative w-full focus-within:ring focus-within:ring-neutral-300 rounded-md pointer-events-none">
         <FlexContainer className="border w-full border-neutral-300 hover:border-neutral-400 focus-within:border-black hover:focus-within:border-black rounded-md justify-between pointer-events-auto">
@@ -63,6 +64,8 @@ function InputForm({ placeholder, handleSubmit }) {
             ref={inputRef}
             placeholder={placeholder}
             autoComplete="off"
+            role="combobox"
+            aria-label="search text"
           />
           <button className="pr-2" type="submit">
             <svg
