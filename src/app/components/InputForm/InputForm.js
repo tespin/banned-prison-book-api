@@ -24,6 +24,7 @@ function InputForm({ placeholder, handleSubmit }) {
   }
 
   function handleChange(e) {
+    setIsActive(true);
     setValue(e.target.value);
     filterData(e.target.value);
   }
@@ -57,14 +58,15 @@ function InputForm({ placeholder, handleSubmit }) {
             id="search-input"
             type="search"
             value={value}
-            onClick={handleDisplayDropdown}
             onChange={(e) => {
               handleChange(e);
+            }}
+            onFocus={(e) => {
+              handleFocus(e);
             }}
             onKeyDown={(e) => {
               handleKeyDown(e);
             }}
-            onFocus={handleFocus}
             className="relative w-full rounded-md focus:outline-none px-2 py-2 "
             ref={inputRef}
             placeholder={placeholder}

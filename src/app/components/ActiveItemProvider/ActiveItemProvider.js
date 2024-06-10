@@ -26,7 +26,7 @@ function ActiveItemProvider({ children }) {
   }, [activeIndex]);
 
   function handleKeyDown(e) {
-    let newIndex;
+    let newIndex = 0;
 
     switch (e.key) {
       case "ArrowUp":
@@ -45,7 +45,6 @@ function ActiveItemProvider({ children }) {
         break;
       case "Enter":
         const newValue = filtered[activeIndex].name;
-
         setValue(newValue);
         break;
       default:
