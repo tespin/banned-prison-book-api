@@ -44,6 +44,10 @@ function ActiveItemProvider({ children }) {
         }
         break;
       case "Enter":
+        if (!filtered || !filtered[activeIndex]) {
+          return;
+        }
+
         const newValue = filtered[activeIndex].name;
         setValue(newValue);
         break;
