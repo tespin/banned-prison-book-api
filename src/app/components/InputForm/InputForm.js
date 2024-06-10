@@ -39,6 +39,10 @@ function InputForm({ placeholder, handleSubmit }) {
     }
   }
 
+  function handleFocus(e) {
+    setIsActive(true);
+  }
+
   return (
     <form
       onSubmit={(e) => {
@@ -60,6 +64,7 @@ function InputForm({ placeholder, handleSubmit }) {
             onKeyDown={(e) => {
               handleKeyDown(e);
             }}
+            onFocus={handleFocus}
             className="relative w-full rounded-md focus:outline-none px-2 py-2 "
             ref={inputRef}
             placeholder={placeholder}

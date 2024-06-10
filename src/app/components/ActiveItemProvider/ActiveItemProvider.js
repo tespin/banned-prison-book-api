@@ -11,7 +11,7 @@ export const ActiveItemContext = createContext();
 
 function ActiveItemProvider({ children }) {
   const { filtered, setValue } = useContext(SearchInputContext);
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const selectedRef = useRef();
 
   useEffect(() => {
