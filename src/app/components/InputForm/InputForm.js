@@ -24,6 +24,7 @@ function InputForm({ placeholder, handleSubmit }) {
   }
 
   function handleChange(e) {
+    setIsActive(true);
     setValue(e.target.value);
     filterData(e.target.value);
   }
@@ -37,6 +38,10 @@ function InputForm({ placeholder, handleSubmit }) {
     if (e.target !== inputRef.current) {
       setIsActive(false);
     }
+  }
+
+  function handleFocus(e) {
+    setIsActive(true);
   }
 
   return (
@@ -53,9 +58,11 @@ function InputForm({ placeholder, handleSubmit }) {
             id="search-input"
             type="search"
             value={value}
-            onClick={handleDisplayDropdown}
             onChange={(e) => {
               handleChange(e);
+            }}
+            onFocus={(e) => {
+              handleFocus(e);
             }}
             onKeyDown={(e) => {
               handleKeyDown(e);

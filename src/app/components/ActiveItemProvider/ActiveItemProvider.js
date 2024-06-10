@@ -11,7 +11,7 @@ export const ActiveItemContext = createContext();
 
 function ActiveItemProvider({ children }) {
   const { filtered, setValue } = useContext(SearchInputContext);
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const selectedRef = useRef();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function ActiveItemProvider({ children }) {
   }, [activeIndex]);
 
   function handleKeyDown(e) {
-    let newIndex;
+    let newIndex = 0;
 
     switch (e.key) {
       case "ArrowUp":
@@ -44,8 +44,11 @@ function ActiveItemProvider({ children }) {
         }
         break;
       case "Enter":
-        const newValue = filtered[activeIndex].name;
+        if (!filtered || !filtered[activeIndex]) {
+          return;
+        }
 
+        const newValue = filtered[activeIndex].name;
         setValue(newValue);
         break;
       default:

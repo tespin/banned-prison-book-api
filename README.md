@@ -45,3 +45,5 @@ Discover texts banned in your state's prison system.
 - if used arrow to go to 1st page or last page, focus should switch to the opposite arrow
 
 #### Errors
+
+- pressing 'enter' when there are no autocomplete suggestions for the input (whether input is nonsense or empty) results in an error
