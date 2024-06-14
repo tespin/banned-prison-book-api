@@ -15,7 +15,7 @@ function FilterDialog() {
       <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content>
-          <p>what's up</p>
+          <p>what is up</p>
           <Dialog.Close>X</Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
