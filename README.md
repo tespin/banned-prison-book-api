@@ -26,6 +26,7 @@ Discover texts banned in your state's prison system.
 - design pass on spacing between autocomplete suggestions and search results
 - keep previous search query
 - focus search button when query is selected
+- clear button for queries
 
 #### Design
 
