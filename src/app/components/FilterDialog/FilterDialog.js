@@ -15,7 +15,12 @@ function FilterDialog() {
       <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content>
-          <p>what is up</p>
+          <h2>Sort</h2>
+          {/* slide button Ascending / Descending */}
+          <h2>Years</h2>
+          {/* buttons */}
+          <h2>Ban Reason</h2>
+          {/* checkboxes */}
           <Dialog.Close>X</Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
