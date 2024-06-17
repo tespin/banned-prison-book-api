@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="h-screen">
         <FlexContainer className="justify-center">
           <FlexContainer className="xs:flex-col xs:max-w-sm">
             <header className="flex my-6 w-full justify-between items-center">
