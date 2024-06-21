@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OptionButton from "../OptionButton";
 
-function ButtonGroup({ buttons }) {
+function ButtonGroup({ buttons, data, handleFilter }) {
   const [activeButtons, setActiveButtons] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   function handleClick(button) {
-    console.log("clicked");
     let newButtons = [];
+    // let newData = data.filter((data) => {
+    //   const year = data.date.split("-")[0];
+    //   return year === button;
+    // });
 
+    // // console.log(newData.length);
     if (activeButtons.includes(button)) {
       newButtons = activeButtons.filter(
         (activeButton) => activeButton != button
@@ -18,6 +23,16 @@ function ButtonGroup({ buttons }) {
     console.log(newButtons);
     setActiveButtons(newButtons);
   }
+
+  useEffect(() => {
+    let newData = data.filter((data) => {
+      const year = data.date.split("-")[0];
+      return activeButtons.includes(year);
+    });
+    handleFilter(newData);
+
+    console.log(newData.length);
+  }, [activeButtons]);
 
   function isActive(button) {
     return activeButtons.includes(button);

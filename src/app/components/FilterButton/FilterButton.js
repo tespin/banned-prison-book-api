@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import FlexContainer from "../FlexContainer";
 
-const FilterButton = forwardRef(function FilterButton(props, ref) {
+const FilterButton = forwardRef(function FilterButton(props, forwardedRef) {
   return (
     <button
       onClick={(e) => {
@@ -9,6 +9,7 @@ const FilterButton = forwardRef(function FilterButton(props, ref) {
       }}
       className="border rounded-md px-3 py-3"
       {...props}
+      ref={forwardedRef}
     >
       <svg
         width="18"

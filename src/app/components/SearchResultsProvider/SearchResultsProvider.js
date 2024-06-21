@@ -12,6 +12,7 @@ const numSiblings = 1;
 function SearchResultsProvider({ children }) {
   const [status, setStatus] = useState("idle");
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [numPerPage, setNumPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
@@ -35,8 +36,13 @@ function SearchResultsProvider({ children }) {
   const currentData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * numPerPage;
     const lastPageIndex = firstPageIndex + numPerPage;
+
+    if (filteredData?.length > 0) {
+      return filteredData.slice(firstPageIndex, lastPageIndex);
+    }
+
     return data.slice(firstPageIndex, lastPageIndex);
-  }, [numPerPage, currentPage, data]);
+  }, [numPerPage, currentPage, data, filteredData]);
 
   return (
     <SearchResultsContext.Provider
@@ -46,9 +52,12 @@ function SearchResultsProvider({ children }) {
         currentPage,
         currentData,
         totalCount,
+        setTotalCount,
         numPerPage,
         numSiblings,
         data,
+        filteredData,
+        setFilteredData,
         query,
         status,
       }}

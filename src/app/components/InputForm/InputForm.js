@@ -3,10 +3,12 @@ import FlexContainer from "../FlexContainer";
 import Filter from "../Filter";
 import { SearchInputContext } from "../SearchInputProvider";
 import { ActiveItemContext } from "../ActiveItemProvider";
+import { SearchResultsContext } from "../SearchResultsProvider";
 
 function InputForm({ placeholder, handleSubmit }) {
   const { filtered, filterData, value, setValue } =
     useContext(SearchInputContext);
+  const { totalCount } = useContext(SearchResultsContext);
   const { handleKeyDown, activeIndex, setActiveIndex, selectedRef } =
     useContext(ActiveItemContext);
   const [isActive, setIsActive] = useState(false);
@@ -120,7 +122,7 @@ function InputForm({ placeholder, handleSubmit }) {
             </ul>
           )}
         </FlexContainer>
-        <Filter />
+        {totalCount > 0 && <Filter />}
       </FlexContainer>
     </form>
   );
