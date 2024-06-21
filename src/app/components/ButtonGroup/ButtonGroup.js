@@ -12,7 +12,7 @@ function ButtonGroup({ buttons, data, handleFilter }) {
     //   return year === button;
     // });
 
-    // // console.log(newData.length);
+    // console.log(newData.length);
     if (activeButtons.includes(button)) {
       newButtons = activeButtons.filter(
         (activeButton) => activeButton != button
@@ -20,7 +20,7 @@ function ButtonGroup({ buttons, data, handleFilter }) {
     } else {
       newButtons = [...activeButtons, button];
     }
-    console.log(newButtons);
+    // console.log(newButtons);
     setActiveButtons(newButtons);
   }
 
@@ -30,7 +30,6 @@ function ButtonGroup({ buttons, data, handleFilter }) {
       return activeButtons.includes(year);
     });
     handleFilter(newData);
-
     console.log(newData.length);
   }, [activeButtons]);
 

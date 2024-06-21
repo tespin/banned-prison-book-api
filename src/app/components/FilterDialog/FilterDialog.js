@@ -9,13 +9,14 @@ import OptionButton from "../OptionButton";
 import { SearchResultsContext } from "../SearchResultsProvider";
 
 function FilterDialog() {
-  const { totalCount, setTotalCount, data, setFilteredData } =
-    useContext(SearchResultsContext);
+  const { data, setFilteredData } = useContext(SearchResultsContext);
   // const [filteredData, setFilteredData] = useState([]);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
   const [scrollPos, setScrollPos] = useState({ x: 0, y: 0 });
   const buttons = ["2011", "2019", "2022"];
+
+  const totalCount = currentData ? currentData.length : data.length;
 
   // function handleScroll() {
   //   const { scrollX, scrollY } = window;
@@ -33,7 +34,6 @@ function FilterDialog() {
   function handleSubmit(e) {
     e.preventDefault();
     setFilteredData(currentData);
-    setTotalCount(currentData.length);
   }
 
   return (

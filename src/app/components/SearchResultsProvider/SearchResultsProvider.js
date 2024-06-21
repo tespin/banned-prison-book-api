@@ -33,6 +33,11 @@ function SearchResultsProvider({ children }) {
     setQuery(value);
   }
 
+  useEffect(() => {
+    console.log(filteredData.length);
+    setTotalCount(filteredData.length);
+  }, [filteredData]);
+
   const currentData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * numPerPage;
     const lastPageIndex = firstPageIndex + numPerPage;
