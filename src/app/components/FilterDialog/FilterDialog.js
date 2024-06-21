@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import FlexContainer from "../FlexContainer";
 import FilterButton from "../FilterButton";
+import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import OptionButton from "../OptionButton";
 
 function FilterDialog() {
   const [open, setOpen] = useState(false);
   const [scrollPos, setScrollPos] = useState({ x: 0, y: 0 });
+  const buttons = ["2002", "2017", "2025"];
 
   function handleScroll() {
     const { scrollX, scrollY } = window;
@@ -44,9 +46,7 @@ function FilterDialog() {
             {/* slide button Ascending / Descending */}
             <h2 className="text-xl font-medium">Years</h2>
             {/* insert prop here for years*/}
-            <OptionButton option="2002" />
-            <OptionButton option="2017" />
-            <OptionButton option="2025" />
+            <ButtonGroup buttons={buttons} />;
           </Dialog.Content>
         </FlexContainer>
       </Dialog.Portal>

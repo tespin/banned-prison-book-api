@@ -20,7 +20,6 @@ function SearchResultsProvider({ children }) {
   async function handleSubmit(e, value) {
     e.preventDefault();
     setStatus("loading");
-    // const { from, to } = getRange(currentPage, numPerPage);
     const query = stateToAbbrev[value.toLowerCase()];
     const { data } = await supabase
       .from("books")
