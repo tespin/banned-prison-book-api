@@ -50,5 +50,4 @@ Discover texts banned in your state's prison system.
 - pressing 'enter' when there are no autocomplete suggestions for the input (whether input is nonsense or empty) results in an error
 - if user is on say page 2021 of florida's results, then inputs another query, it will return no results. new queries should reset current page to 1 to prevent this error
 - does not remember active buttons for styling upon dialog closing
-- does not close modal after clicking submit
 - add filtered options to results text after submitting

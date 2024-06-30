@@ -13,6 +13,7 @@ function FilterDialog() {
   // const [filteredData, setFilteredData] = useState([]);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
+  const [filterActive, setFilterActive] = useState(false);
   const [scrollPos, setScrollPos] = useState({ x: 0, y: 0 });
   const buttons = ["2011", "2019", "2022"];
 
@@ -33,7 +34,9 @@ function FilterDialog() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    /* if filters are active, setFilterActive(true) */
     setFilteredData(currentData);
+    setOpen(false);
   }
 
   return (
