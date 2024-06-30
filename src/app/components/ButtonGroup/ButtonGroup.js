@@ -1,40 +1,30 @@
 import React, { useEffect, useState } from "react";
 import OptionButton from "../OptionButton";
 
-function ButtonGroup({ buttons, data, handleFilter }) {
+function ButtonGroup({
+  buttons,
+  data,
+  handleFilter,
+  handleActiveFilters,
+  activeFilters,
+}) {
   const [activeButtons, setActiveButtons] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
-  function handleClick(button) {
-    let newButtons = [];
-    // let newData = data.filter((data) => {
-    //   const year = data.date.split("-")[0];
-    //   return year === button;
-    // });
-
-    // console.log(newData.length);
-    if (activeButtons.includes(button)) {
-      newButtons = activeButtons.filter(
-        (activeButton) => activeButton != button
-      );
-    } else {
-      newButtons = [...activeButtons, button];
-    }
-    // console.log(newButtons);
-    setActiveButtons(newButtons);
+  function handleClick(value) {
+    handleActiveFilters(value);
   }
 
   useEffect(() => {
     let newData = data.filter((data) => {
       const year = data.date.split("-")[0];
-      return activeButtons.includes(year);
+      return activeFilters.includes(year);
     });
     handleFilter(newData);
-    console.log(newData.length);
-  }, [activeButtons]);
+  }, [activeFilters]);
 
-  function isActive(button) {
-    return activeButtons.includes(button);
+  function isActive(value) {
+    return activeFilters.includes(value);
   }
 
   return buttons.map((button, idx) => {

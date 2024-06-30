@@ -8,7 +8,7 @@ import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import OptionButton from "../OptionButton";
 import { SearchResultsContext } from "../SearchResultsProvider";
 
-function FilterDialog() {
+function FilterDialog({ handleActiveFilters, activeFilters }) {
   const { data, setFilteredData } = useContext(SearchResultsContext);
   // const [filteredData, setFilteredData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -27,6 +27,14 @@ function FilterDialog() {
 
     setYearButtons([...new Set(years)]);
   }, [currentData, data]);
+
+  useEffect(() => {
+    if (activeFilters.length > 0) {
+      setFilterActive(true);
+    } else {
+      setFilterActive(false);
+    }
+  }, [activeFilters]);
 
   // function handleScroll() {
   //   const { scrollX, scrollY } = window;
@@ -48,12 +56,10 @@ function FilterDialog() {
     setOpen(false);
   }
 
-  function handleFilterActive() {}
-
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <FilterButton />
+        <FilterButton isActive={filterActive} />
       </Dialog.Trigger>
       <Dialog.Portal className="w-full h-full">
         <Dialog.Overlay className="bg-black/65 fixed inset-0" />
@@ -73,6 +79,8 @@ function FilterDialog() {
               buttons={yearButtons}
               data={data}
               handleFilter={setCurrentData}
+              handleActiveFilters={handleActiveFilters}
+              activeFilters={activeFilters}
             />
             <button className="pr-2" type="submit" onClick={handleSubmit}>
               show {totalCount} banned texts
