@@ -13,11 +13,20 @@ function FilterDialog() {
   // const [filteredData, setFilteredData] = useState([]);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
+  const [activeButtons, setActiveButtons] = useState([]);
+  const [yearButtons, setYearButtons] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
   const [scrollPos, setScrollPos] = useState({ x: 0, y: 0 });
-  const buttons = ["2011", "2019", "2022"];
-
   const totalCount = currentData ? currentData.length : data.length;
+
+  useEffect(() => {
+    const years = data.map((data) => {
+      return data.date.split("-")[0];
+    });
+    years.sort((a, b) => a - b);
+
+    setYearButtons([...new Set(years)]);
+  }, [currentData, data]);
 
   // function handleScroll() {
   //   const { scrollX, scrollY } = window;
@@ -39,6 +48,8 @@ function FilterDialog() {
     setOpen(false);
   }
 
+  function handleFilterActive() {}
+
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
@@ -59,7 +70,7 @@ function FilterDialog() {
             <button className="border border-black">Descending</button>
             <h2 className="text-xl font-medium">Years</h2>
             <ButtonGroup
-              buttons={buttons}
+              buttons={yearButtons}
               data={data}
               handleFilter={setCurrentData}
             />
