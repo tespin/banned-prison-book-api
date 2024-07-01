@@ -38,6 +38,7 @@ function ButtonGroup({
         option={button}
         active={() => isActive(button)}
         handleClick={handleClick}
+        key={button}
       />
     );
   });

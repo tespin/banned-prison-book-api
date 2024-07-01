@@ -68,20 +68,22 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
             className={`flex-col relative rounded-md xs:w-11/12 xs:h-2/3 max-w-lg max-h-screen p-4 bg-white overflow-y-auto`}
           >
             <Dialog.Close className="absolute">X</Dialog.Close>
-            <p className="basis-auto grow-0 shrink text-center font-bold">
+            <Dialog.Title className="basis-auto grow-0 shrink text-center font-bold">
               Filters
-            </p>
+            </Dialog.Title>
             <h2 className="text-xl font-medium">Sort</h2>
             <button className="border border-black">Ascending</button>
             <button className="border border-black">Descending</button>
             <h2 className="text-xl font-medium">Years</h2>
-            <ButtonGroup
-              buttons={yearButtons}
-              data={data}
-              handleFilter={setCurrentData}
-              handleActiveFilters={handleActiveFilters}
-              activeFilters={activeFilters}
-            />
+            <FlexContainer className="flex-wrap justify-between gap-y-4">
+              <ButtonGroup
+                buttons={yearButtons}
+                data={data}
+                handleFilter={setCurrentData}
+                handleActiveFilters={handleActiveFilters}
+                activeFilters={activeFilters}
+              />
+            </FlexContainer>
             <button className="pr-2" type="submit" onClick={handleSubmit}>
               show {totalCount} banned texts
             </button>

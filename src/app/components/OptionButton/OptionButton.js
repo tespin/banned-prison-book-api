@@ -6,13 +6,14 @@ function OptionButton({ option, active, handleClick }) {
 
   return (
     <button
-      className={`ring-inset hover:ring-black hover:bg-gray-400/10  ${
+      className={`w-auto ring-inset hover:ring-black hover:bg-gray-400/10  ${
         isActive ? "ring-2 ring-black" : "ring-1 ring-gray-400"
       } px-8 py-2 rounded-xl `}
       onClick={() => {
         handleClick(option);
       }}
       type="button"
+      key={option}
     >
       {option}
     </button>
