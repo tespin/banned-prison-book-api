@@ -16,6 +16,11 @@ function ButtonGroup({
   }
 
   useEffect(() => {
+    if (activeFilters.length === 0) {
+      handleFilter(data);
+      return;
+    }
+
     let newData = data.filter((data) => {
       const year = data.date.split("-")[0];
       return activeFilters.includes(year);
