@@ -57,15 +57,28 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
   }
 
   return (
+    // <Dialog.Root>
+    //   <Dialog.Trigger>open</Dialog.Trigger>
+    //   <Dialog.Portal>
+    //     <Dialog.Overlay />
+    //     <Dialog.Content>
+    //       <Dialog.Title />
+    //       <p>test</p>
+    //       <Dialog.Description />
+    //       <Dialog.Close />
+    //     </Dialog.Content>
+    //   </Dialog.Portal>
+    // </Dialog.Root>
+
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <FilterButton isActive={filterActive} />
       </Dialog.Trigger>
-      <Dialog.Portal className="w-full h-full">
+      <Dialog.Portal className="">
         <Dialog.Overlay className="bg-black/65 fixed inset-0" />
-        <Dialog.Content className="flex w-full h-full fixed left-0 top-0 justify-center items-center">
+        <Dialog.Content className="flex fixed w-full max-w-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center items-center">
           <FlexContainer
-            className={`flex-col relative rounded-md xs:w-11/12 xs:h-2/3 max-w-lg max-h-screen p-4 bg-white overflow-y-auto`}
+            className={`flex-col relative rounded-md w-full xs:h-2/3 max-h-screen px-6 py-4 bg-white overflow-y-auto`}
           >
             <Dialog.Close className="absolute">X</Dialog.Close>
             <Dialog.Title className="basis-auto grow-0 shrink text-center font-bold">
@@ -84,7 +97,11 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
                 activeFilters={activeFilters}
               />
             </FlexContainer>
-            <button className="pr-2" type="submit" onClick={handleSubmit}>
+            <button
+              className=" bg-black text-white rounded-md mt-4 px-4 py-2"
+              type="submit"
+              onClick={handleSubmit}
+            >
               show {totalCount} banned texts
             </button>
           </FlexContainer>
