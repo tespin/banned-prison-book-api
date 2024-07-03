@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import OptionButton from "../OptionButton";
 
 function ButtonGroup({
@@ -8,9 +8,6 @@ function ButtonGroup({
   handleActiveFilters,
   activeFilters,
 }) {
-  const [activeButtons, setActiveButtons] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-
   function handleClick(value) {
     handleActiveFilters(value);
   }
@@ -32,7 +29,7 @@ function ButtonGroup({
     return activeFilters.includes(value);
   }
 
-  return buttons.map((button, idx) => {
+  return buttons.map((button) => {
     return (
       <OptionButton
         option={button}

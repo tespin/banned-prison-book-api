@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../FlexContainer";
 import Filter from "../Filter";
-import * as Dialog from "@radix-ui/react-dialog";
 import { SearchInputContext } from "../SearchInputProvider";
 import { ActiveItemContext } from "../ActiveItemProvider";
 import { SearchResultsContext } from "../SearchResultsProvider";
@@ -124,17 +123,6 @@ function InputForm({ placeholder, handleSubmit }) {
           )}
         </FlexContainer>
         {totalCount > 0 && <Filter />}
-        {/* <Dialog.Root>
-          <Dialog.Trigger>open dialog</Dialog.Trigger>
-          <Dialog.Portal>
-            <Dialog.Overlay />
-            <Dialog.Content>
-              <Dialog.Title />
-              <p>test</p>
-              <Dialog.Close />
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root> */}
       </FlexContainer>
     </form>
   );

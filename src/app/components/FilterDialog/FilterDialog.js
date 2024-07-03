@@ -5,18 +5,14 @@ import * as Dialog from "@radix-ui/react-dialog";
 import FlexContainer from "../FlexContainer";
 import FilterButton from "../FilterButton";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
-import OptionButton from "../OptionButton";
 import { SearchResultsContext } from "../SearchResultsProvider";
 
 function FilterDialog({ handleActiveFilters, activeFilters }) {
   const { data, setFilteredData } = useContext(SearchResultsContext);
-  // const [filteredData, setFilteredData] = useState([]);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
-  const [activeButtons, setActiveButtons] = useState([]);
   const [yearButtons, setYearButtons] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
-  const [scrollPos, setScrollPos] = useState({ x: 0, y: 0 });
   const totalCount = currentData ? currentData.length : data.length;
 
   useEffect(() => {
@@ -36,40 +32,13 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
     }
   }, [activeFilters]);
 
-  // function handleScroll() {
-  //   const { scrollX, scrollY } = window;
-  //   setScrollPos({ x: scrollX, y: scrollY });
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // });
-
   function handleSubmit(e) {
     e.preventDefault();
-    /* if filters are active, setFilterActive(true) */
     setFilteredData(currentData);
     setOpen(false);
   }
 
   return (
-    // <Dialog.Root>
-    //   <Dialog.Trigger>open</Dialog.Trigger>
-    //   <Dialog.Portal>
-    //     <Dialog.Overlay />
-    //     <Dialog.Content>
-    //       <Dialog.Title />
-    //       <p>test</p>
-    //       <Dialog.Description />
-    //       <Dialog.Close />
-    //     </Dialog.Content>
-    //   </Dialog.Portal>
-    // </Dialog.Root>
-
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <FilterButton isActive={filterActive} />

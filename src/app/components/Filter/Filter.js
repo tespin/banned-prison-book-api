@@ -15,7 +15,6 @@ function Filter() {
     } else {
       newFilters = [...activeFilters, filter];
     }
-    // console.log(newButtons);
     setActiveFilters(newFilters);
   }
 
