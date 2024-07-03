@@ -53,5 +53,4 @@ Discover texts banned in your state's prison system.
 - does not remember active buttons for styling upon dialog closing
 - add filtered options to results text after submitting
 - clearing filter options should reset filtered data
-- data.date is null when searching for texts in California
 - replicate: results not showing properly when filtering through multiple years

@@ -17,8 +17,11 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
 
   useEffect(() => {
     const years = data.map((data) => {
+      if (!data.date) return "Unrecorded";
+
       return data.date.split("-")[0];
     });
+    console.log(years);
     years.sort((a, b) => a - b);
 
     setYearButtons([...new Set(years)]);

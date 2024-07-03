@@ -19,6 +19,8 @@ function ButtonGroup({
     }
 
     let newData = data.filter((data) => {
+      if (!data.date) return activeFilters.includes("Unrecorded");
+
       const year = data.date.split("-")[0];
       return activeFilters.includes(year);
     });
