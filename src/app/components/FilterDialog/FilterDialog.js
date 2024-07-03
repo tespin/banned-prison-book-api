@@ -55,8 +55,14 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
             </Dialog.Title>
             <FlexContainer className="flex-col">
               <h2 className="text-xl font-medium">Sort</h2>
-              <button className="border border-black">Ascending</button>
-              <button className="border border-black">Descending</button>
+              <FlexContainer className="flex-row">
+                <button className="border border-black rounded-tl-md rounded-bl-md mr-[-1px] px-8 py-3">
+                  Ascending
+                </button>
+                <button className="border border-black rounded-tr-md rounded-br-md px-8 py-3">
+                  Descending
+                </button>
+              </FlexContainer>
             </FlexContainer>
             <FlexContainer className="flex-col">
               <h2 className="text-xl font-medium">Years</h2>
