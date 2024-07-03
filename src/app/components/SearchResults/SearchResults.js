@@ -1,9 +1,9 @@
 "use client";
 import React, { useContext } from "react";
-import FlexContainer from "../FlexContainer";
+import FlexContainer from "../UI/FlexContainer";
 import ResultsList from "../ResultsList";
 import PageNav from "../PageNav";
-import { SearchResultsContext } from "../SearchResultsProvider";
+import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function SearchResults({ className }) {
   const {

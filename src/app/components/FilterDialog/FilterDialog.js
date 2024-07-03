@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import FlexContainer from "../FlexContainer";
+import FlexContainer from "../UI/FlexContainer";
 import FilterButton from "../FilterButton";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
-import { SearchResultsContext } from "../SearchResultsProvider";
+import OptionButton from "../OptionButton";
+import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function FilterDialog({ handleActiveFilters, activeFilters }) {
   const { data, setFilteredData } = useContext(SearchResultsContext);

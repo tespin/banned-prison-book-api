@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import FlexContainer from "../FlexContainer";
 
 const FilterButton = forwardRef(function FilterButton(
   { isActive, ...props },

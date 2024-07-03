@@ -1,4 +1,4 @@
-import FlexContainer from "./components/FlexContainer";
+import FlexContainer from "./components/UI/FlexContainer";
 import "./globals.css";
 import Image from "next/image";
 

@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import FlexContainer from "../FlexContainer";
+import FlexContainer from "../UI/FlexContainer";
 import Filter from "../Filter";
-import { SearchInputContext } from "../SearchInputProvider";
-import { ActiveItemContext } from "../ActiveItemProvider";
-import { SearchResultsContext } from "../SearchResultsProvider";
+import { SearchInputContext } from "../Providers/SearchInputProvider";
+import { ActiveItemContext } from "../Providers/ActiveItemProvider";
+import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function InputForm({ placeholder, handleSubmit }) {
   const { filtered, filterData, value, setValue } =

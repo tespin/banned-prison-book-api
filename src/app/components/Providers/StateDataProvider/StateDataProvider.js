@@ -4,7 +4,7 @@ import { useState, useEffect, createContext, useRef } from "react";
 
 export const StateDataContext = createContext();
 
-import States from "../../utils/states.json";
+import States from "@/app/utils/states.json";
 
 function StateDataProvider({ children }) {
   const [stateData, setStateData] = useState([]);

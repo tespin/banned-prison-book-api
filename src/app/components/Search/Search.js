@@ -1,8 +1,8 @@
 "use client";
 import React, { useContext } from "react";
 import SearchBar from "../SearchBar";
-import { StateDataContext } from "../StateDataProvider";
-import { SearchResultsContext } from "../SearchResultsProvider";
+import { StateDataContext } from "../Providers/StateDataProvider";
+import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function Search({ placeholder }) {
   const { stateData } = useContext(StateDataContext);

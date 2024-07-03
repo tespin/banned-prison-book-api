@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import InputForm from "../InputForm";
-import SearchInputProvider from "../SearchInputProvider";
-import ActiveItemProvider from "../ActiveItemProvider";
+import SearchInputProvider from "../Providers/SearchInputProvider";
+import ActiveItemProvider from "../Providers/ActiveItemProvider";
 
 function SearchBar({ placeholder, options, onSearch }) {
   return (
