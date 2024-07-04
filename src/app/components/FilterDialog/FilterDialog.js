@@ -11,22 +11,23 @@ import { FilterContext } from "../Providers/FilterProvider/FilterProvider";
 
 function FilterDialog({}) {
   const { data, setFilteredData } = useContext(SearchResultsContext);
-  const { filters, handleSort, handleYears } = useContext(FilterContext);
+  const { options, handleToggleSelected, handleIsSelected } =
+    useContext(FilterContext);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
   const [yearButtons, setYearButtons] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
   const totalCount = currentData ? currentData.length : data.length;
 
-  useEffect(() => {
-    const years = data.map((data) => {
-      if (!data.date) return "Unrecorded";
+  // useEffect(() => {
+  //   const years = data.map((data) => {
+  //     if (!data.date) return "Unrecorded";
 
-      return data.date.split("-")[0];
-    });
-    console.log(years);
-    handleYears(years);
-  }, [data]);
+  //     return data.date.split("-")[0];
+  //   });
+  //   console.log(years);
+  //   handleFilters("gen-years", years);
+  // }, [data]);
 
   // useEffect(() => {
   //   if (activeFilters.length > 0) {
@@ -72,12 +73,9 @@ function FilterDialog({}) {
               <h2 className="text-xl font-medium">Years</h2>
               <div className="grid grid-cols-4 gap-4">
                 <ButtonGroup
-                  values={filters.years}
                   data={data}
                   type="YEARS"
                   handleFilter={setCurrentData}
-                  handleActiveFilters={{}}
-                  activeFilters={{}}
                 />
               </div>
             </FlexContainer>

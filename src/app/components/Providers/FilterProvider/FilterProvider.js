@@ -1,16 +1,28 @@
-import React, { createContext, useReducer } from "react";
+"use client";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useReducer,
+} from "react";
+import { SearchResultsContext } from "../SearchResultsProvider";
 
 export const FilterContext = createContext();
 
 function reducer(filters, action) {
   switch (action.type) {
-    case "SORT":
+    case "toggle-sort":
       return { ...filters, sort: action.payload };
-    case "YEARS":
-      let years = [...new Set(action.payload)];
-      years.sort((a, b) => a - b);
+    case "toggle-years":
+      let newYears = [];
+      if (filters.years.includes(action.payload)) {
+        newYears = filters.years.filter((year) => year !== action.payload);
+      } else {
+        newYears = [...filters.years, action.payload];
+      }
 
-      return { ...filters, years };
+      return { ...filters, years: newYears };
     default:
       return filters;
   }
@@ -21,30 +33,52 @@ function FilterProvider({ children }) {
     sort: "ascending",
     years: [],
   });
+  const [options, setOptions] = useState({
+    sort: ["ascending", "descending"],
+    years: [],
+  });
+  const { data, setFilteredData } = useContext(SearchResultsContext);
 
-  function handleSort(sort) {
-    dispatch({ type: "SORT", payload: sort });
+  useEffect(() => {
+    const years = data.map((item) => {
+      if (!item.date) return "Unrecorded";
+
+      return item.date.split("-")[0];
+    });
+
+    let yearSet = [...new Set(years)];
+    yearSet.sort((a, b) => a - b);
+
+    setOptions({ ...options, years: yearSet });
+  }, [data]);
+
+  function handleToggleSelected(filterType, value) {
+    switch (filterType) {
+      case "YEARS":
+        dispatch({ type: "toggle-years", payload: value });
+      default:
+        return;
+    }
   }
 
-  function handleYears(years) {
-    dispatch({ type: "YEARS", payload: years });
-  }
-
-  function handleIsSelected(value) {
+  function handleIsSelected(type, value) {
     switch (type) {
       case "SORT":
         return filters.sort === value;
       case "YEARS":
+        console.log("checked selected for value");
         return filters.years.includes(value);
+      default:
+        return;
     }
   }
 
   return (
     <FilterContext.Provider
       value={{
+        options,
         filters,
-        handleSort,
-        handleYears,
+        handleToggleSelected,
         handleIsSelected,
       }}
     >
