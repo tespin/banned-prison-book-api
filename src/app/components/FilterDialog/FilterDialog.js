@@ -15,9 +15,8 @@ function FilterDialog({}) {
     useContext(FilterContext);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
-  const [yearButtons, setYearButtons] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
-  const totalCount = currentData ? currentData.length : data.length;
+  const totalCount = currentData.length > 0 ? currentData.length : data.length;
 
   // useEffect(() => {
   //   const years = data.map((data) => {
@@ -28,7 +27,6 @@ function FilterDialog({}) {
   //   console.log(years);
   //   handleFilters("gen-years", years);
   // }, [data]);
-
   // useEffect(() => {
   //   if (activeFilters.length > 0) {
   //     setFilterActive(true);
