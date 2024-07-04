@@ -5,9 +5,11 @@ import * as Dialog from "@radix-ui/react-dialog";
 import FlexContainer from "../UI/FlexContainer";
 import FilterButton from "../FilterButton";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
+import { FilterContext } from "../Providers/FilterProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function FilterDialog({}) {
+  const { handleFilterData } = useContext(FilterContext);
   const { data, setFilteredData } = useContext(SearchResultsContext);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
@@ -16,7 +18,8 @@ function FilterDialog({}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setFilteredData(currentData);
+    // setFilteredData(currentData);
+    handleFilterData();
     setOpen(false);
   }
 

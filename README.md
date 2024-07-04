@@ -59,3 +59,4 @@ Discover texts banned in your state's prison system.
 - add filtered options to results text after submitting
 - clearing filter options should reset filtered data
 - replicate: results not showing properly when filtering through multiple years
+- new search should clear filters

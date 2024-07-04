@@ -73,6 +73,24 @@ function FilterProvider({ children }) {
     }
   }
 
+  function handleFilterData() {
+    let newData = data.filter((data) => {
+      if (!data.date) return filters.years.includes("Unrecorded");
+
+      return filters.years.includes(data.date.split("-")[0]);
+    });
+
+    newData.sort((a, b) => {
+      if (filters.sort === "ascending") {
+        return a.date - b.date;
+      }
+
+      return b.date - a.date;
+    });
+
+    setFilteredData(newData);
+  }
+
   return (
     <FilterContext.Provider
       value={{
@@ -80,6 +98,7 @@ function FilterProvider({ children }) {
         filters,
         handleToggleSelected,
         handleIsSelected,
+        handleFilterData,
       }}
     >
       {children}
