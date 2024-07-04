@@ -1,44 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { FilterContext } from "../Providers/FilterProvider";
 import OptionButton from "../OptionButton";
 
 function ButtonGroup({
-  buttons,
+  type,
+  values,
   data,
   handleFilter,
   handleActiveFilters,
   activeFilters,
 }) {
+  const { filters, handleIsSelected } = useContext(FilterContext);
+
   function handleClick(value) {
     handleActiveFilters(value);
   }
 
   useEffect(() => {
-    if (activeFilters.length === 0) {
+    if (filters.length === 0) {
       handleFilter(data);
       return;
     }
 
     let newData = data.filter((data) => {
-      if (!data.date) return activeFilters.includes("Unrecorded");
+      if (!data.date) return filters.years.includes("Unrecorded");
 
       const year = data.date.split("-")[0];
-      return activeFilters.includes(year);
+      return filters.years.includes(year);
     });
     handleFilter(newData);
-  }, [activeFilters]);
+  }, [filters]);
 
   function isActive(value) {
     return activeFilters.includes(value);
   }
 
-  return buttons.map((button) => {
+  return values.map((value) => {
     return (
       <OptionButton
-        option={button}
-        active={() => isActive(button)}
+        isSelected={() => {
+          handleIsSelected(type, value);
+        }}
         handleClick={handleClick}
-        key={button}
-      />
+        id={value}
+      >
+        {value}
+      </OptionButton>
     );
   });
 }

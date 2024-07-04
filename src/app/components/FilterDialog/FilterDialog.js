@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useReducer } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import FlexContainer from "../UI/FlexContainer";
 import FilterButton from "../FilterButton";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import OptionButton from "../OptionButton";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import { FilterContext } from "../Providers/FilterProvider/FilterProvider";
 
-function FilterDialog({ handleActiveFilters, activeFilters }) {
+function FilterDialog({}) {
   const { data, setFilteredData } = useContext(SearchResultsContext);
+  const { filters, handleSort, handleYears } = useContext(FilterContext);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
   const [yearButtons, setYearButtons] = useState([]);
@@ -23,18 +25,16 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
       return data.date.split("-")[0];
     });
     console.log(years);
-    years.sort((a, b) => a - b);
+    handleYears(years);
+  }, [data]);
 
-    setYearButtons([...new Set(years)]);
-  }, [currentData, data]);
-
-  useEffect(() => {
-    if (activeFilters.length > 0) {
-      setFilterActive(true);
-    } else {
-      setFilterActive(false);
-    }
-  }, [activeFilters]);
+  // useEffect(() => {
+  //   if (activeFilters.length > 0) {
+  //     setFilterActive(true);
+  //   } else {
+  //     setFilterActive(false);
+  //   }
+  // }, [filters]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -72,11 +72,12 @@ function FilterDialog({ handleActiveFilters, activeFilters }) {
               <h2 className="text-xl font-medium">Years</h2>
               <div className="grid grid-cols-4 gap-4">
                 <ButtonGroup
-                  buttons={yearButtons}
+                  values={filters.years}
                   data={data}
+                  type="YEARS"
                   handleFilter={setCurrentData}
-                  handleActiveFilters={handleActiveFilters}
-                  activeFilters={activeFilters}
+                  handleActiveFilters={{}}
+                  activeFilters={{}}
                 />
               </div>
             </FlexContainer>

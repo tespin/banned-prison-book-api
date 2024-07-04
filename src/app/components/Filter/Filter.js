@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import FilterDialog from "../FilterDialog";
+import FilterProvider from "../Providers/FilterProvider";
 
 function Filter() {
   const [activeFilters, setActiveFilters] = useState([]);
@@ -19,11 +20,12 @@ function Filter() {
   }
 
   return (
-    <FilterDialog
-      handleActiveFilters={handleActiveFilters}
-      activeFilters={activeFilters}
-    />
+    <FilterProvider>
+      <FilterDialog
+        handleActiveFilters={handleActiveFilters}
+        activeFilters={activeFilters}
+      />
+    </FilterProvider>
   );
 }
-
 export default Filter;
