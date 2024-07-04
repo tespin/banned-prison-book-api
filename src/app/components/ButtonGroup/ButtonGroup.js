@@ -6,10 +6,6 @@ function ButtonGroup({ data, type, handleFilter }) {
   const { filters, options, handleToggleSelected, handleIsSelected } =
     useContext(FilterContext);
 
-  // function handleClick(value) {
-  //   handleActiveFilters(value);
-  // }
-
   useEffect(() => {
     if (filters.length === 0) {
       handleFilter(data);
@@ -23,11 +19,10 @@ function ButtonGroup({ data, type, handleFilter }) {
       return filters.years.includes(year);
     });
     handleFilter(newData);
-    // console.log(type);
   }, [filters]);
 
   function isSelected(value) {
-    return handleIsSelected("YEARS", value);
+    return handleIsSelected(type, value);
   }
 
   return options.years.map((option) => {

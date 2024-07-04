@@ -44,6 +44,11 @@ Discover texts banned in your state's prison system.
 - hover styles
 - page numbers look cramped when 3 digits
 - if used arrow to go to 1st page or last page, focus should switch to the opposite arrow
+- don't show pagination if less than one page
+
+### use reducer refactor
+
+- total count is wrong after activating and then deactivating a filter
 
 #### Errors
 

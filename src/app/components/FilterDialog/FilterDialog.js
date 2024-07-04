@@ -1,39 +1,18 @@
 "use client";
 
-import React, { useEffect, useState, useContext, useReducer } from "react";
+import React, { useState, useContext } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import FlexContainer from "../UI/FlexContainer";
 import FilterButton from "../FilterButton";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
-import OptionButton from "../OptionButton";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
-import { FilterContext } from "../Providers/FilterProvider/FilterProvider";
 
 function FilterDialog({}) {
   const { data, setFilteredData } = useContext(SearchResultsContext);
-  const { options, handleToggleSelected, handleIsSelected } =
-    useContext(FilterContext);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
   const totalCount = currentData.length > 0 ? currentData.length : data.length;
-
-  // useEffect(() => {
-  //   const years = data.map((data) => {
-  //     if (!data.date) return "Unrecorded";
-
-  //     return data.date.split("-")[0];
-  //   });
-  //   console.log(years);
-  //   handleFilters("gen-years", years);
-  // }, [data]);
-  // useEffect(() => {
-  //   if (activeFilters.length > 0) {
-  //     setFilterActive(true);
-  //   } else {
-  //     setFilterActive(false);
-  //   }
-  // }, [filters]);
 
   function handleSubmit(e) {
     e.preventDefault();
