@@ -1,10 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import FilterDialog from "../FilterDialog";
 import FilterProvider from "../Providers/FilterProvider";
+import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function Filter() {
   const [activeFilters, setActiveFilters] = useState([]);
+  const { data, setFilteredData } = useContext(SearchResultsContext);
 
   function handleActiveFilters(filter) {
     let newFilters = [];

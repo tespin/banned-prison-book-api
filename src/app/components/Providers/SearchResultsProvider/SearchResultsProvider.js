@@ -27,7 +27,6 @@ function SearchResultsProvider({ children }) {
       .from("books")
       .select()
       .eq("state_arc", query);
-
     setData(data);
     setStatus("success");
     setTotalCount(data.length);

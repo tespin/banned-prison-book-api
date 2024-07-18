@@ -66,7 +66,6 @@ function FilterProvider({ children }) {
       case "SORT":
         return filters.sort === value;
       case "YEARS":
-        console.log("checked selected for value");
         return filters.years.includes(value);
       default:
         return;
