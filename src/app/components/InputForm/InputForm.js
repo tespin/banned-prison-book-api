@@ -1,11 +1,14 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import FlexContainer from "../FlexContainer";
-import { SearchInputContext } from "../SearchInputProvider";
-import { ActiveItemContext } from "../ActiveItemProvider";
+import FlexContainer from "../UI/FlexContainer";
+import Filter from "../Filter";
+import { SearchInputContext } from "../Providers/SearchInputProvider";
+import { ActiveItemContext } from "../Providers/ActiveItemProvider";
+import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function InputForm({ placeholder, handleSubmit }) {
   const { filtered, filterData, value, setValue } =
     useContext(SearchInputContext);
+  const { totalCount } = useContext(SearchResultsContext);
   const { handleKeyDown, activeIndex, setActiveIndex, selectedRef } =
     useContext(ActiveItemContext);
   const [isActive, setIsActive] = useState(false);
@@ -52,8 +55,8 @@ function InputForm({ placeholder, handleSubmit }) {
       className="flex grow"
       role="search"
     >
-      <FlexContainer className="relative w-full focus-within:ring focus-within:ring-neutral-300 rounded-md pointer-events-none">
-        <FlexContainer className="border w-full border-neutral-300 hover:border-neutral-400 focus-within:border-black hover:focus-within:border-black rounded-md justify-between pointer-events-auto">
+      <FlexContainer className="relative w-full gap-x-2 ">
+        <FlexContainer className="border w-full focus-within:ring focus-within:ring-neutral-300 border-neutral-300 hover:border-neutral-400 focus-within:border-black hover:focus-within:border-black rounded-md justify-between pointer-events-auto">
           <input
             id="search-input"
             type="search"
@@ -119,6 +122,7 @@ function InputForm({ placeholder, handleSubmit }) {
             </ul>
           )}
         </FlexContainer>
+        {totalCount > 0 && <Filter />}
       </FlexContainer>
     </form>
   );

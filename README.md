@@ -26,6 +26,7 @@ Discover texts banned in your state's prison system.
 - design pass on spacing between autocomplete suggestions and search results
 - keep previous search query
 - focus search button when query is selected
+- clear button for queries
 
 #### Design
 
@@ -43,7 +44,19 @@ Discover texts banned in your state's prison system.
 - hover styles
 - page numbers look cramped when 3 digits
 - if used arrow to go to 1st page or last page, focus should switch to the opposite arrow
+- don't show pagination if less than one page
+
+### use reducer refactor
+
+- total count is wrong after activating and then deactivating a filter
 
 #### Errors
 
 - pressing 'enter' when there are no autocomplete suggestions for the input (whether input is nonsense or empty) results in an error
+- if user is on say page 2021 of florida's results, then inputs another query, it will return no results. new queries should reset current page to 1 to prevent this error
+- persist filter choices when modal closes (means )
+- does not remember active buttons for styling upon dialog closing
+- add filtered options to results text after submitting
+- clearing filter options should reset filtered data
+- replicate: results not showing properly when filtering through multiple years
+- new search should clear filters

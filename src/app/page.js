@@ -1,8 +1,8 @@
 import React from "react";
-import FlexContainer from "./components/FlexContainer";
+import FlexContainer from "./components/UI/FlexContainer";
 import Search from "./components/Search";
-import StateDataProvider from "./components/StateDataProvider";
-import SearchResultsProvider from "./components/SearchResultsProvider";
+import StateDataProvider from "./components/Providers/StateDataProvider";
+import SearchResultsProvider from "./components/Providers/SearchResultsProvider";
 import Filter from "./components/Filter";
 import SearchResults from "./components/SearchResults";
 
