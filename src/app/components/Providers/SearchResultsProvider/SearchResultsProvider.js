@@ -34,7 +34,6 @@ function SearchResultsProvider({ children }) {
   }
 
   useEffect(() => {
-    console.log(filteredData.length);
     setTotalCount(filteredData.length);
   }, [filteredData]);
 

@@ -54,6 +54,8 @@ function FilterProvider({ children }) {
 
   function handleToggleSelected(filterType, value) {
     switch (filterType) {
+      case "SORT":
+        dispatch({ type: "toggle-sort", payload: value });
       case "YEARS":
         dispatch({ type: "toggle-years", payload: value });
       default:
@@ -80,11 +82,12 @@ function FilterProvider({ children }) {
     });
 
     newData.sort((a, b) => {
-      if (filters.sort === "ascending") {
-        return a.date - b.date;
+      const yearA = a.date.split("-")[0];
+      const yearB = b.date.split("-")[0];
+      if (filters.sort === "asc") {
+        return yearA - yearB;
       }
-
-      return b.date - a.date;
+      return yearB - yearA;
     });
 
     setFilteredData(newData);
