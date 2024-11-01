@@ -13,8 +13,10 @@ export const FilterContext = createContext();
 function reducer(filters, action) {
   switch (action.type) {
     case "toggle-sort":
+      console.log("sort", filters, action.payload);
       return { ...filters, sort: action.payload };
     case "toggle-years":
+      console.log("years", filters, action.payload);
       let newYears = [];
       if (filters.years.includes(action.payload)) {
         newYears = filters.years.filter((year) => year !== action.payload);
@@ -30,11 +32,11 @@ function reducer(filters, action) {
 
 function FilterProvider({ children }) {
   const [filters, dispatch] = useReducer(reducer, {
-    sort: "ascending",
+    sort: "asc",
     years: [],
   });
   const [options, setOptions] = useState({
-    sort: ["ascending", "descending"],
+    sort: ["asc", "desc"],
     years: [],
   });
   const { data, setFilteredData } = useContext(SearchResultsContext);
@@ -56,8 +58,10 @@ function FilterProvider({ children }) {
     switch (filterType) {
       case "SORT":
         dispatch({ type: "toggle-sort", payload: value });
+        break;
       case "YEARS":
         dispatch({ type: "toggle-years", payload: value });
+        break;
       default:
         return;
     }
@@ -76,6 +80,7 @@ function FilterProvider({ children }) {
 
   function handleFilterData() {
     let newData = data.filter((data) => {
+      if (filters.years.length === 0) return data;
       if (!data.date) return filters.years.includes("Unrecorded");
 
       return filters.years.includes(data.date.split("-")[0]);

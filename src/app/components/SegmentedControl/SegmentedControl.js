@@ -3,7 +3,7 @@ import FlexContainer from "../UI/FlexContainer";
 import { FilterContext } from "../Providers/FilterProvider";
 
 function SegmentedControl({ name, segments }) {
-  const { handleToggleSelected } = useContext(FilterContext);
+  const { handleToggleSelected, handleIsSelected } = useContext(FilterContext);
   const [activeIndex, setActiveIndex] = useState(0);
   const [highlightW, setHighlightW] = useState(0);
   const [highlightPos, setHighlightPos] = useState(0);
@@ -22,6 +22,10 @@ function SegmentedControl({ name, segments }) {
     handleToggleSelected("SORT", value);
   }
 
+  function isSelected(value) {
+    return handleIsSelected("SORT", value);
+  }
+
   return (
     <FlexContainer>
       <FlexContainer
@@ -34,7 +38,7 @@ function SegmentedControl({ name, segments }) {
               className={` ${i === 0 ? "rounded-tl-lg rounded-bl-lg" : ""} ${
                 i === segments.length - 1 ? "rounded-tr-lg rounded-br-lg" : ""
               } flex cursor-pointer relative ${
-                i === activeIndex ? `bg-black text-white` : ""
+                isSelected(segment.value) ? `bg-black text-white` : ""
               }`}
               ref={segment.ref}
             >
