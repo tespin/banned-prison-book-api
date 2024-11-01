@@ -29,6 +29,7 @@ function SearchResultsProvider({ children }) {
       .eq("state_arc", query);
     setData(data);
     setStatus("success");
+    setCurrentPage(1);
     setTotalCount(data.length);
     setQuery(value);
   }
