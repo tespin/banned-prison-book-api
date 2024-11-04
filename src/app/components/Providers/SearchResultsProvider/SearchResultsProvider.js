@@ -27,6 +27,12 @@ function SearchResultsProvider({ children }) {
       .from("books")
       .select()
       .eq("state_arc", query);
+    data.sort((a, b) => {
+      const yearA = a.date.split("-")[0];
+      const yearB = b.date.split("-")[0];
+
+      return yearA - yearB;
+    });
     setData(data);
     setStatus("success");
     setCurrentPage(1);
