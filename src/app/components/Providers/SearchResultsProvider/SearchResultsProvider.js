@@ -34,6 +34,7 @@ function SearchResultsProvider({ children }) {
       return yearA - yearB;
     });
     setData(data);
+    setFilteredData(data);
     setStatus("success");
     setCurrentPage(1);
     setTotalCount(data.length);

@@ -94,7 +94,6 @@ function FilterProvider({ children }) {
       }
       return yearB - yearA;
     });
-
     setFilteredData(newData);
   }
 
