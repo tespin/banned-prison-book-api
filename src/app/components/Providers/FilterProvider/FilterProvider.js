@@ -10,6 +10,11 @@ import { SearchResultsContext } from "../SearchResultsProvider";
 
 export const FilterContext = createContext();
 
+const initialState = {
+  sort: "asc",
+  years: [],
+};
+
 function reducer(filters, action) {
   switch (action.type) {
     case "toggle-sort":
@@ -25,21 +30,20 @@ function reducer(filters, action) {
       }
 
       return { ...filters, years: newYears };
+    case "reset":
+      return initialState;
     default:
       return filters;
   }
 }
 
 function FilterProvider({ children }) {
-  const [filters, dispatch] = useReducer(reducer, {
-    sort: "asc",
-    years: [],
-  });
+  const [filters, dispatch] = useReducer(reducer, initialState);
   const [options, setOptions] = useState({
     sort: ["asc", "desc"],
     years: [],
   });
-  const { data, setFilteredData } = useContext(SearchResultsContext);
+  const { data, setFilteredData, status } = useContext(SearchResultsContext);
 
   useEffect(() => {
     const years = data.map((item) => {
@@ -53,6 +57,12 @@ function FilterProvider({ children }) {
 
     setOptions({ ...options, years: yearSet });
   }, [data]);
+
+  useEffect(() => {
+    if (status === "loading") {
+      dispatch({ type: "reset" });
+    }
+  }, [status]);
 
   function handleToggleSelected(filterType, value) {
     switch (filterType) {
