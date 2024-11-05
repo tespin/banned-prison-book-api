@@ -28,10 +28,20 @@ function SearchResultsProvider({ children }) {
       .select()
       .eq("state_arc", query);
     data.sort((a, b) => {
-      const yearA = a.date.split("-")[0];
-      const yearB = b.date.split("-")[0];
+      const yearA = a.date ? a.date.split("-")[0] : "";
+      const yearB = b.date ? b.date.split("-")[0] : "";
 
-      return yearA - yearB;
+      if (yearA && yearB) {
+        return yearA - yearB;
+      }
+      if (!yearA && !yearB) {
+        console.log(a, b);
+        return a.publication.localeCompare(b.publication);
+      }
+      if (!yearA) {
+        return 1;
+      }
+      return -1;
     });
     setData(data);
     setFilteredData(data);
