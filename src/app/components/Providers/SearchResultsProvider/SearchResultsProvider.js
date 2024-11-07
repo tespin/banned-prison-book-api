@@ -35,7 +35,6 @@ function SearchResultsProvider({ children }) {
         return yearA - yearB;
       }
       if (!yearA && !yearB) {
-        console.log(a, b);
         return a.publication.localeCompare(b.publication);
       }
       if (!yearA) {

@@ -98,18 +98,19 @@ function FilterProvider({ children }) {
 
     newData.sort((a, b) => {
       if (filters.sort === "asc") {
-        if (!a.date) return 1;
-        if (!b.date) return -1;
-        if (!a.date && !b.date)
+        if (!a.date) return -1;
+        if (!b.date) return 1;
+        if (!a.date && !b.date) {
           return a.publication.localeCompare(b.publication);
+        }
 
         return a.date.split("-")[0] - b.date.split("-")[0];
       } else {
-        if (!a.date) return -1;
-        if (!b.date) return 1;
-        if (!a.date && !b.date)
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        if (!a.date && !b.date) {
           return b.publication.localeCompare(a.publication);
-
+        }
         return b.date.split("-")[0] - a.date.split("-")[0];
       }
     });
