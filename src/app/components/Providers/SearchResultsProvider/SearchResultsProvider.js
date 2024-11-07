@@ -27,14 +27,30 @@ function SearchResultsProvider({ children }) {
       .from("books")
       .select()
       .eq("state_arc", query);
+    data.sort((a, b) => {
+      const yearA = a.date ? a.date.split("-")[0] : "";
+      const yearB = b.date ? b.date.split("-")[0] : "";
+
+      if (yearA && yearB) {
+        return yearA - yearB;
+      }
+      if (!yearA && !yearB) {
+        return a.publication.localeCompare(b.publication);
+      }
+      if (!yearA) {
+        return 1;
+      }
+      return -1;
+    });
     setData(data);
+    setFilteredData(data);
     setStatus("success");
+    setCurrentPage(1);
     setTotalCount(data.length);
     setQuery(value);
   }
 
   useEffect(() => {
-    console.log(filteredData.length);
     setTotalCount(filteredData.length);
   }, [filteredData]);
 

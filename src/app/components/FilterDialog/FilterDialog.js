@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import FlexContainer from "../UI/FlexContainer";
 import FilterButton from "../FilterButton";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
+import SegmentedControl from "../SegmentedControl";
 import { FilterContext } from "../Providers/FilterProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
@@ -40,14 +41,15 @@ function FilterDialog({}) {
             </Dialog.Title>
             <FlexContainer className="flex-col">
               <h2 className="text-xl font-medium">Sort</h2>
-              <FlexContainer className="flex-row">
-                <button className="border border-black rounded-tl-md rounded-bl-md mr-[-1px] px-8 py-3">
-                  Ascending
-                </button>
-                <button className="border border-black rounded-tr-md rounded-br-md px-8 py-3">
-                  Descending
-                </button>
-              </FlexContainer>
+              <SegmentedControl
+                name="sort"
+                callback={(val, i) => console.log(val, i)}
+                controlRef={useRef()}
+                segments={[
+                  { label: "Ascending", value: "asc", ref: useRef() },
+                  { label: "Descending", value: "desc", ref: useRef() },
+                ]}
+              />
             </FlexContainer>
             <FlexContainer className="flex-col">
               <h2 className="text-xl font-medium">Years</h2>
