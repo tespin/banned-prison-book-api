@@ -10,11 +10,18 @@ import { SearchResultsContext } from "../SearchResultsProvider";
 
 export const FilterContext = createContext();
 
+const initialState = {
+  sort: "asc",
+  years: [],
+};
+
 function reducer(filters, action) {
   switch (action.type) {
     case "toggle-sort":
+      console.log("sort", filters, action.payload);
       return { ...filters, sort: action.payload };
     case "toggle-years":
+      console.log("years", filters, action.payload);
       let newYears = [];
       if (filters.years.includes(action.payload)) {
         newYears = filters.years.filter((year) => year !== action.payload);
@@ -23,21 +30,20 @@ function reducer(filters, action) {
       }
 
       return { ...filters, years: newYears };
+    case "reset":
+      return initialState;
     default:
       return filters;
   }
 }
 
 function FilterProvider({ children }) {
-  const [filters, dispatch] = useReducer(reducer, {
-    sort: "ascending",
-    years: [],
-  });
+  const [filters, dispatch] = useReducer(reducer, initialState);
   const [options, setOptions] = useState({
-    sort: ["ascending", "descending"],
+    sort: ["asc", "desc"],
     years: [],
   });
-  const { data, setFilteredData } = useContext(SearchResultsContext);
+  const { data, setFilteredData, status } = useContext(SearchResultsContext);
 
   useEffect(() => {
     const years = data.map((item) => {
@@ -52,10 +58,20 @@ function FilterProvider({ children }) {
     setOptions({ ...options, years: yearSet });
   }, [data]);
 
+  useEffect(() => {
+    if (status === "loading") {
+      dispatch({ type: "reset" });
+    }
+  }, [status]);
+
   function handleToggleSelected(filterType, value) {
     switch (filterType) {
+      case "SORT":
+        dispatch({ type: "toggle-sort", payload: value });
+        break;
       case "YEARS":
         dispatch({ type: "toggle-years", payload: value });
+        break;
       default:
         return;
     }
@@ -74,19 +90,30 @@ function FilterProvider({ children }) {
 
   function handleFilterData() {
     let newData = data.filter((data) => {
+      if (filters.years.length === 0) return data;
       if (!data.date) return filters.years.includes("Unrecorded");
 
       return filters.years.includes(data.date.split("-")[0]);
     });
 
     newData.sort((a, b) => {
-      if (filters.sort === "ascending") {
-        return a.date - b.date;
+      if (filters.sort === "asc") {
+        if (!a.date) return -1;
+        if (!b.date) return 1;
+        if (!a.date && !b.date) {
+          return a.publication.localeCompare(b.publication);
+        }
+
+        return a.date.split("-")[0] - b.date.split("-")[0];
+      } else {
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        if (!a.date && !b.date) {
+          return b.publication.localeCompare(a.publication);
+        }
+        return b.date.split("-")[0] - a.date.split("-")[0];
       }
-
-      return b.date - a.date;
     });
-
     setFilteredData(newData);
   }
 
