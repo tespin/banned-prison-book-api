@@ -100,19 +100,11 @@ const fetchSearchResults = async (query) => {
 
 function SearchResultsProvider({ children }) {
   const [state, dispatch] = useReducer(searchResultsReducer, initialState);
-  // const [status, setStatus] = useState("idle");
-  // const [data, setData] = useState([]);
-  // const [filteredData, setFilteredData] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [numPerPage, setNumPerPage] = useState(10);
-  // const [totalCount, setTotalCount] = useState(0);
-  // const [query, setQuery] = useState("");
 
   async function handleSubmit(e, value) {
     e.preventDefault();
 
     dispatch({ type: "SEARCH_START", payload: value });
-    // setStatus("loading");
 
     try {
       const results = await fetchSearchResults(value);
@@ -120,18 +112,7 @@ function SearchResultsProvider({ children }) {
     } catch (error) {
       dispatch({ type: "SEARCH_ERROR", payload: error });
     }
-
-    // setData(results);
-    // setFilteredData(results);
-    // setStatus("success");
-    // setCurrentPage(1);
-    // setTotalCount(results.length);
-    // setQuery(value);
   }
-
-  // useEffect(() => {
-  //   setTotalCount(filteredData.length);
-  // }, [state.filteredData]);
 
   const setCurrentPage = (page) => {
     dispatch({ type: "SET_CURRENT_PAGE", payload: page });
@@ -165,24 +146,7 @@ function SearchResultsProvider({ children }) {
   );
 
   return (
-    <SearchResultsContext.Provider
-      value={
-        contextValue
-        // handleSubmit,
-        // setCurrentPage,
-        // currentPage,
-        // currentData,
-        // totalCount,
-        // setTotalCount,
-        // numPerPage,
-        // numSiblings,
-        // data,
-        // filteredData,
-        // setFilteredData,
-        // query,
-        // status,
-      }
-    >
+    <SearchResultsContext.Provider value={contextValue}>
       {children}
     </SearchResultsContext.Provider>
   );
