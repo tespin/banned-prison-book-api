@@ -7,11 +7,9 @@ import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function SearchResults({ className }) {
   const {
-    totalCount,
+    pagination,
     currentData,
-    currentPage,
     setCurrentPage,
-    numPerPage,
     numSiblings,
     query,
     status,
@@ -24,7 +22,8 @@ function SearchResults({ className }) {
       {status === "success" && hasResults ? (
         <>
           <p className="text-sm mb-4">
-            There are <span className=" font-medium">{totalCount}</span> banned
+            There are{" "}
+            <span className=" font-medium">{pagination.totalCount}</span> banned
             texts in {query}.
           </p>
           <FlexContainer className="flex-col">
@@ -32,10 +31,10 @@ function SearchResults({ className }) {
             <PageNav
               className="my-4"
               onPageChange={(page) => setCurrentPage(page)}
-              currentPage={currentPage}
-              totalCount={totalCount}
+              currentPage={pagination.currentPage}
+              totalCount={pagination.totalCount}
               siblingCount={numSiblings}
-              pageSize={numPerPage}
+              pageSize={pagination.numPerPage}
             />
           </FlexContainer>
         </>

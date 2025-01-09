@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, createContext, useEffect, useMemo } from "react";
+import React, { useReducer, createContext, useEffect, useMemo } from "react";
 import supabase from "@/app/utils/supabase";
 import usePagination from "@/app/hooks/usePagination";
 import { stateToAbbrev } from "@/app/utils/helpers";
@@ -8,6 +8,69 @@ export const SearchResultsContext = createContext();
 const DOTS = "...";
 const numPerPage = 10;
 const numSiblings = 1;
+
+const initialState = {
+  status: "idle",
+  error: null,
+  data: [],
+  filteredData: [],
+  pagination: {
+    currentPage: 1,
+    numPerPage: 10,
+    totalCount: 0,
+  },
+  query: "",
+};
+
+function searchResultsReducer(state, action) {
+  switch (action.type) {
+    case "SEARCH_START":
+      return {
+        ...state,
+        status: "loading",
+        query: action.payload,
+      };
+    case "SEARCH_SUCCESS":
+      return {
+        ...state,
+        status: "success",
+        data: action.payload,
+        filteredData: action.payload,
+        pagination: {
+          ...state.pagination,
+          currentPage: 1,
+          totalCount: action.payload.length,
+        },
+      };
+    case "SEARCH_ERROR":
+      return {
+        ...state,
+        status: "error",
+        error: action.payload,
+      };
+    case "SET_FILTERED_DATA":
+      return {
+        ...state,
+        filteredData: action.payload,
+        pagination: {
+          ...state.pagination,
+          totalCount: action.payload.length,
+        },
+      };
+    case "SET_CURRENT_PAGE":
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          currentPage: action.payload,
+        },
+      };
+    case "RESET":
+      return initialState;
+    default:
+      return state;
+  }
+}
 
 const sortByDateAndPublication = (data) => {
   return data.sort((a, b) => {
@@ -36,61 +99,89 @@ const fetchSearchResults = async (query) => {
 };
 
 function SearchResultsProvider({ children }) {
-  const [status, setStatus] = useState("idle");
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [numPerPage, setNumPerPage] = useState(10);
-  const [totalCount, setTotalCount] = useState(0);
-
-  const [query, setQuery] = useState("");
+  const [state, dispatch] = useReducer(searchResultsReducer, initialState);
+  // const [status, setStatus] = useState("idle");
+  // const [data, setData] = useState([]);
+  // const [filteredData, setFilteredData] = useState([]);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [numPerPage, setNumPerPage] = useState(10);
+  // const [totalCount, setTotalCount] = useState(0);
+  // const [query, setQuery] = useState("");
 
   async function handleSubmit(e, value) {
     e.preventDefault();
-    setStatus("loading");
 
-    const results = await fetchSearchResults(value);
+    dispatch({ type: "SEARCH_START", payload: value });
+    // setStatus("loading");
 
-    setData(results);
-    setFilteredData(results);
-    setStatus("success");
-    setCurrentPage(1);
-    setTotalCount(results.length);
-    setQuery(value);
-  }
-
-  useEffect(() => {
-    setTotalCount(filteredData.length);
-  }, [filteredData]);
-
-  const currentData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * numPerPage;
-    const lastPageIndex = firstPageIndex + numPerPage;
-
-    if (filteredData?.length > 0) {
-      return filteredData.slice(firstPageIndex, lastPageIndex);
+    try {
+      const results = await fetchSearchResults(value);
+      dispatch({ type: "SEARCH_SUCCESS", payload: results });
+    } catch (error) {
+      dispatch({ type: "SEARCH_ERROR", payload: error });
     }
 
-    return data.slice(firstPageIndex, lastPageIndex);
-  }, [numPerPage, currentPage, data, filteredData]);
+    // setData(results);
+    // setFilteredData(results);
+    // setStatus("success");
+    // setCurrentPage(1);
+    // setTotalCount(results.length);
+    // setQuery(value);
+  }
+
+  // useEffect(() => {
+  //   setTotalCount(filteredData.length);
+  // }, [state.filteredData]);
+
+  const setCurrentPage = (page) => {
+    dispatch({ type: "SET_CURRENT_PAGE", payload: page });
+  };
+
+  const setFilteredData = (newData) => {
+    dispatch({ type: "SET_FILTERED_DATA", payload: newData });
+  };
+
+  const currentData = useMemo(() => {
+    const dataToDisplay =
+      state.filteredData.length > 0 ? state.filteredData : state.data;
+
+    const firstPageIndex =
+      (state.pagination.currentPage - 1) * state.pagination.numPerPage;
+    const lastPageIndex = firstPageIndex + state.pagination.numPerPage;
+
+    return dataToDisplay.slice(firstPageIndex, lastPageIndex);
+  }, [state.pagination, state.data, state.filteredData]);
+
+  const contextValue = useMemo(
+    () => ({
+      ...state,
+      handleSubmit,
+      setCurrentPage,
+      setFilteredData,
+      currentData,
+      numSiblings,
+    }),
+    [state, currentData]
+  );
 
   return (
     <SearchResultsContext.Provider
-      value={{
-        handleSubmit,
-        setCurrentPage,
-        currentPage,
-        currentData,
-        totalCount,
-        setTotalCount,
-        numPerPage,
-        numSiblings,
-        data,
-        filteredData,
-        setFilteredData,
-        query,
-        status,
-      }}
+      value={
+        contextValue
+        // handleSubmit,
+        // setCurrentPage,
+        // currentPage,
+        // currentData,
+        // totalCount,
+        // setTotalCount,
+        // numPerPage,
+        // numSiblings,
+        // data,
+        // filteredData,
+        // setFilteredData,
+        // query,
+        // status,
+      }
     >
       {children}
     </SearchResultsContext.Provider>
