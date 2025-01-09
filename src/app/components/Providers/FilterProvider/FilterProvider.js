@@ -18,10 +18,8 @@ const initialState = {
 function reducer(filters, action) {
   switch (action.type) {
     case "toggle-sort":
-      console.log("sort", filters, action.payload);
       return { ...filters, sort: action.payload };
     case "toggle-years":
-      console.log("years", filters, action.payload);
       let newYears = [];
       if (filters.years.includes(action.payload)) {
         newYears = filters.years.filter((year) => year !== action.payload);
