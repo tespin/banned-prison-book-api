@@ -1,10 +1,10 @@
 "use client";
 import React, {
   createContext,
-  useState,
   useEffect,
   useContext,
   useReducer,
+  useMemo,
 } from "react";
 import { SearchResultsContext } from "../SearchResultsProvider";
 
@@ -15,32 +15,24 @@ const initialState = {
   years: [],
 };
 
-function reducer(filters, action) {
+function reducer(state, action) {
   switch (action.type) {
     case "toggle-sort":
-      return { ...filters, sort: action.payload };
+      return { ...state, sort: action.payload };
     case "toggle-years":
-      let newYears = [];
-      if (filters.years.includes(action.payload)) {
-        newYears = filters.years.filter((year) => year !== action.payload);
-      } else {
-        newYears = [...filters.years, action.payload];
-      }
-
-      return { ...filters, years: newYears };
+      const newYears = state.years.includes(action.payload)
+        ? state.years.filter((year) => year !== action.payload)
+        : [...state.years, action.payload];
+      return { ...state, years: newYears };
     case "reset":
       return initialState;
     default:
-      return filters;
+      return state;
   }
 }
 
 function FilterProvider({ children }) {
-  const [filters, dispatch] = useReducer(reducer, initialState);
-  const [options, setOptions] = useState({
-    sort: ["asc", "desc"],
-    years: [],
-  });
+  const [filterState, dispatch] = useReducer(reducer, initialState);
   const { data, setFilteredData, status } = useContext(SearchResultsContext);
 
   const getYear = (date) => {
@@ -54,11 +46,7 @@ function FilterProvider({ children }) {
       .sort((a, b) => a - b);
   };
 
-  useEffect(() => {
-    const yearSet = extractYears(data);
-
-    setOptions((prev) => ({ ...prev, years: yearSet }));
-  }, [data]);
+  const extractedYears = useMemo(() => extractYears(data), [data]);
 
   useEffect(() => {
     if (status === "loading") {
@@ -82,9 +70,9 @@ function FilterProvider({ children }) {
   function handleIsSelected(type, value) {
     switch (type) {
       case "SORT":
-        return filters.sort === value;
+        return filterState.sort === value;
       case "YEARS":
-        return filters.years.includes(value);
+        return filterState.years.includes(value);
       default:
         return;
     }
@@ -105,7 +93,6 @@ function FilterProvider({ children }) {
   };
 
   const sortData = (data, direction) => {
-    // return data.sort((a, b) => {});
     return data.sort((a, b) => {
       const yearA = getYear(a.date);
       const yearB = getYear(b.date);
@@ -126,21 +113,27 @@ function FilterProvider({ children }) {
   };
 
   function handleFilterData() {
-    const filtered = filterByYear(data, filters.years);
-    const sorted = sortData(filtered, filters.sort);
+    const filtered = filterByYear(data, filterState.years);
+    const sorted = sortData(filtered, filterState.sort);
     setFilteredData(sorted);
   }
 
+  const contextValue = useMemo(
+    () => ({
+      options: {
+        sort: ["asc", "desc"],
+        years: extractedYears,
+      },
+      filterState,
+      handleToggleSelected,
+      handleIsSelected,
+      handleFilterData,
+    }),
+    [filterState, extractedYears]
+  );
+
   return (
-    <FilterContext.Provider
-      value={{
-        options,
-        filters,
-        handleToggleSelected,
-        handleIsSelected,
-        handleFilterData,
-      }}
-    >
+    <FilterContext.Provider value={contextValue}>
       {children}
     </FilterContext.Provider>
   );
