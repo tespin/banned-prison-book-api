@@ -43,17 +43,17 @@ function FilterProvider({ children }) {
   });
   const { data, setFilteredData, status } = useContext(SearchResultsContext);
 
+  const extractYears = (data) => {
+    return data
+      .map((item) => (item.date ? item.date.split("-")[0] : "Unrecorded"))
+      .filter((year, index, self) => self.indexOf(year) === index)
+      .sort((a, b) => a - b);
+  };
+
   useEffect(() => {
-    const years = data.map((item) => {
-      if (!item.date) return "Unrecorded";
+    const yearSet = extractYears(data);
 
-      return item.date.split("-")[0];
-    });
-
-    let yearSet = [...new Set(years)];
-    yearSet.sort((a, b) => a - b);
-
-    setOptions({ ...options, years: yearSet });
+    setOptions((prev) => ({ ...prev, years: yearSet }));
   }, [data]);
 
   useEffect(() => {

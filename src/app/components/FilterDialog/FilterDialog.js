@@ -11,7 +11,8 @@ import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function FilterDialog({}) {
   const { handleFilterData } = useContext(FilterContext);
-  const { data, setFilteredData } = useContext(SearchResultsContext);
+  const { data, setCurrentPage, setFilteredData } =
+    useContext(SearchResultsContext);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
@@ -20,6 +21,7 @@ function FilterDialog({}) {
   function handleSubmit(e) {
     e.preventDefault();
     // setFilteredData(currentData);
+    setCurrentPage(1);
     handleFilterData();
     setOpen(false);
   }
