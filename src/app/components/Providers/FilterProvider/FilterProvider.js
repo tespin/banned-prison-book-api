@@ -78,12 +78,6 @@ function FilterProvider({ children }) {
     }
   }
 
-  const compareTitles = (a, b, direction) => {
-    return direction === "asc"
-      ? a.publication.localeCompare(b.publication)
-      : b.publication.localeCompare(a.publication);
-  };
-
   const filterByYear = (data, selectedYears) => {
     if (selectedYears.length === 0) return data;
     return data.filter((item) => {
@@ -92,23 +86,43 @@ function FilterProvider({ children }) {
     });
   };
 
+  // generic value comparison for strings or numbers
+  const compareValues = (a, b, direction) => {
+    if (direction === "asc") return a < b ? -1 : a > b ? 1 : 0;
+    return a > b ? -1 : a < b ? 1 : 0;
+  };
+
+  // compare years with special handling for "Unrecorded" values
+  const compareYears = (yearA, yearB, direction) => {
+    if (yearA === "Unrecorded" && yearB === "Unrecorded") return 0; // if both years are unrecorded, they are equal
+    if (yearA === "Unrecorded") return direction === "asc" ? -1 : 1; // if ascending, unrecorded years come first
+    if (yearB === "Unrecorded") return direction === "asc" ? 1 : -1; // if descending, unrecorded years come last
+
+    return compareValues(Number(yearA), Number(yearB), direction); // convert years to numbers and compare
+  };
+
+  // compare titles alphabetically
+  const compareTitles = (a, b, direction) => {
+    // localeCompare is a string comparison method that handles special characters and case sensitivity
+    return direction === "asc"
+      ? a.publication.localeCompare(b.publication)
+      : b.publication.localeCompare(a.publication);
+  };
+
+  // main sorting function that combines year and title sorting
   const sortData = (data, direction) => {
-    return data.sort((a, b) => {
+    return [...data].sort((a, b) => {
+      // avoid mutating original data
       const yearA = getYear(a.date);
       const yearB = getYear(b.date);
 
-      if (yearA === "Unrecorded" && yearB === "Unrecorded") {
-        return compareTitles(a, b, direction);
-      }
+      const yearComparison = compareYears(yearA, yearB, direction);
 
-      if (yearA === "Unrecorded") return direction === "asc" ? -1 : 1;
-      if (yearB === "Unrecorded") return direction === "asc" ? 1 : -1;
-
-      const comparedYears = direction === "asc" ? yearA - yearB : yearB - yearA;
-
-      return comparedYears === 0
+      // if the years are equal, compare alphabetically
+      // otherwise sort by years respecting the sort direction
+      return yearComparison === 0
         ? compareTitles(a, b, direction)
-        : comparedYears;
+        : yearComparison;
     });
   };
 
