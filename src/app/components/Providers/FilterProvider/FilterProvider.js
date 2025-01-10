@@ -15,16 +15,17 @@ const initialState = {
   years: [],
 };
 
+// reducer for handling updates to filter state
 function reducer(state, action) {
   switch (action.type) {
-    case "toggle-sort":
+    case "toggle-sort": // switches sort direction
       return { ...state, sort: action.payload };
-    case "toggle-years":
+    case "toggle-years": // adds/removes years from filter
       const newYears = state.years.includes(action.payload)
         ? state.years.filter((year) => year !== action.payload)
         : [...state.years, action.payload];
       return { ...state, years: newYears };
-    case "reset":
+    case "reset": // return to initial state
       return initialState;
     default:
       return state;
@@ -35,25 +36,31 @@ function FilterProvider({ children }) {
   const [filterState, dispatch] = useReducer(reducer, initialState);
   const { data, setFilteredData, status } = useContext(SearchResultsContext);
 
+  // util function for extracting year from date string
+  // returns "Unrecorded" if no date is provided
   const getYear = (date) => {
     return date ? date.split("-")[0] : "Unrecorded";
   };
 
+  // extract unique, sorted array of years from data
   const extractYears = (data) => {
     return data
       .map((item) => getYear(item.date))
-      .filter((year, index, self) => self.indexOf(year) === index)
+      .filter((year, index, self) => self.indexOf(year) === index) // remove duplicates
       .sort((a, b) => a - b);
   };
 
+  // memoize years to prevent unnecessary recalculations
   const extractedYears = useMemo(() => extractYears(data), [data]);
 
+  // reset filter state when data is loading
   useEffect(() => {
     if (status === "loading") {
       dispatch({ type: "reset" });
     }
   }, [status]);
 
+  // handle toggling of filter options
   function handleToggleSelected(filterType, value) {
     switch (filterType) {
       case "SORT":
@@ -67,6 +74,7 @@ function FilterProvider({ children }) {
     }
   }
 
+  // check if a filter option is selected
   function handleIsSelected(type, value) {
     switch (type) {
       case "SORT":
@@ -78,6 +86,7 @@ function FilterProvider({ children }) {
     }
   }
 
+  // filter data by selected years, returns all data if no years are selected
   const filterByYear = (data, selectedYears) => {
     if (selectedYears.length === 0) return data;
     return data.filter((item) => {
