@@ -8,7 +8,7 @@ import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 function InputForm({ placeholder, handleSubmit }) {
   const { filtered, filterData, value, setValue } =
     useContext(SearchInputContext);
-  const { totalCount } = useContext(SearchResultsContext);
+  const { pagination } = useContext(SearchResultsContext);
   const { handleKeyDown, activeIndex, setActiveIndex, selectedRef } =
     useContext(ActiveItemContext);
   const [isActive, setIsActive] = useState(false);
@@ -122,7 +122,7 @@ function InputForm({ placeholder, handleSubmit }) {
             </ul>
           )}
         </FlexContainer>
-        {totalCount > 0 && <Filter />}
+        {pagination.totalCount > 0 && <Filter />}
       </FlexContainer>
     </form>
   );
