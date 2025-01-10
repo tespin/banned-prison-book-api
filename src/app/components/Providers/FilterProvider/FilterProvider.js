@@ -43,9 +43,13 @@ function FilterProvider({ children }) {
   });
   const { data, setFilteredData, status } = useContext(SearchResultsContext);
 
+  const getYear = (date) => {
+    return date ? date.split("-")[0] : "Unrecorded";
+  };
+
   const extractYears = (data) => {
     return data
-      .map((item) => (item.date ? item.date.split("-")[0] : "Unrecorded"))
+      .map((item) => getYear(item.date))
       .filter((year, index, self) => self.indexOf(year) === index)
       .sort((a, b) => a - b);
   };
@@ -86,33 +90,45 @@ function FilterProvider({ children }) {
     }
   }
 
-  function handleFilterData() {
-    let newData = data.filter((data) => {
-      if (filters.years.length === 0) return data;
-      if (!data.date) return filters.years.includes("Unrecorded");
+  const compareTitles = (a, b, direction) => {
+    return direction === "asc"
+      ? a.publication.localeCompare(b.publication)
+      : b.publication.localeCompare(a.publication);
+  };
 
-      return filters.years.includes(data.date.split("-")[0]);
+  const filterByYear = (data, selectedYears) => {
+    if (selectedYears.length === 0) return data;
+    return data.filter((item) => {
+      const year = getYear(item.date);
+      return selectedYears.includes(year);
     });
+  };
 
-    newData.sort((a, b) => {
-      if (filters.sort === "asc") {
-        if (!a.date) return -1;
-        if (!b.date) return 1;
-        if (!a.date && !b.date) {
-          return a.publication.localeCompare(b.publication);
-        }
+  const sortData = (data, direction) => {
+    // return data.sort((a, b) => {});
+    return data.sort((a, b) => {
+      const yearA = getYear(a.date);
+      const yearB = getYear(b.date);
 
-        return a.date.split("-")[0] - b.date.split("-")[0];
-      } else {
-        if (!a.date) return 1;
-        if (!b.date) return -1;
-        if (!a.date && !b.date) {
-          return b.publication.localeCompare(a.publication);
-        }
-        return b.date.split("-")[0] - a.date.split("-")[0];
+      if (yearA === "Unrecorded" && yearB === "Unrecorded") {
+        return compareTitles(a, b, direction);
       }
+
+      if (yearA === "Unrecorded") return direction === "asc" ? -1 : 1;
+      if (yearB === "Unrecorded") return direction === "asc" ? 1 : -1;
+
+      const comparedYears = direction === "asc" ? yearA - yearB : yearB - yearA;
+
+      return comparedYears === 0
+        ? compareTitles(a, b, direction)
+        : comparedYears;
     });
-    setFilteredData(newData);
+  };
+
+  function handleFilterData() {
+    const filtered = filterByYear(data, filters.years);
+    const sorted = sortData(filtered, filters.sort);
+    setFilteredData(sorted);
   }
 
   return (
