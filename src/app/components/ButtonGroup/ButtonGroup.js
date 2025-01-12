@@ -3,23 +3,23 @@ import { FilterContext } from "../Providers/FilterProvider";
 import OptionButton from "../OptionButton";
 
 function ButtonGroup({ data, type, handleFilter }) {
-  const { filters, options, handleToggleSelected, handleIsSelected } =
+  const { filterState, options, handleToggleSelected, handleIsSelected } =
     useContext(FilterContext);
 
   useEffect(() => {
-    if (filters.length === 0) {
+    if (filterState.length === 0) {
       handleFilter(data);
       return;
     }
 
     let newData = data.filter((data) => {
-      if (!data.date) return filters.years.includes("Unrecorded");
+      if (!data.date) return filterState.years.includes("Unrecorded");
 
       const year = data.date.split("-")[0];
-      return filters.years.includes(year);
+      return filterState.years.includes(year);
     });
     handleFilter(newData);
-  }, [filters]);
+  }, [filterState]);
 
   function isSelected(value) {
     return handleIsSelected(type, value);
