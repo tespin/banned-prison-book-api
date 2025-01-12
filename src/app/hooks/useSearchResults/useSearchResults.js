@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import { SearchResultsContext } from "@/app/components/Providers/SearchResultsProvider";
 
-export function useSearchResults() {
+export default function useSearchResults() {
   const context = useContext(SearchResultsContext);
 
   if (context === undefined) {
@@ -10,5 +10,5 @@ export function useSearchResults() {
     );
   }
 
-  return useContext;
+  return context;
 }

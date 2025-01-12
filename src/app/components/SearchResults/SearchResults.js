@@ -4,6 +4,7 @@ import FlexContainer from "../UI/FlexContainer";
 import ResultsList from "../ResultsList";
 import PageNav from "../PageNav";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import useSearchResults from "@/app/hooks/useSearchResults";
 
 function SearchResults({ className }) {
   const {
@@ -13,7 +14,7 @@ function SearchResults({ className }) {
     numSiblings,
     query,
     status,
-  } = useContext(SearchResultsContext);
+  } = useSearchResults();
 
   const hasResults = currentData.length > 0;
 

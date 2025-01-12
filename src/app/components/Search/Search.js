@@ -2,11 +2,11 @@
 import React, { useContext } from "react";
 import SearchBar from "../SearchBar";
 import { StateDataContext } from "../Providers/StateDataProvider";
-import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import useSearchResults from "@/app/hooks/useSearchResults";
 
 function Search({ placeholder }) {
   const { stateData } = useContext(StateDataContext);
-  const { handleSubmit } = useContext(SearchResultsContext);
+  const { handleSubmit } = useSearchResults();
 
   return (
     <SearchBar
