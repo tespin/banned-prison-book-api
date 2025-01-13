@@ -1,18 +1,11 @@
 import React from "react";
 import FlexContainer from "./components/UI/FlexContainer";
-import Search from "./components/Search";
-import StateDataProvider from "./components/Providers/StateDataProvider";
+import SearchContainer from "./components/Search/SearchContainer";
+import BannedBooksProvider from "./components/Providers/BannedBooksProvider";
 import SearchResultsProvider from "./components/Providers/SearchResultsProvider";
-import Filter from "./components/Filter";
-import SearchResults from "./components/SearchResults";
+import SearchResults from "./components/Search/SearchResults/ResultsCard";
 
 async function Home() {
-  // const file = await fs.readFile(
-  //   process.cwd() + "/src/app/assets/books.json",
-  //   "utf8"
-  // );
-  // const data = JSON.parse(file);
-
   return (
     <main>
       <FlexContainer className="xs:flex-col xs:max-w-sm">
@@ -26,10 +19,9 @@ async function Home() {
         </div>
         <SearchResultsProvider>
           <FlexContainer className="gap-x-2">
-            <StateDataProvider>
-              <Search placeholder={`I'm looking for books in ...`} />
-            </StateDataProvider>
-            {/* <Filter></Filter> */}
+            <BannedBooksProvider>
+              <SearchContainer placeholder={`I'm looking for books in ...`} />
+            </BannedBooksProvider>
           </FlexContainer>
           <SearchResults className="mt-8" />
         </SearchResultsProvider>
