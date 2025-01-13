@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../UI/FlexContainer";
 import Filter from "../Filter";
 import { SearchQueryContext } from "../Providers/SearchQueryProvider";
-import { ActiveItemContext } from "../Providers/ActiveItemProvider";
+import { SelectedBookContext } from "../Providers/SelectedBookProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function InputForm({ placeholder, handleSubmit }) {
@@ -10,7 +10,7 @@ function InputForm({ placeholder, handleSubmit }) {
     useContext(SearchQueryContext);
   const { totalCount } = useContext(SearchResultsContext);
   const { handleKeyDown, activeIndex, setActiveIndex, selectedRef } =
-    useContext(ActiveItemContext);
+    useContext(SelectedBookContext);
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef();
 

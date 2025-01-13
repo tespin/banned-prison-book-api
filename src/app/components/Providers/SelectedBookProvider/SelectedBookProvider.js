@@ -7,9 +7,9 @@ import React, {
 } from "react";
 import { SearchQueryContext } from "../SearchQueryProvider";
 
-export const ActiveItemContext = createContext();
+export const SelectedBookContext = createContext();
 
-function ActiveItemProvider({ children }) {
+function SelectedBookProvider({ children }) {
   const { filtered, setValue } = useContext(SearchQueryContext);
   const [activeIndex, setActiveIndex] = useState(0);
   const selectedRef = useRef();
@@ -58,12 +58,12 @@ function ActiveItemProvider({ children }) {
   }
 
   return (
-    <ActiveItemContext.Provider
+    <SelectedBookContext.Provider
       value={{ activeIndex, setActiveIndex, handleKeyDown, selectedRef }}
     >
       {children}
-    </ActiveItemContext.Provider>
+    </SelectedBookContext.Provider>
   );
 }
 
-export default ActiveItemProvider;
+export default SelectedBookProvider;

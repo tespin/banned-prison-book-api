@@ -2,14 +2,14 @@
 import React from "react";
 import InputForm from "../InputForm";
 import SearchInputProvider from "../Providers/SearchQueryProvider";
-import ActiveItemProvider from "../Providers/ActiveItemProvider";
+import SelectedBookProvider from "../Providers/SelectedBookProvider";
 
 function SearchBar({ placeholder, options, onSearch }) {
   return (
     <SearchInputProvider data={options}>
-      <ActiveItemProvider>
+      <SelectedBookProvider>
         <InputForm placeholder={placeholder} handleSubmit={onSearch} />
-      </ActiveItemProvider>
+      </SelectedBookProvider>
     </SearchInputProvider>
   );
 }
