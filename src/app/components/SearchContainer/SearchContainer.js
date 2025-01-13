@@ -4,7 +4,7 @@ import SearchBar from "../SearchBar";
 import { StateDataContext } from "../Providers/StateDataProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
-function Search({ placeholder }) {
+function SearchContainer({ placeholder }) {
   const { stateData } = useContext(StateDataContext);
   const { handleSubmit } = useContext(SearchResultsContext);
 
@@ -17,4 +17,4 @@ function Search({ placeholder }) {
   );
 }
 
-export default Search;
+export default SearchContainer;
