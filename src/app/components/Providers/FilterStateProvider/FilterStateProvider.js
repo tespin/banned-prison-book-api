@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { SearchResultsContext } from "../SearchResultsProvider";
 
-export const FilterContext = createContext();
+export const FilterStateContext = createContext();
 
 const initialState = {
   sort: "asc",
@@ -37,7 +37,7 @@ function reducer(filters, action) {
   }
 }
 
-function FilterProvider({ children }) {
+function FilterStateProvider({ children }) {
   const [filters, dispatch] = useReducer(reducer, initialState);
   const [options, setOptions] = useState({
     sort: ["asc", "desc"],
@@ -118,7 +118,7 @@ function FilterProvider({ children }) {
   }
 
   return (
-    <FilterContext.Provider
+    <FilterStateContext.Provider
       value={{
         options,
         filters,
@@ -128,8 +128,8 @@ function FilterProvider({ children }) {
       }}
     >
       {children}
-    </FilterContext.Provider>
+    </FilterStateContext.Provider>
   );
 }
 
-export default FilterProvider;
+export default FilterStateProvider;

@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from "react";
-import { FilterContext } from "../Providers/FilterProvider";
+import { FilterStateContext } from "../Providers/FilterStateProvider";
 import OptionButton from "../OptionButton";
 
 function ButtonGroup({ data, type, handleFilter }) {
   const { filters, options, handleToggleSelected, handleIsSelected } =
-    useContext(FilterContext);
+    useContext(FilterStateContext);
 
   useEffect(() => {
     if (filters.length === 0) {

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import FlexContainer from "../UI/FlexContainer";
-import { FilterContext } from "../Providers/FilterProvider";
+import { FilterStateContext } from "../Providers/FilterStateProvider";
 
 function SegmentedControl({ name, segments }) {
-  const { handleToggleSelected, handleIsSelected } = useContext(FilterContext);
+  const { filterActions, handleToggleSelected, handleIsSelected } =
+    useContext(FilterStateContext);
   const [activeIndex, setActiveIndex] = useState(0);
   const [highlightW, setHighlightW] = useState(0);
   const [highlightPos, setHighlightPos] = useState(0);

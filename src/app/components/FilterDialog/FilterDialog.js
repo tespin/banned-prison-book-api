@@ -6,11 +6,11 @@ import FlexContainer from "../UI/FlexContainer";
 import FilterButton from "../FilterButton";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import SegmentedControl from "../SegmentedControl";
-import { FilterContext } from "../Providers/FilterProvider";
+import { FilterStateContext } from "../Providers/FilterStateProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function FilterDialog({}) {
-  const { handleFilterData } = useContext(FilterContext);
+  const { handleFilterData } = useContext(FilterStateContext);
   const { data, setFilteredData } = useContext(SearchResultsContext);
   const [open, setOpen] = useState(false);
   const [currentData, setCurrentData] = useState([]);

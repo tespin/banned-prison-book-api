@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useContext } from "react";
 import FilterDialog from "../FilterDialog";
-import FilterProvider from "../Providers/FilterProvider";
+import FilterProvider from "../Providers/FilterStateProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function Filter() {
