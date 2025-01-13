@@ -5,12 +5,12 @@ import React, {
   useContext,
   useRef,
 } from "react";
-import { SearchInputContext } from "../SearchInputProvider";
+import { SearchQueryContext } from "../SearchQueryProvider";
 
 export const ActiveItemContext = createContext();
 
 function ActiveItemProvider({ children }) {
-  const { filtered, setValue } = useContext(SearchInputContext);
+  const { filtered, setValue } = useContext(SearchQueryContext);
   const [activeIndex, setActiveIndex] = useState(0);
   const selectedRef = useRef();
 

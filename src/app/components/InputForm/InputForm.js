@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import FlexContainer from "../UI/FlexContainer";
 import Filter from "../Filter";
-import { SearchInputContext } from "../Providers/SearchInputProvider";
+import { SearchQueryContext } from "../Providers/SearchQueryProvider";
 import { ActiveItemContext } from "../Providers/ActiveItemProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function InputForm({ placeholder, handleSubmit }) {
   const { filtered, filterData, value, setValue } =
-    useContext(SearchInputContext);
+    useContext(SearchQueryContext);
   const { totalCount } = useContext(SearchResultsContext);
   const { handleKeyDown, activeIndex, setActiveIndex, selectedRef } =
     useContext(ActiveItemContext);

@@ -2,11 +2,11 @@
 import React from "react";
 import { useState, useEffect, createContext, useRef } from "react";
 
-export const StateDataContext = createContext();
+export const BannedBooksContext = createContext();
 
 import States from "@/app/utils/states.json";
 
-function StateDataProvider({ children }) {
+function BannedBooksProvider({ children }) {
   const [stateData, setStateData] = useState([]);
 
   useEffect(() => {
@@ -19,14 +19,14 @@ function StateDataProvider({ children }) {
   }, []);
 
   return (
-    <StateDataContext.Provider
+    <BannedBooksContext.Provider
       value={{
         stateData,
       }}
     >
       {children}
-    </StateDataContext.Provider>
+    </BannedBooksContext.Provider>
   );
 }
 
-export default StateDataProvider;
+export default BannedBooksProvider;

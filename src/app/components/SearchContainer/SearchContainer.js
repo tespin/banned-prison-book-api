@@ -1,11 +1,11 @@
 "use client";
 import React, { useContext } from "react";
 import SearchBar from "../SearchBar";
-import { StateDataContext } from "../Providers/StateDataProvider";
+import { BannedBooksContext } from "../Providers/BannedBooksProvider";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function SearchContainer({ placeholder }) {
-  const { stateData } = useContext(StateDataContext);
+  const { stateData } = useContext(BannedBooksContext);
   const { handleSubmit } = useContext(SearchResultsContext);
 
   return (

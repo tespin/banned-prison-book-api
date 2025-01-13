@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import FlexContainer from "../UI/FlexContainer";
 import ResultsList from "../ResultsList";
-import PageNav from "../PageNav";
+import ResultsPagination from "../ResultsPagination";
 import { SearchResultsContext } from "../Providers/SearchResultsProvider";
 
 function SearchResults({ className }) {
@@ -29,7 +29,7 @@ function SearchResults({ className }) {
           </p>
           <FlexContainer className="flex-col">
             <ResultsList searchResults={currentData} />
-            <PageNav
+            <ResultsPagination
               className="my-4"
               onPageChange={(page) => setCurrentPage(page)}
               currentPage={currentPage}

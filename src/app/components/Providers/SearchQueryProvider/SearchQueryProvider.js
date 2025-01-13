@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect, createContext } from "react";
 
-export const SearchInputContext = createContext();
+export const SearchQueryContext = createContext();
 
-function SearchInputProvider({ children, data }) {
+function SearchQueryProvider({ children, data }) {
   const [filtered, setFilteredData] = useState([]);
   const [value, setValue] = useState("");
 
@@ -20,7 +20,7 @@ function SearchInputProvider({ children, data }) {
   }
 
   return (
-    <SearchInputContext.Provider
+    <SearchQueryContext.Provider
       value={{
         filterData,
         filtered,
@@ -29,7 +29,7 @@ function SearchInputProvider({ children, data }) {
       }}
     >
       {children}
-    </SearchInputContext.Provider>
+    </SearchQueryContext.Provider>
   );
 }
-export default SearchInputProvider;
+export default SearchQueryProvider;

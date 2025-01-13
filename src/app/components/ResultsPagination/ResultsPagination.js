@@ -3,7 +3,7 @@ import FlexContainer from "../UI/FlexContainer";
 import Link from "next/link";
 import usePagination, { DOTS } from "@/app/hooks/usePagination";
 
-function PageNav({
+function ResultsPagination({
   onPageChange,
   currentPage,
   totalCount,
@@ -98,4 +98,4 @@ function PageNav({
   );
 }
 
-export default PageNav;
+export default ResultsPagination;

@@ -1,7 +1,7 @@
 import React from "react";
 import FlexContainer from "./components/UI/FlexContainer";
 import SearchContainer from "./components/SearchContainer";
-import StateDataProvider from "./components/Providers/StateDataProvider";
+import BannedBooksProvider from "./components/Providers/BannedBooksProvider";
 import SearchResultsProvider from "./components/Providers/SearchResultsProvider";
 import SearchResults from "./components/SearchResults";
 
@@ -19,9 +19,9 @@ async function Home() {
         </div>
         <SearchResultsProvider>
           <FlexContainer className="gap-x-2">
-            <StateDataProvider>
+            <BannedBooksProvider>
               <SearchContainer placeholder={`I'm looking for books in ...`} />
-            </StateDataProvider>
+            </BannedBooksProvider>
           </FlexContainer>
           <SearchResults className="mt-8" />
         </SearchResultsProvider>
