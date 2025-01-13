@@ -1,9 +1,9 @@
 import React from "react";
 import FlexContainer from "./components/UI/FlexContainer";
-import SearchContainer from "./components/SearchContainer";
+import SearchContainer from "./components/Search/SearchContainer";
 import BannedBooksProvider from "./components/Providers/BannedBooksProvider";
 import SearchResultsProvider from "./components/Providers/SearchResultsProvider";
-import SearchResults from "./components/SearchResults";
+import SearchResults from "./components/Search/SearchResults/ResultsCard";
 
 async function Home() {
   return (

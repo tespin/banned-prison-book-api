@@ -1,5 +1,5 @@
 import React from "react";
-import FlexContainer from "../UI/FlexContainer";
+import FlexContainer from "../../../UI/FlexContainer";
 import Link from "next/link";
 import usePagination, { DOTS } from "@/app/hooks/usePagination";
 

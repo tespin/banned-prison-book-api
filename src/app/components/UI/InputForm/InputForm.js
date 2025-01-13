@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import FlexContainer from "../UI/FlexContainer";
-import Filter from "../Filter";
-import { SearchQueryContext } from "../Providers/SearchQueryProvider";
-import { SelectedBookContext } from "../Providers/SelectedBookProvider";
-import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import FlexContainer from "../FlexContainer";
+import FilterContainer from "../../Search/SearchFilter/FilterContainer";
+import { SearchQueryContext } from "../../Providers/SearchQueryProvider";
+import { SelectedBookContext } from "../../Providers/SelectedBookProvider";
+import { SearchResultsContext } from "../../Providers/SearchResultsProvider";
 
 function InputForm({ placeholder, handleSubmit }) {
   const { filtered, filterData, value, setValue } =
@@ -122,7 +122,7 @@ function InputForm({ placeholder, handleSubmit }) {
             </ul>
           )}
         </FlexContainer>
-        {totalCount > 0 && <Filter />}
+        {totalCount > 0 && <FilterContainer />}
       </FlexContainer>
     </form>
   );

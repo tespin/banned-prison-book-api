@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { FilterStateContext } from "../Providers/FilterStateProvider";
+import { FilterStateContext } from "../../Providers/FilterStateProvider";
 import OptionButton from "../OptionButton";
 
 function ButtonGroup({ data, type, handleFilter }) {

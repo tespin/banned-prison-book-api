@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useContext } from "react";
 import FilterDialog from "../FilterDialog";
-import FilterProvider from "../Providers/FilterStateProvider";
-import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import FilterProvider from "../../../Providers/FilterStateProvider";
+import { SearchResultsContext } from "../../../Providers/SearchResultsProvider";
 
-function Filter() {
+function FilterContainer() {
   const [activeFilters, setActiveFilters] = useState([]);
   const { data, setFilteredData } = useContext(SearchResultsContext);
 
@@ -30,4 +30,4 @@ function Filter() {
     </FilterProvider>
   );
 }
-export default Filter;
+export default FilterContainer;

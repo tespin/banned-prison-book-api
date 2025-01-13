@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import FlexContainer from "../UI/FlexContainer";
-import { FilterStateContext } from "../Providers/FilterStateProvider";
+import FlexContainer from "../FlexContainer";
+import { FilterStateContext } from "../../Providers/FilterStateProvider";
 
 function SegmentedControl({ name, segments }) {
   const { filterActions, handleToggleSelected, handleIsSelected } =

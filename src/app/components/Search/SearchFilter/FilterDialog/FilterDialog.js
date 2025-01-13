@@ -2,12 +2,12 @@
 
 import React, { useState, useContext, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import FlexContainer from "../UI/FlexContainer";
+import FlexContainer from "../../../UI/FlexContainer";
 import FilterButton from "../FilterButton";
-import ButtonGroup from "../ButtonGroup/ButtonGroup";
-import SegmentedControl from "../SegmentedControl";
-import { FilterStateContext } from "../Providers/FilterStateProvider";
-import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import ButtonGroup from "../../../UI/ButtonGroup/ButtonGroup";
+import SegmentedControl from "../../../UI/SegmentedControl";
+import { FilterStateContext } from "../../../Providers/FilterStateProvider";
+import { SearchResultsContext } from "../../../Providers/SearchResultsProvider";
 
 function FilterDialog({}) {
   const { handleFilterData } = useContext(FilterStateContext);

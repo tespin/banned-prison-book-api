@@ -1,11 +1,11 @@
 "use client";
 import React, { useContext } from "react";
-import FlexContainer from "../UI/FlexContainer";
-import ResultsList from "../ResultsList";
+import FlexContainer from "../../../UI/FlexContainer";
+import Card from "../../../UI/Card";
 import ResultsPagination from "../ResultsPagination";
-import { SearchResultsContext } from "../Providers/SearchResultsProvider";
+import { SearchResultsContext } from "../../../Providers/SearchResultsProvider";
 
-function SearchResults({ className }) {
+function ResultsCard({ className }) {
   const {
     totalCount,
     currentData,
@@ -28,7 +28,13 @@ function SearchResults({ className }) {
             texts in {query}.
           </p>
           <FlexContainer className="flex-col">
-            <ResultsList searchResults={currentData} />
+            <ul
+              className={`flex flex-col gap-y-4 ${className ? className : ""}`}
+            >
+              {currentData.map((item) => {
+                return <Card data={item} key={item.id} />;
+              })}
+            </ul>
             <ResultsPagination
               className="my-4"
               onPageChange={(page) => setCurrentPage(page)}
@@ -51,4 +57,4 @@ function SearchResults({ className }) {
   );
 }
 
-export default SearchResults;
+export default ResultsCard;
